@@ -262,7 +262,7 @@ function agendaHTML() {
 }
 
 function fotoBlok(id, titel, omschr, icoon, map) {
- const ph = `<div class="foto-item" onclick="openLb(this)"><img src="fotos/vieringen/Vieringen en liturgie 1.png" alt="Vieringen en Liturgie" data-titel="Vieringen en Liturgie"><span class="foto-label">Vieringen en Liturgie</span></div>`;
+ const ph = <div class="foto-item"><div class="foto-ph"><span class="fi">${icoon}</span>Foto toevoegen</div></div>;
   return `<div class="foto-categorie">
     <h3 class="foto-cat-titel">${titel}</h3>
     <p class="foto-omschr">${omschr}</p>
