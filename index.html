@@ -110,6 +110,18 @@
   .ev-icoon { flex-shrink: 0; font-size: 0.7rem; }
   .agenda-legenda { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.55rem; font-size: 0.78rem; color: var(--muted); font-style: italic; }
 
+  /* ── ARCHIEF LIJST ── */
+  .archief-lijst { list-style: none; margin: 0; padding: 0; }
+  .archief-lijst li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.32rem 0; border-bottom: 1px solid var(--pale-blue); font-size: 0.93rem; }
+  .archief-lijst li:last-child { border-bottom: none; }
+  .archief-lijst a { text-decoration: none; color: var(--blue-mid); transition: color 0.2s; flex: 1; }
+  .archief-lijst a:hover { color: var(--gold); }
+  .al-datum { font-size: 0.78rem; color: var(--muted); white-space: nowrap; font-style: italic; flex-shrink: 0; }
+  .viering-list { margin-top: 0.5rem; }
+  .vl-item { display: flex; flex-direction: column; padding: 0.55rem 0.9rem; border-left: 3px solid var(--blue-mid); background: var(--white); border-bottom: 1px solid var(--border); margin-bottom: 0.4rem; border-radius: 0 3px 3px 0; }
+  .vl-datum { font-family: 'Playfair Display', serif; font-size: 0.82rem; color: var(--gold); margin-bottom: 0.15rem; }
+  .vl-tekst { font-size: 0.95rem; color: var(--text); }
+
   /* ── PAULUS BOX ── */
   .paulus-box { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 1.3rem 1.7rem; border-radius: 3px; margin-top: 0.9rem; box-shadow: 0 2px 8px rgba(15,40,80,0.07); }
   .paulus-box h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--blue-deep); font-style: normal; margin: 0 0 0.6rem; }
@@ -322,17 +334,11 @@ const pages = {
 
     <section>
       <h2>Paulusgemeenschappen</h2>
-      <p>Onze parochie is verbonden met de <strong>Paulusgemeenschappen</strong>, een netwerk van geloofsgemeenschappen in Vlaanderen en Brussel dat mensen samenbrengt rondom een levend geloof, dialoog en zorg voor kwetsbare medemensen &mdash; in de geest van de apostel Paulus.</p>
+      <p>Onze parochie Goede Bijstand maakt deel uit van de <strong>Paulusgemeenschappen</strong>, een samenwerkingsverband van Nederlandstalige geloofsgemeenschappen in Brussel rond de kerken van Onze-Lieve-Vrouw van Vreugde (Anderlecht), Onze-Lieve-Vrouw van Goede Bijstand (Centrum), Sint-Pieter (Ukkel), Sint-Jozef (Evere), Sint-Martinus (Ganshoren) en de Verrijzenis (Molenbeek).</p>
       <div class="paulus-box">
-        <h3>Over de Paulusgemeenschappen</h3>
-        <p>De Paulusgemeenschappen bieden een thuisbasis voor wie wil nadenken over geloof, maatschappij en spiritualiteit. Op hun website vindt u onder meer:</p>
-        <ul>
-          <li>Informatie over de verschillende gemeenschappen en hun werking</li>
-          <li>Bezinningsdagen, retraites en geloofsgesprekken</li>
-          <li>Nieuws en initiatieven rond liturgie en samenleving</li>
-          <li>Publicaties en spirituele bronnen</li>
-        </ul>
-        <p>Als parochie Goede Bijstand werken wij graag samen en moedigen wij iedereen aan om hun aanbod te ontdekken.</p>
+        <h3>Waarom &lsquo;Paulusgemeenschappen&rsquo;?</h3>
+        <p>De naam verwijst naar de apostel Paulus, die van gemeenschap naar gemeenschap trok om te bemoedigen en te ondersteunen &mdash; zonder de gemeenschappen hun eigenheid te ontnemen. Zo kiezen ook onze pastores voor een dienend leiderschap: de gemeenschappen nemen zelf verantwoordelijkheid, elk met hun eigen charisma&rsquo;s en accenten.</p>
+        <p>De samenwerking groeit vanuit een gedeelde zorg voor de toekomst van de Nederlandstalige kerk in Brussel. Het pastoresteam &mdash; Johnny De Mot, Guido Vandeperre, Peter Baekelmans, Gino Mattheeuws, Chris Ruelens en Mariette Dhondt &mdash; werkt nauw samen over de gemeenschappen heen.</p>
         <a class="paulus-knop" href="https://www.paulusgemeenschappen.be/nl" target="_blank" rel="noopener">Bezoek paulusgemeenschappen.be &#8594;</a>
       </div>
     </section>
@@ -346,11 +352,8 @@ const pages = {
       <p><strong>20.00&nbsp;u</strong> &mdash; Gebed &nbsp;|&nbsp; <strong>20.40&nbsp;u</strong> &mdash; Stilte met instrumentale Taiz&#233; liederen &nbsp;|&nbsp; <strong>21.00&nbsp;u</strong> &mdash; Kort gebed en zang. Dit herhalen we elk kwartier tot 22.30&nbsp;u.</p>
       <p>Voor meer informatie: <a href="mailto:bep.saintandre@gmail.com">bep.saintandre@gmail.com</a></p>
       <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
-      <h3>Datums 2025&ndash;2026</h3>
+      <h3>Datums 2026</h3>
       <ul class="date-list">
-        <li>Za 20 september 2025</li><li>Za 18 oktober 2025</li>
-        <li>Za 22 november 2025</li><li>Za 20 december 2025</li>
-        <li>Za 17 januari 2026</li><li>Za 21 februari 2026</li>
         <li>Za 21 maart 2026</li><li>Za 18 april 2026</li>
         <li>Za 16 mei 2026</li><li>Za 20 juni 2026</li>
         <li>Za 18 juli 2026</li><li>Za 15 augustus 2026</li>
@@ -468,38 +471,217 @@ const pages = {
     <section>
       <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> Vieringen</div>
       <h2>Vieringen</h2>
-      <img src="${INT}" alt="Interieur kerk" class="church-photo" style="height:220px;">
-      <p class="photo-caption">Het interieur van de Kerk van Goede Bijstand &#169; Jean-Paul Remy / visit.brussels</p>
-      <h3>Vaste vieringen</h3>
-      <table class="viering-table">
-        <thead><tr><th>Kerk</th><th>Dag</th><th>Uur</th><th>Bijzonderheden</th></tr></thead>
-        <tbody>
-          <tr><td>Goede Bijstand</td><td>Elke zondag</td><td>11.00&nbsp;u</td><td>3e zondag: kindernevendienst</td></tr>
-          <tr><td>Finis Terrae</td><td>Elke zaterdag</td><td>16.30&nbsp;u</td><td>&mdash;</td></tr>
-        </tbody>
-      </table>
-      <h3>Januari 2026</h3>
-      <table class="viering-table">
-        <thead><tr><th>Datum</th><th>Thema</th></tr></thead>
-        <tbody>
-          <tr><td>Zo 4 januari</td><td>2e zondag na Kerstmis</td></tr>
-          <tr><td>Zo 11 januari</td><td>Doopsel van de Heer</td></tr>
-          <tr><td>Zo 18 januari</td><td>2e zondag &mdash; met Goede Bijtjes &amp; Mosterdzaadjes</td></tr>
-          <tr><td>Zo 25 januari</td><td>3e zondag door het jaar</td></tr>
-        </tbody>
-      </table>
-      <h3>Februari 2026</h3>
-      <table class="viering-table">
-        <thead><tr><th>Datum</th><th>Thema</th></tr></thead>
-        <tbody>
-          <tr><td>Zo 1 februari</td><td>4e zondag door het jaar</td></tr>
-          <tr><td>Zo 8 februari</td><td>5e zondag door het jaar</td></tr>
-          <tr><td>Zo 15 februari</td><td>6e zondag &mdash; met Goede Bijtjes &amp; Mosterdzaadjes</td></tr>
-          <tr><td>Zo 22 februari</td><td>7e zondag door het jaar</td></tr>
-        </tbody>
-      </table>
-      <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
-      <p>Homilies van recente vieringen: <a onclick="navigate('homilie')">Bekijk homilies &#8594;</a></p>
+
+      <div class="subnav">
+        <a onclick="showVierSub('overzicht')" data-vsub="overzicht" class="subnav-active">Overzicht</a>
+        <a onclick="showVierSub('homilies')"  data-vsub="homilies">Homilies</a>
+        <a onclick="showVierSub('bezinning')" data-vsub="bezinning">Bezinningsteksten</a>
+        <a onclick="showVierSub('fotos')"     data-vsub="fotos">&#128247; Foto&#8217;s</a>
+      </div>
+
+      <!-- ── OVERZICHT ── -->
+      <div id="vsub-overzicht" class="vsub">
+        <img src="${INT}" alt="Interieur kerk" class="church-photo" style="height:200px;">
+        <p class="photo-caption">Het interieur van de Kerk van Goede Bijstand &#169; Jean-Paul Remy / visit.brussels</p>
+        <h3>Vaste vieringen</h3>
+        <table class="viering-table">
+          <thead><tr><th>Kerk</th><th>Dag</th><th>Uur</th><th>Bijzonderheden</th></tr></thead>
+          <tbody>
+            <tr><td>Goede Bijstand</td><td>Elke zondag</td><td>11.00&nbsp;u</td><td>3e zondag: kindernevendienst</td></tr>
+            <tr><td>Finis Terrae</td><td>Elke zaterdag</td><td>16.30&nbsp;u</td><td>&mdash;</td></tr>
+          </tbody>
+        </table>
+        <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
+        <h3>Komende vieringen</h3>
+        <div class="viering-list">
+          <div class="vl-item"><span class="vl-datum">Zo 1 maart 2026 &mdash; 11&nbsp;u</span><span class="vl-tekst">Viering met de Goede Bijtjes en de Mosterdzaadjes</span></div>
+        </div>
+      </div>
+
+      <!-- ── HOMILIES ── -->
+      <div id="vsub-homilies" class="vsub" style="display:none;">
+        <p style="font-style:italic;color:var(--muted);margin-bottom:1rem;">Homilies van vieringen in de Kerk van Goede Bijstand.</p>
+        <ul class="archief-lijst">
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/20251225_Kerstmis/" target="_blank">Kerstmis: moet ik zwijgen?</a> <span class="al-datum">25 december 2025</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/20220424_Tvmis/" target="_blank">Homilie tv-mis</a> <span class="al-datum">24 april 2022</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/20220116_Tvmis/" target="_blank">Homilie tv-mis</a> <span class="al-datum">16 januari 2022</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/20220102_MijmeringenBijDeAfrikadag/" target="_blank">Mijmeringen bij de Afrikadag</a> <span class="al-datum">2 januari 2022</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/20200413_Paaswake/" target="_blank">Paaswake</a> <span class="al-datum">13 april 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/HomilieViering20191020/" target="_blank">Homilie viering</a> <span class="al-datum">20 oktober 2019</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/HomilieViering20171217/" target="_blank">Homilie viering</a> <span class="al-datum">17 december 2017</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/HomilieViering20171203/" target="_blank">Homilie viering, 1e adventszondag B</a> <span class="al-datum">3 december 2017</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/HomilieTvmis20161218/" target="_blank">Homilie tv-mis</a> <span class="al-datum">18 december 2016</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/HomilieViering20141109/" target="_blank">Homilie viering</a> <span class="al-datum">9 november 2014</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/HomiliePausFranciscus20130319/" target="_blank">Homilie Paus Franciscus</a> <span class="al-datum">19 maart 2013</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/HomilieTvmis20120212/" target="_blank">Homilie tv-mis</a> <span class="al-datum">12 februari 2012</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/2eZondagDoorHetJaar/" target="_blank">2e Zondag door het jaar</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/HomilieKerstmis20111225/" target="_blank">Homilie Kerstmis</a> <span class="al-datum">25 december 2011</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/HomilieTvmis20111218/" target="_blank">Homilie tv-mis</a> <span class="al-datum">18 december 2011</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/OverWeinigWaartGeTrouwOverVeelZalIkUAanstellen/" target="_blank">Over weinig waart ge trouw, over veel zal ik u aanstellen</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/HomilieTvmis20110911/" target="_blank">Homilie tv-mis</a> <span class="al-datum">11 september 2011</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/ZieHetLamGods/" target="_blank">Zie het Lam Gods</a> <span class="al-datum">2e zondag A</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/HomilieTvmis20101010/" target="_blank">Homilie tv-mis</a> <span class="al-datum">10 oktober 2010</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/HomilieTvmis20100718/" target="_blank">Homilie tv-mis</a> <span class="al-datum">18 juli 2010</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/BruiloftTeCana/" target="_blank">Bruiloft te Cana</a> <span class="al-datum">2e zondag C</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/ZijnErNogProfeten/" target="_blank">Zijn er nog profeten?</a> <span class="al-datum">14e zondag B</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/FilippusEnDeEthiopischeEunuch/" target="_blank">Filippus en de Ethiopische eunuch</a> <span class="al-datum">5e zondag van Pasen B</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/WieZeggenDeMensenDatIkBen/" target="_blank">Wie zeggen de mensen dat ik ben?</a> <span class="al-datum">21e zondag A</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/EenDuobaanPetrusEnPaulus/" target="_blank">Een duobaan: Petrus en Paulus</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/DeGoedeHerder/" target="_blank">De goede herder</a> <span class="al-datum">4e Paaszondag A</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/Lazarus/" target="_blank">Lazarus</a> <span class="al-datum">5e zondag van de vasten A</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/EenDroomVanGerechtigheid/" target="_blank">Een droom van gerechtigheid</a> <span class="al-datum">4e adventszondag A</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/JohannesDeProfeet/" target="_blank">Johannes, de profeet</a> <span class="al-datum">3e adventszondag A</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Homilies/EenVisioenVanJesaja/" target="_blank">Een visioen van Jesaja</a> <span class="al-datum">2e adventszondag A</span></li>
+        </ul>
+      </div>
+
+      <!-- ── BEZINNINGSTEKSTEN ── -->
+      <div id="vsub-bezinning" class="vsub" style="display:none;">
+        <p style="font-style:italic;color:var(--muted);margin-bottom:1rem;">Bezinningsteksten, getuigenissen en spirituele reflecties.</p>
+        <ul class="archief-lijst">
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20250921_KoudGepaktWarmGedragen/" target="_blank">Koud Gepakt, Warm Gedragen</a> <span class="al-datum">21 september 2025</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20250831_DagRita/" target="_blank">Dag Rita</a> <span class="al-datum">31 augustus 2025</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20240521_MindfulnessInEenChristelijkeSfeer/" target="_blank">Mindfulness in een christelijke sfeer</a> <span class="al-datum">21 mei 2024</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20240518_Pinksterwake/" target="_blank">Pinksterwake: de Geest zendt de Paulusgemeenschappen</a> <span class="al-datum">18 mei 2024</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20231007_BiddenIsMijNietGegeven/" target="_blank">Bidden is mij niet gegeven</a> <span class="al-datum">7 oktober 2023</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20230929_GodvergetenDeVlaamseBisschoppenWillenSamenNieuweStappenZetten/" target="_blank">Godvergeten: de Vlaamse bisschoppen willen samen nieuwe stappen zetten</a> <span class="al-datum">29 september 2023</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20230422_PausInInterviewCelibaatIsHerzienbaar/" target="_blank">Paus in interview: Celibaat is herzienbaar</a> <span class="al-datum">22 april 2023</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20230415_Paasmorgen/" target="_blank">Paasmorgen</a> <span class="al-datum">15 april 2023</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20230325_ZorgpastorGoedeleGetuigt/" target="_blank">Zorgpastor Goedele getuigt: &lsquo;De eerste 5 minuten zijn cruciaal&rsquo;</a> <span class="al-datum">25 maart 2023</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20230311_GetuigenisAanslagen223/" target="_blank">Ex-basketballer S&eacute;bastien Bellin: &lsquo;Ik vergeef jullie&rsquo;</a> <span class="al-datum">11 maart 2023</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20221005_EenPannenkoekAanDeAbdij/" target="_blank">Een pannenkoek aan de abdij!</a> <span class="al-datum">5 oktober 2022</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20220528_Pinksteren/" target="_blank">Pinksteren</a> <span class="al-datum">28 mei 2022</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20220507_AchtBloemenDieNaarMariaVerwijzenVoorInJouwTuin/" target="_blank">Acht bloemen die naar Maria verwijzen voor in jouw tuin</a> <span class="al-datum">7 mei 2022</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20220430_HoopOmhelzen/" target="_blank">Hoop Omhelzen</a> <span class="al-datum">30 april 2022</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20220423_Woedend/" target="_blank">Woedend</a> <span class="al-datum">23 april 2022</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20220417_InHetLichtVanGodsWoord/" target="_blank">In Het Licht Van Gods Woord</a> <span class="al-datum">17 april 2022</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20220409_VanWoestijnNaarPasen/" target="_blank">Van Woestijn naar Pasen</a> <span class="al-datum">9 april 2022</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20220402_DeVerlorenDochter/" target="_blank">De Verloren Dochter</a> <span class="al-datum">2 april 2022</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20220212_Februari/" target="_blank">Februari</a> <span class="al-datum">12 februari 2022</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20220205_Lichtmis/" target="_blank">Lichtmis</a> <span class="al-datum">5 februari 2022</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20220102_Driekoningen10VragenEnAntwoorden/" target="_blank">Driekoningen: 10 vragen &amp; antwoorden</a> <span class="al-datum">2 januari 2022</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20211225_DeEeuwigeVlam/" target="_blank">De Eeuwige Vlam</a> <span class="al-datum">25 december 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20211211_Zand/" target="_blank">Zand</a> <span class="al-datum">11 december 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20211127_InDeBoot/" target="_blank">In De Boot</a> <span class="al-datum">27 november 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20211123_KrachtigGebed/" target="_blank">Krachtig Gebed</a> <span class="al-datum">23 november 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20211106_HetSprookjeVanVerdrietEnHetOudeVrouwtje/" target="_blank">Het Sprookje van Verdriet en het Oude Vrouwtje</a> <span class="al-datum">6 november 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20211030_Wolken/" target="_blank">Wolken</a> <span class="al-datum">30 oktober 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20211016_HeSeesMigrantsAsModernSlaves/" target="_blank">He Sees Migrants as &lsquo;Modern Slaves&rsquo;</a> <span class="al-datum">16 oktober 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20211009_Lourdes2021/" target="_blank">Lourdes 2021</a> <span class="al-datum">9 oktober 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20211002_NuDeHerfstZichKenbaarMaakt/" target="_blank">Nu de herfst zich kenbaar maakt</a> <span class="al-datum">2 oktober 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20210904_Startbezinning/" target="_blank">Startbezinning</a> <span class="al-datum">4 september 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20210711_VredeswensZoMetenWijHetLeven/" target="_blank">Vredeswens: zo meten wij het leven</a> <span class="al-datum">11 juli 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20210602_PraatMetOnsNietOverOns/" target="_blank">Praat met ons, niet over ons</a> <span class="al-datum">2 juni 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20210505_DeIcoonVanDeMoederGodsVanVladimir/" target="_blank">De Icoon van de Moeder Gods van Vladimir</a> <span class="al-datum">3 mei 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20210405_PaasboodschapVanDePaus/" target="_blank">Paasboodschap van Paus Franciscus</a> <span class="al-datum">4 april 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20210319_OpinieResponsumInDubiumMetOpmerkingen/" target="_blank">Opinie: Responsum Ad Dubium, met opmerkingen</a> <span class="al-datum">19 maart 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20210316_OverEenMeisjeZonderGezicht/" target="_blank">Over een meisje zonder gezicht</a> <span class="al-datum">16 maart 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20210227_HomilieEersteZondagVanDeVeertigdagentijd/" target="_blank">Homilie eerste zondag van de Veertigdagentijd</a> <span class="al-datum">27 februari 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20210223_HomilieUitvaartLucVersteylen/" target="_blank">Homilie bij de uitvaart van Luc Versteylen</a> <span class="al-datum">23 februari 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20210202_BoodschapVanPausFranciscus/" target="_blank">De boodschap van Paus Franciscus, vol wijsheid en nederigheid</a> <span class="al-datum">2 februari 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20210122_DeHeuvelDieWeBeklimmen/" target="_blank">De heuvel die we beklimmen</a> <span class="al-datum">22 januari 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20210118_OnzeMomentenVanAlleenZijn/" target="_blank">Onze momenten van alleen zijn</a> <span class="al-datum">18 januari 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20210115_DeBlindenEnDeOlifant/" target="_blank">De blinden en de olifant</a> <span class="al-datum">15 januari 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20210106_DeWijzen/" target="_blank">De Wijzen</a> <span class="al-datum">6 januari 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20201228_LatenWeOnzeBallingschapKoesteren/" target="_blank">Laten we onze ballingschap koesteren</a> <span class="al-datum">28 december 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20201225_DeNieuwgeboreneVanNicolasAlquin/" target="_blank">De Nieuwgeborene van Nicolas Alquin</a> <span class="al-datum">25 december 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20201219_ZachtheidHeetOnsKind/" target="_blank">Zachtheid heet ons kind&hellip;</a> <span class="al-datum">19 december 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20201218_DeOnVredeDesHerenZijMetU/" target="_blank">De (on)vrede des Heren zij met u&hellip;</a> <span class="al-datum">18 december 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20201214_NietInEenTempelMaarInEenTent/" target="_blank">Niet in een tempel, maar in een tent</a> <span class="al-datum">14 december 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20201213_OntmoetingMariaElisabet/" target="_blank">Ontmoeting &mdash; Maria en Elisabet</a> <span class="al-datum">13 december 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20201211_DeSteenBlijftNietLiggenVoorHetGraf/" target="_blank">De steen blijft niet liggen voor het graf</a> <span class="al-datum">11 december 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20201210_OntmoetingMariaJozef/" target="_blank">Ontmoeting &mdash; Maria en Jozef</a> <span class="al-datum">10 december 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20201203_OpWegNaarKerstmis/" target="_blank">Op weg naar Kerstmis</a> <span class="al-datum">3 december 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20201127_HommageStraatdodeChristophe/" target="_blank">Hommage straatdode: Christophe</a> <span class="al-datum">27 november 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20201115_OpenBrief/" target="_blank">Een open brief: Opnieuw Kerkzijn in de huiselijke kring</a> <span class="al-datum">15 november 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200622_VanLockdownNaarWakeUp/" target="_blank">Van lockdown naar wake-up</a> <span class="al-datum">22 juni 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200621_Nadien/" target="_blank">Nadien</a> <span class="al-datum">21 juni 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200620_Verrijzenis/" target="_blank">Verrijzenis</a> <span class="al-datum">20 juni 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200619_Hoop/" target="_blank">Hoop</a> <span class="al-datum">19 juni 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200618_VoetenInBraziliaanseAarde/" target="_blank">Voeten in Braziliaanse aarde</a> <span class="al-datum">18 juni 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200616_GoedZijn/" target="_blank">Goed zijn</a> <span class="al-datum">16 juni 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200614_VoorAllesInHetLevenIsEenTijd/" target="_blank">Voor alles in het leven is een tijd</a> <span class="al-datum">14 juni 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200613_EenBeterWij/" target="_blank">Een beter wij</a> <span class="al-datum">13 juni 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200612_AmerikaanseJezuietEnZwartSchrijftIndringendEssay/" target="_blank">Amerikaanse jezu&iuml;et schrijft indringend essay</a> <span class="al-datum">12 juni 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200609_BabelPinksterenEenGoddelijkeLesOverSamenleven/" target="_blank">Babel &mdash; Pinksteren: een goddelijke les over samenleven</a> <span class="al-datum">9 juni 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200605_LiefdeGafUDuizendNamen/" target="_blank">Liefde Gaf U Duizend Namen</a> <span class="al-datum">5 juni 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200601_DeScheppendeGodBlaastDeMensZijnLevensademIn/" target="_blank">De scheppende God blaast de mens zijn levensadem in</a> <span class="al-datum">1 juni 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200531_KomSchepperAdemInOnsHart/" target="_blank">Kom Schepper, adem in ons hart</a> <span class="al-datum">31 mei 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200530_GroterDanOnsHartHuubOosterhuis/" target="_blank">Groter dan ons hart &mdash; Huub Oosterhuis</a> <span class="al-datum">30 mei 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200529_MissionariswerkInElSalvadorRogerPonseeleGetuigt/" target="_blank">Missionariswerk in El Salvador: Roger Ponseele getuigt</a> <span class="al-datum">29 mei 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200527_HunkerenNaarEenMisviering/" target="_blank">Hunkeren naar een misviering</a> <span class="al-datum">27 mei 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200522_Gevangenisregime/" target="_blank">Gevangenisregime</a> <span class="al-datum">22 mei 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200521_InMijnDiepsteBinnenste/" target="_blank">In mijn diepste binnenste</a> <span class="al-datum">21 mei 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200520_Verbanddoos/" target="_blank">Verbanddoos</a> <span class="al-datum">20 mei 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200519_KleineGoedheidIsGekkenwerkMaarNietsIsMeerMenselijk/" target="_blank">Kleine goedheid is gekkenwerk, maar niets is meer menselijk</a> <span class="al-datum">19 mei 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200516_WieWarenZeEigenlijkDieBeruchteIjsheiligen/" target="_blank">Wie waren ze eigenlijk, die beruchte ijsheiligen?</a> <span class="al-datum">16 mei 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200515_WeetJeDatNog/" target="_blank">Weet je dat nog&hellip;</a> <span class="al-datum">15 mei 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200514_HeiligeCorona/" target="_blank">Heilige Corona</a> <span class="al-datum">14 mei 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200513_VanBlijfInJeKotTotKeerInTotJeHart/" target="_blank">Van &lsquo;blijf in je kot&rsquo; tot &lsquo;keer in tot je hart&rsquo;</a> <span class="al-datum">13 mei 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200511_ZonderCoronavaccinZullenWeNooitMeerNormaalKunnenLeven/" target="_blank">Zonder coronavaccin zullen we nooit meer normaal kunnen leven</a> <span class="al-datum">11 mei 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200510_PeoplesFaces/" target="_blank">People&rsquo;s Faces</a> <span class="al-datum">10 mei 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200509_VanKindsoldaatTotStrijderTegenCorona/" target="_blank">Van kindsoldaat tot strijder tegen corona</a> <span class="al-datum">9 mei 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200427_ChristusOntmoetZijnMoederEenParadijselijkeActualiteit/" target="_blank">Christus ontmoet zijn moeder &mdash; Een paradijselijke actualiteit</a> <span class="al-datum">27 april 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200426_GaandewegGingenHunOgenOpen/" target="_blank">Gaandeweg gingen hun ogen open</a> <span class="al-datum">26 april 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200425_StormOpHetMeer/" target="_blank">Storm op het meer</a> <span class="al-datum">25 april 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200424_NaarBinnen/" target="_blank">Naar binnen!</a> <span class="al-datum">24 april 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200423_ReddendeEngelenInDeTijdVanHetCoronavirus/" target="_blank">Reddende engelen in de tijd van het coronavirus</a> <span class="al-datum">23 april 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200420_OrthodoxeChristenenVierenVandaagPasen/" target="_blank">Orthodoxe christenen vieren vandaag Pasen</a> <span class="al-datum">20 april 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200418_DeCoronacrisisIsHetMomentVoorDeKerkOmTeVeranderen/" target="_blank">De coronacrisis is h&eacute;t moment voor de kerk om te veranderen</a> <span class="al-datum">18 april 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200415_WieKanVoorOnsDeSteenVanHetGrafWegrollen/" target="_blank">Wie kan voor ons de steen van het graf wegrollen?</a> <span class="al-datum">15 april 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200413_PaasboodschapVanPausFranciscus/" target="_blank">Paasboodschap van paus Franciscus</a> <span class="al-datum">13 april 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200412_DoorGodGegrepenDeStilteVanPasen/" target="_blank">Door God gegrepen &mdash; De stilte van Pasen</a> <span class="al-datum">12 april 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200411_BruggenBouwenOpWegNaarPasen/" target="_blank">Bruggen bouwen op weg naar Pasen</a> <span class="al-datum">11 april 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200410_StaandeBlijvenInMachteloosheid/" target="_blank">Staande blijven in machteloosheid</a> <span class="al-datum">10 april 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200406_LePointNoir/" target="_blank">Le point noir</a> <span class="al-datum">6 april 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200404_TroostwoordVoorDePandemie/" target="_blank">Troostwoord voor de pandemie</a> <span class="al-datum">4 april 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200328_CoronacrisisToontDatHetGoedeWoordMachtigerIsDanHetBoze/" target="_blank">Coronacrisis toont dat het goede woord machtiger is dan het boze</a> <span class="al-datum">28 maart 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200327_GebedenOmTroost/" target="_blank">Gebeden om troost</a> <span class="al-datum">27 maart 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200326_WachtenWijOpDeBesmettingOfOpDeVerlossing/" target="_blank">Wachten wij op de besmetting of op de verlossing?</a> <span class="al-datum">26 maart 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200325_GoedeBijstandskerkBrussel/" target="_blank">Goede Bijstandskerk Brussel</a> <span class="al-datum">25 maart 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200324_GebedOmInzichtEnMoed/" target="_blank">Gebed om inzicht en moed</a> <span class="al-datum">24 maart 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200322_Lockdown/" target="_blank">Lockdown</a> <span class="al-datum">22 maart 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/20200320_MaarDeLenteWistHetNiet/" target="_blank">Maar de lente wist het niet</a> <span class="al-datum">20 maart 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/LeMessageDuChanteurRwandaisKizitoMihigoDoitEtreEntendu/" target="_blank">Le message du chanteur rwandais Kizito Mihigo</a> <span class="al-datum">4 maart 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/Allerheiligen2019/" target="_blank">Allerheiligen</a> <span class="al-datum">1 november 2019</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/DeGebarstenKlok/" target="_blank">De gebarsten klok</a> <span class="al-datum">8 februari 2018</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/GeenPlaatsVoorGeloofInOnzeMedia/" target="_blank">Geen plaats voor geloof in onze media</a> <span class="al-datum">10 december 2017</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/EersteLezing20140727/" target="_blank">Eerste lezing: Kerkwijding</a> <span class="al-datum">27 juli 2014</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/GeloofsbelijdenisVanPausFranciscus/" target="_blank">Geloofsbelijdenis van Paus Franciscus</a> <span class="al-datum">2013</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/Woorddienst20121209/" target="_blank">Bezinning bij de Woorddienst</a> <span class="al-datum">9 december 2012</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/MarceloBarrosWasInBelgie/" target="_blank">Marcelo Barros was in Belgi&euml;</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/GetuigenisVanFrancoise/" target="_blank">Getuigenis van Fran&ccedil;oise</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/AlsDeLenteUitblijft/" target="_blank">Als de lente uitblijft</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/EenAnderProfiel/" target="_blank">Een ander profiel</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/Bezinning/" target="_blank">Bezinning</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/AlleHeiligen/" target="_blank">Alle Heiligen</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/ZijnErRechtvaardigeZiekten/" target="_blank">Zijn er rechtvaardige ziekten?</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/TrouwAanOnzeRoeping/" target="_blank">Trouw aan onze roeping</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/LHommeQuiPleureDeMensWeent/" target="_blank">L&rsquo;homme qui pleure&hellip; De mens weent&hellip;</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/40JaarVlaamsePastoraal/" target="_blank">40 jaar Vlaamse pastoraal</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/ChristelijkeSpiritualiteitEnUniverseleSolidariteit/" target="_blank">Christelijke spiritualiteit en universele solidariteit</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/GeboorteZevenImpressies/" target="_blank">Geboorte &mdash; zeven impressies</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/JongerenLerenVanWatMenHunVoorleeft/" target="_blank">Jongeren leren van wat men hun voorleeft</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/HetZonneliedVanFranciscus/" target="_blank">Het zonnelied van Franciscus</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/PleidooiVoorVerdriet/" target="_blank">Pleidooi voor &lsquo;Verdriet&rsquo;</a></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Bezinningsteksten/LeefJeLevenAlsEenSchilderijtje/" target="_blank">Leef je leven als een schilderijtje</a></li>
+        </ul>
+      </div>
+
+      <!-- ── FOTO'S VIERINGEN ── -->
+      <div id="vsub-fotos" class="vsub" style="display:none;">
+        <p style="font-style:italic;color:var(--muted);margin-bottom:1rem;">Foto&rsquo;s van vieringen in de Kerk van Goede Bijstand.</p>
+        <ul class="archief-lijst">
+          <li><a href="http://www.goedebijstand.be/Vieringen/Fotos/20241102_Viering/" target="_blank">Viering Allerzielen</a> <span class="al-datum">2 november 2024</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Fotos/20231015_Viering/" target="_blank">Gedachtenisviering</a> <span class="al-datum">15 oktober 2023</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Fotos/20221120_DoopLineOlivia/" target="_blank">Doop Line en Olivia</a> <span class="al-datum">20 november 2022</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Fotos/20211219_Viering/" target="_blank">Viering</a> <span class="al-datum">19 december 2021</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Fotos/20200118_DoopBeatrice/" target="_blank">Doop B&eacute;atrice</a> <span class="al-datum">18 januari 2020</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Fotos/20130203_Lichtmis/" target="_blank">Lichtmis</a> <span class="al-datum">3 februari 2013</span></li>
+          <li><a href="http://www.goedebijstand.be/Vieringen/Fotos/Vieringen/" target="_blank">Vieringen (archief)</a></li>
+        </ul>
+      </div>
+
     </section>` },
 
   activiteiten: { title:'Activiteiten', content:`
@@ -654,6 +836,13 @@ const pages = {
       <p style="margin-top:1.5rem;"><a onclick="navigate('vieringen')">&#8592; Terug naar vieringen</a></p>
     </section>` }
 };
+
+// ── Subnav Vieringen
+function showVierSub(k) {
+  document.querySelectorAll('.vsub').forEach(el => el.style.display='none');
+  const t = document.getElementById('vsub-'+k); if(t) t.style.display='block';
+  document.querySelectorAll('[data-vsub]').forEach(a => a.classList.toggle('subnav-active', a.dataset.vsub===k));
+}
 
 // ── Subnav De Goede Bijstand
 function showSub(k) {
