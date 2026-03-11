@@ -1,174 +1,293 @@
+wijzig aan deze site: hoofdtabs: kerk - parochie - grondbib - activiteiten - contact. Onder 'kerk' komt geschiedenis en toeristeninfo. Onder parochie komt: vieringen - jongeren - sacramenten - overlijden - de schelp - samenwerking. Logo kerkfabriek in footer verwerken. Onder tab 'activiteiten' ook plaats voor foto's en vermelding voorbije activiteiten.
+Mar 10
+Reading frontend design skill
+
+Now I'll build the redesigned site with the new navigation structure. Let me create it:
+Creating redesigned parish website with new navigation structure
+
+Now let me embed the logo image as base64 so it works in the footer:
+Ran 2 commands, read a file
+
+Hier is de vernieuwde website. De wijzigingen op een rij:
+
+Nieuwe navigatiestructuur met dropdownmenu's:
+
+    Kerk → Geschiedenis | Bezoekersinformatie | Kunst & Architectuur
+    Parochie → Vieringen | Kinderen & Jongeren | Sacramenten | Overlijden | De Schelp | Samenwerking
+    Grondbibliotheek (eigen tab)
+    Activiteiten → Komende activiteiten | Voorbije activiteiten | Foto's
+    Contact
+
+Kerk-tab heeft nu een tijdlijn met de geschiedenis van de kerk, plus aparte subpagina's voor bezoekersinformatie en kunst & architectuur.
+
+Activiteiten heeft drie subtabs: komende activiteiten, een overzicht van voorbije activiteiten (met korte beschrijvingen), en een fotogalerij die rechtstreeks laadt vanuit de GitHub-repository.
+
+Footer is uitgebreid tot drie kolommen met daarin het logo van de kerkfabriek, het rekeningnummer en het RPR-nummer zoals op het briefhoofd.
+Goede bijstand
+Code · HTML 
+
+geef de site optie Nederlandstalig, franstalig, engelstalig, duitstalig, met een knop rechts boven de site
+10:08 AM
+Working
+Want to be notified when Claude responds?
+
+
+Claude is AI and can make mistakes. Please double-check responses.
+Goede bijstand · HTML
 <!DOCTYPE html>
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Onze-Lieve-Vrouw van Goede Bijstand – Brussel</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-  :root{--sky:#eef4fb;--pale-blue:#daeaf8;--blue-mid:#2d6a9f;--blue-deep:#1a3f6f;--blue-navy:#0f2744;--gold:#c4933a;--gold-lt:#e0b05a;--text:#0e1f33;--muted:#4a6480;--border:#a8c6e0;--white:#ffffff;--admin-bg:#f0f7ff;}
-  *{box-sizing:border-box;margin:0;padding:0;} html{scroll-behavior:smooth;}
-  body{font-family:'EB Garamond',Georgia,serif;background:var(--sky);color:var(--text);font-size:18px;line-height:1.75;}
-  header{background:linear-gradient(160deg,var(--blue-navy) 0%,var(--blue-deep) 60%,var(--blue-mid) 100%);color:#fff;text-align:center;padding:0;border-bottom:4px solid var(--gold);cursor:pointer;position:relative;overflow:hidden;}
-  .hero-photo{width:100%;height:320px;object-fit:cover;object-position:center 40%;display:block;opacity:.45;}
-  .hero-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;}
-  .hero-cross{font-size:1.6rem;color:var(--gold-lt);letter-spacing:10px;margin-bottom:.5rem;}
-  header h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:600;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.6);letter-spacing:.04em;}
-  header p.subtitle{font-style:italic;color:var(--gold-lt);font-size:1.1rem;margin-top:.4rem;text-shadow:0 1px 6px rgba(0,0,0,.5);}
-  nav{background:var(--blue-deep);display:flex;flex-wrap:wrap;justify-content:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(10,30,60,.3);}
-  nav a{color:#cfe2f5;text-decoration:none;padding:.7rem 1.2rem;font-family:'EB Garamond',serif;font-size:.92rem;letter-spacing:.06em;text-transform:uppercase;transition:background .2s,color .2s;border-right:1px solid rgba(255,255,255,.08);cursor:pointer;}
-  nav a:last-child{border-right:none;}
-  nav a:hover,nav a.active{background:var(--gold);color:var(--blue-navy);font-weight:600;}
-  .container{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;grid-template-columns:1fr 310px;gap:2.5rem;}
-  @media(max-width:768px){.container{grid-template-columns:1fr;}}
-  main>section{margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--border);animation:fadeIn .35s ease;}
-  main>section:last-child{border-bottom:none;}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-  h2{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--blue-deep);font-weight:600;margin-bottom:.9rem;padding-bottom:.45rem;border-bottom:2px solid var(--gold);display:inline-block;}
-  h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--blue-mid);font-style:italic;margin:1.1rem 0 .35rem;}
-  p{margin-bottom:.75rem;}
-  a{color:var(--blue-mid);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px;transition:color .2s;cursor:pointer;}
-  a:hover{color:var(--gold);}
-  .ornament{text-align:center;color:var(--gold);font-size:1.2rem;letter-spacing:6px;margin:1.5rem 0;}
-  .church-photo{width:100%;border-radius:4px;border:3px solid var(--pale-blue);box-shadow:0 4px 18px rgba(15,40,80,.18);margin:1.2rem 0;display:block;object-fit:cover;}
-  .photo-caption{font-size:.82rem;color:var(--muted);font-style:italic;text-align:center;margin-top:-.6rem;margin-bottom:1rem;}
-  .photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.2rem 0;}
-  .photo-grid img{width:100%;height:200px;object-fit:cover;border-radius:4px;border:3px solid var(--pale-blue);box-shadow:0 3px 12px rgba(15,40,80,.15);}
-  @media(max-width:600px){.photo-grid{grid-template-columns:1fr;}}
-  .breadcrumb{font-size:.85rem;color:var(--muted);margin-bottom:1.4rem;padding:.35rem 0;border-bottom:1px solid var(--border);}
-  .breadcrumb span{color:var(--gold);margin:0 .4rem;}
-  .subnav{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.8rem;padding-bottom:1.2rem;border-bottom:2px solid var(--pale-blue);}
-  .subnav a{display:inline-block;padding:.35rem .9rem;background:var(--pale-blue);color:var(--blue-deep);text-decoration:none;border-radius:3px;font-size:.9rem;font-family:'EB Garamond',serif;letter-spacing:.04em;border:1px solid var(--border);transition:background .2s,color .2s;cursor:pointer;}
-  .subnav a:hover{background:var(--blue-mid);color:#fff;border-color:var(--blue-mid);}
-  .subnav a.subnav-active{background:var(--blue-deep);color:#fff;border-color:var(--blue-deep);font-weight:600;}
-  .news-item{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--blue-mid);padding:.9rem 1.2rem;margin-bottom:.9rem;border-radius:3px;transition:box-shadow .2s,border-left-color .2s;cursor:pointer;}
-  .news-item:hover{box-shadow:0 3px 14px rgba(30,80,140,.14);border-left-color:var(--gold);}
-  .news-item .tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--blue-mid);font-weight:500;margin-bottom:.2rem;}
-  .news-item .ni-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--blue-navy);}
-  .news-item:hover .ni-title{color:var(--blue-mid);}
-  .viering-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:.95rem;}
-  .viering-table th{background:var(--blue-deep);color:#fff;padding:.5rem .8rem;text-align:left;font-family:'Playfair Display',serif;font-weight:400;}
-  .viering-table td{padding:.5rem .8rem;border-bottom:1px solid var(--border);}
-  .viering-table tr:nth-child(even) td{background:var(--pale-blue);}
-  aside{font-size:.95rem;}
-  .sidebar-box{background:var(--white);border:1px solid var(--border);border-top:3px solid var(--blue-mid);padding:1.2rem 1.2rem 1rem;margin-bottom:1.6rem;border-radius:3px;box-shadow:0 2px 8px rgba(30,80,140,.07);}
-  .sidebar-box h3{font-family:'Playfair Display',serif;font-size:.95rem;font-style:normal;font-weight:600;color:var(--blue-deep);text-transform:uppercase;letter-spacing:.07em;margin:0 0 .65rem;padding-bottom:.4rem;border-bottom:1px solid var(--pale-blue);}
-  .sidebar-box p{margin-bottom:.4rem;font-size:.93rem;}
-  .sidebar-box .time{font-weight:600;color:var(--blue-navy);}
-  .sidebar-box .address{line-height:1.5;color:var(--muted);font-style:italic;font-size:.88rem;}
-  .sidebar-photo{width:100%;border-radius:3px;margin-bottom:1rem;border:2px solid var(--pale-blue);display:block;object-fit:cover;height:160px;}
-  .contact-form{display:grid;gap:1rem;margin-top:1rem;}
-  .contact-form label{font-size:.88rem;color:var(--muted);display:block;margin-bottom:.2rem;}
-  .contact-form input,.contact-form textarea{width:100%;padding:.55rem .8rem;border:1px solid var(--border);background:#fff;font-family:'EB Garamond',serif;font-size:1rem;color:var(--text);border-radius:3px;outline:none;transition:border-color .2s;}
-  .contact-form input:focus,.contact-form textarea:focus{border-color:var(--blue-mid);}
-  .contact-form textarea{min-height:120px;resize:vertical;}
-  .btn{display:inline-block;padding:.6rem 1.6rem;background:var(--blue-deep);color:#fff;border:none;font-family:'EB Garamond',serif;font-size:1rem;letter-spacing:.06em;cursor:pointer;transition:background .2s;border-radius:3px;}
-  .btn:hover{background:var(--blue-navy);}
-  .homilie{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--blue-mid);padding:1.5rem 1.8rem;margin-top:1rem;border-radius:3px;line-height:1.9;}
-  .kids-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1rem;}
-  @media(max-width:600px){.kids-grid{grid-template-columns:1fr;}}
-  .kids-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:1.5rem;text-align:center;cursor:pointer;transition:box-shadow .2s,transform .2s;}
-  .kids-card:hover{box-shadow:0 4px 16px rgba(30,80,140,.15);transform:translateY(-2px);}
-  .kids-card .icon{font-size:2.5rem;margin-bottom:.5rem;}
-  .kids-card h3{font-style:normal;color:var(--blue-deep);margin:0 0 .5rem;}
-  .partners{display:grid;gap:1rem;margin-top:1rem;}
-  .partner-item{background:var(--white);border:1px solid var(--border);padding:1rem 1.3rem;border-radius:3px;border-left:4px solid var(--blue-mid);}
-  .partner-item strong{color:var(--blue-deep);}
-  .map-box{background:var(--pale-blue);border:1px solid var(--border);padding:1.5rem;text-align:center;color:var(--muted);font-style:italic;border-radius:4px;margin-top:1rem;}
-  .agenda-wrapper{border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-top:.8rem;box-shadow:0 2px 8px rgba(15,40,80,.08);}
-  .agenda-maand-header{background:var(--blue-navy);color:var(--gold-lt);font-family:'Playfair Display',serif;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;padding:.28rem .8rem;}
-  .agenda-dag{display:grid;grid-template-columns:72px 1fr;border-bottom:1px solid var(--border);}
-  .agenda-dag:last-child{border-bottom:none;}
-  .agenda-dag.weekend .datum-cel{background:#e4edf7;}
-  .agenda-dag.vandaag .datum-cel{background:rgba(196,147,58,.18);}
-  .datum-cel{background:var(--pale-blue);padding:.35rem .6rem;font-family:'Playfair Display',serif;border-right:2px solid var(--border);display:flex;flex-direction:column;justify-content:center;}
-  .datum-cel .dag-naam{font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-mid);font-family:'EB Garamond',serif;}
-  .datum-cel .dag-nr{font-size:1.1rem;line-height:1.1;color:var(--blue-navy);}
-  .datum-cel .maand-kort{font-size:.6rem;color:var(--muted);font-family:'EB Garamond',serif;}
-  .agenda-dag.vandaag .datum-cel .dag-naam,.agenda-dag.vandaag .datum-cel .dag-nr{color:var(--gold);}
-  .ev-cel{padding:.3rem .8rem;display:flex;flex-direction:column;justify-content:center;background:var(--white);}
-  .evenement{display:flex;align-items:baseline;gap:.45rem;padding:.08rem 0;font-size:.85rem;line-height:1.35;}
-  .ev-tijd{font-family:'Playfair Display',serif;font-size:.7rem;color:var(--gold);min-width:38px;flex-shrink:0;}
-  .ev-icoon{flex-shrink:0;font-size:.7rem;}
-  .ev-taize{color:var(--blue-mid);font-style:italic;}
-  .ev-nacht{color:#2d6a9f;}
-  .agenda-legenda{display:flex;flex-wrap:wrap;gap:1rem;margin-top:.55rem;font-size:.78rem;color:var(--muted);font-style:italic;}
-  .archief-lijst{list-style:none;margin:0;padding:0;}
-  .archief-lijst li{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:.32rem 0;border-bottom:1px solid var(--pale-blue);font-size:.93rem;}
-  .archief-lijst li:last-child{border-bottom:none;}
-  .archief-lijst a{text-decoration:none;color:var(--blue-mid);transition:color .2s;flex:1;}
-  .archief-lijst a:hover{color:var(--gold);}
-  .al-datum{font-size:.78rem;color:var(--muted);white-space:nowrap;font-style:italic;flex-shrink:0;}
-  .paulus-box{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--gold);padding:1.3rem 1.7rem;border-radius:3px;margin-top:.9rem;box-shadow:0 2px 8px rgba(15,40,80,.07);}
-  .paulus-box h3{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--blue-deep);font-style:normal;margin:0 0 .6rem;}
-  .paulus-knop{display:inline-block;margin-top:.7rem;padding:.5rem 1.3rem;background:var(--blue-deep);color:#fff;font-family:'EB Garamond',serif;font-size:.94rem;letter-spacing:.04em;text-decoration:none;border-radius:3px;transition:background .2s;}
-  .paulus-knop:hover{background:var(--gold);color:var(--blue-navy);text-decoration:none;}
-  .act-subnav{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.6rem;padding-bottom:1rem;border-bottom:2px solid var(--pale-blue);}
-  .act-subnav a{display:inline-block;padding:.35rem .9rem;background:var(--pale-blue);color:var(--blue-deep);text-decoration:none;border-radius:3px;font-size:.88rem;font-family:'EB Garamond',serif;border:1px solid var(--border);transition:background .2s,color .2s;cursor:pointer;}
-  .act-subnav a:hover{background:var(--blue-mid);color:#fff;border-color:var(--blue-mid);}
-  .act-subnav a.act-actief{background:var(--blue-deep);color:#fff;border-color:var(--blue-deep);font-weight:600;}
-  .foto-categorie{margin-bottom:2.2rem;}
-  .foto-cat-titel{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--blue-mid);font-style:normal;border-bottom:1px solid var(--border);padding-bottom:.35rem;margin-bottom:.8rem;}
-  .foto-omschr{font-style:italic;color:var(--muted);font-size:.9rem;margin-bottom:.8rem;}
-  .foto-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.8rem;}
-  .foto-item{position:relative;overflow:hidden;border-radius:3px;border:2px solid var(--pale-blue);background:var(--pale-blue);aspect-ratio:4/3;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;}
-  .foto-item:hover{transform:scale(1.03);box-shadow:0 5px 16px rgba(15,40,80,.2);border-color:var(--gold);}
-  .foto-item img{width:100%;height:100%;object-fit:cover;display:block;}
-  .foto-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#7a9ec0;font-size:.74rem;font-family:'EB Garamond',serif;gap:.35rem;text-align:center;padding:.4rem;}
-  .foto-ph .fi{font-size:1.7rem;opacity:.45;}
-  #lightbox{display:none;position:fixed;inset:0;background:rgba(8,18,36,.95);z-index:2000;align-items:center;justify-content:center;flex-direction:column;}
-  #lightbox.open{display:flex;}
-  #lightbox img{max-width:88vw;max-height:82vh;object-fit:contain;border:2px solid var(--gold);border-radius:3px;}
-  #lb-sluit{position:absolute;top:1rem;right:1.5rem;color:var(--gold-lt);font-size:2rem;cursor:pointer;line-height:1;}
-  #lb-cap{margin-top:.8rem;color:var(--gold-lt);font-size:.86rem;font-style:italic;}
-  #admin-overlay{display:none;position:fixed;inset:0;background:rgba(8,18,36,.7);z-index:3000;align-items:flex-start;justify-content:center;overflow-y:auto;padding:2rem 1rem;}
-  #admin-overlay.open{display:flex;}
-  #admin-panel{background:var(--white);border-radius:6px;border-top:4px solid var(--gold);box-shadow:0 8px 40px rgba(10,30,60,.4);width:100%;max-width:700px;padding:2rem;position:relative;}
-  #admin-panel h2{font-family:'Playfair Display',serif;color:var(--blue-deep);font-size:1.4rem;margin-bottom:.3rem;display:block;border-bottom:2px solid var(--gold);padding-bottom:.4rem;}
-  #admin-panel .admin-subtitle{font-size:.9rem;color:var(--muted);font-style:italic;margin-bottom:1.5rem;}
-  #admin-close{position:absolute;top:1rem;right:1.2rem;font-size:1.6rem;color:var(--muted);cursor:pointer;line-height:1;background:none;border:none;}
-  #admin-close:hover{color:var(--blue-deep);}
-  .admin-tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:2px solid var(--pale-blue);}
-  .admin-tab{padding:.5rem 1.2rem;font-family:'EB Garamond',serif;font-size:.95rem;cursor:pointer;border:none;background:none;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .2s,border-color .2s;}
-  .admin-tab.actief{color:var(--blue-deep);border-bottom-color:var(--gold);font-weight:600;}
-  .admin-form{display:grid;gap:1rem;}
-  .admin-form label{font-size:.85rem;color:var(--muted);display:block;margin-bottom:.2rem;font-style:italic;}
-  .admin-form input,.admin-form select,.admin-form textarea{width:100%;padding:.5rem .75rem;border:1px solid var(--border);background:var(--admin-bg);font-family:'EB Garamond',serif;font-size:1rem;color:var(--text);border-radius:3px;outline:none;transition:border-color .2s;}
-  .admin-form input:focus,.admin-form select:focus,.admin-form textarea:focus{border-color:var(--blue-mid);background:#fff;}
-  .admin-form .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-  @media(max-width:500px){.admin-form .form-row{grid-template-columns:1fr;}}
-  .admin-btn-row{display:flex;gap:.8rem;align-items:center;margin-top:.5rem;}
-  .btn-primary{padding:.55rem 1.5rem;background:var(--blue-deep);color:#fff;border:none;font-family:'EB Garamond',serif;font-size:1rem;letter-spacing:.04em;cursor:pointer;border-radius:3px;transition:background .2s;}
-  .btn-primary:hover{background:var(--gold);color:var(--blue-navy);}
-  .btn-danger{padding:.4rem 1rem;background:#c0392b;color:#fff;border:none;font-family:'EB Garamond',serif;font-size:.88rem;cursor:pointer;border-radius:3px;transition:background .2s;}
-  .btn-danger:hover{background:#96281b;}
-  .admin-success{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7;padding:.5rem 1rem;border-radius:3px;font-size:.9rem;display:none;margin-top:.5rem;}
-  .admin-success.show{display:block;}
-  .ev-rij{display:flex;align-items:center;gap:.6rem;padding:.45rem .7rem;border-bottom:1px solid var(--pale-blue);font-size:.88rem;}
-  .ev-rij:last-child{border-bottom:none;}
-  .ev-rij .ev-info{flex:1;}
-  .ev-rij .ev-datum-tag{font-family:'Playfair Display',serif;color:var(--gold);font-size:.8rem;margin-right:.5rem;}
-  .ev-rij .ev-naam{color:var(--blue-navy);}
-  .ev-rij .ev-type-badge{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;padding:.1rem .4rem;border-radius:2px;background:var(--pale-blue);color:var(--blue-mid);flex-shrink:0;}
-  .ev-leeg{font-style:italic;color:var(--muted);font-size:.9rem;padding:.5rem 0;}
-  .admin-trigger{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--blue-deep);color:var(--gold-lt);border:2px solid var(--gold);border-radius:50px;padding:.55rem 1.2rem;font-family:'EB Garamond',serif;font-size:.88rem;letter-spacing:.06em;cursor:pointer;box-shadow:0 4px 16px rgba(10,30,60,.3);transition:background .2s,transform .15s;z-index:999;display:flex;align-items:center;gap:.5rem;}
-  .admin-trigger:hover{background:var(--gold);color:var(--blue-navy);transform:translateY(-2px);}
-  footer{background:linear-gradient(135deg,var(--blue-navy) 0%,var(--blue-deep) 100%);color:#cfe2f5;text-align:center;padding:2rem 1rem;font-size:.88rem;border-top:4px solid var(--gold);margin-top:1rem;}
-  footer a{color:var(--gold-lt);}
-  footer .footer-cross{font-size:2rem;color:var(--gold);display:block;margin-bottom:.6rem;}
-  @media(max-width:600px){.agenda-dag{grid-template-columns:78px 1fr;} .foto-grid{grid-template-columns:1fr 1fr;}}
-  #gb-map-svg{width:100%;height:auto;filter:drop-shadow(0 3px 14px rgba(0,0,0,.1));border:2px solid var(--gold);border-radius:4px;background:#c8dff0;display:block;}
-  .gb-pin{cursor:pointer;} .gb-hit-area{fill:transparent;stroke:none;}
-  .gb-dot{fill:var(--blue-mid);stroke:var(--gold);stroke-width:1.2;filter:drop-shadow(0 1px 3px rgba(0,0,0,.3));transition:r .12s;}
-  .gb-pin:hover .gb-dot{r:6;}
-  .gb-pin.africa .gb-dot{fill:#8b3a1a;} .gb-pin.asia .gb-dot{fill:#3d5c2a;}
-  .gb-pin.europe .gb-dot{fill:#2a4a6b;} .gb-pin.americas .gb-dot{fill:#6b2a7a;}
-  #gb-tooltip{position:fixed;background:#1a1208;color:#faf6e8;padding:.7rem 1.1rem;border-radius:4px;font-size:.95rem;pointer-events:none;opacity:0;transition:opacity .18s;z-index:3500;border-left:3px solid var(--gold);max-width:280px;min-width:150px;line-height:1.5;box-shadow:0 4px 20px rgba(0,0,0,.4);}
-  #gb-tooltip.visible{opacity:1;}
-  .gb-tt-place{font-family:'Playfair Display',serif;font-size:1rem;color:#e0b05a;}
-  .gb-tt-country{font-size:.8rem;color:#bbb;margin-top:.1rem;}
-  .gb-tt-note{font-style:italic;font-size:.78rem;color:#aaa;margin-top:.15rem;}
-  .gb-tt-date{font-size:.76rem;color:#aaa;}
+  :root {
+    --sky:       #eef4fb;
+    --pale-blue: #daeaf8;
+    --blue-mid:  #2d6a9f;
+    --blue-deep: #1a3f6f;
+    --blue-navy: #0f2744;
+    --gold:      #c4933a;
+    --gold-lt:   #e0b05a;
+    --text:      #0e1f33;
+    --muted:     #4a6480;
+    --border:    #a8c6e0;
+    --white:     #ffffff;
+    --admin-bg:  #f0f7ff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'EB Garamond', Georgia, serif; background: var(--sky); color: var(--text); font-size: 18px; line-height: 1.75; }
+
+  /* ── HEADER ── */
+  header { background: linear-gradient(160deg, var(--blue-navy) 0%, var(--blue-deep) 60%, var(--blue-mid) 100%); color: #fff; text-align: center; padding: 0; border-bottom: 4px solid var(--gold); cursor: pointer; position: relative; overflow: hidden; }
+  .hero-photo { width: 100%; height: 300px; object-fit: cover; object-position: center 40%; display: block; opacity: 0.42; }
+  .hero-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem; }
+  .hero-cross { font-size: 1.4rem; color: var(--gold-lt); letter-spacing: 10px; margin-bottom: 0.5rem; }
+  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4.5vw, 3.2rem); font-weight: 600; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.6); letter-spacing: 0.03em; }
+  header p.subtitle { font-style: italic; color: var(--gold-lt); font-size: 1.05rem; margin-top: 0.4rem; text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+
+  /* ── HOOFDNAVIGATIE ── */
+  nav#main-nav { background: var(--blue-navy); display: flex; flex-wrap: wrap; justify-content: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(10,30,60,0.4); }
+  nav#main-nav > .nav-item { position: relative; }
+  nav#main-nav > .nav-item > a { color: #cfe2f5; text-decoration: none; padding: 0.75rem 1.3rem; font-family: 'EB Garamond', serif; font-size: 0.9rem; letter-spacing: 0.07em; text-transform: uppercase; display: block; transition: background 0.2s, color 0.2s; border-right: 1px solid rgba(255,255,255,0.07); cursor: pointer; white-space: nowrap; }
+  nav#main-nav > .nav-item:last-child > a { border-right: none; }
+  nav#main-nav > .nav-item > a:hover,
+  nav#main-nav > .nav-item > a.active { background: var(--gold); color: var(--blue-navy); font-weight: 600; }
+  /* dropdown */
+  .dropdown { display: none; position: absolute; top: 100%; left: 0; background: var(--blue-deep); min-width: 210px; box-shadow: 0 6px 20px rgba(10,30,60,0.3); border-top: 2px solid var(--gold); z-index: 200; }
+  .nav-item:hover .dropdown { display: block; }
+  .dropdown a { display: block; color: #cfe2f5; text-decoration: none; padding: 0.55rem 1.1rem; font-family: 'EB Garamond', serif; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.07); cursor: pointer; transition: background 0.15s, color 0.15s; }
+  .dropdown a:last-child { border-bottom: none; }
+  .dropdown a:hover { background: var(--gold); color: var(--blue-navy); }
+  .nav-arrow { font-size: 0.6rem; opacity: 0.6; margin-left: 0.3rem; }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem; display: grid; grid-template-columns: 1fr 300px; gap: 2.5rem; }
+  @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }
+  main > section { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); animation: fadeIn 0.3s ease; }
+  main > section:last-child { border-bottom: none; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── TYPOGRAFIE ── */
+  h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--blue-deep); font-weight: 600; margin-bottom: 0.9rem; padding-bottom: 0.45rem; border-bottom: 2px solid var(--gold); display: inline-block; }
+  h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--blue-mid); font-style: italic; margin: 1.1rem 0 0.35rem; }
+  p { margin-bottom: 0.75rem; }
+  a { color: var(--blue-mid); text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 3px; transition: color 0.2s; cursor: pointer; }
+  a:hover { color: var(--gold); }
+  .ornament { text-align: center; color: var(--gold); font-size: 1.2rem; letter-spacing: 6px; margin: 1.5rem 0; }
+
+  /* ── FOTO'S ── */
+  .church-photo { width: 100%; border-radius: 4px; border: 3px solid var(--pale-blue); box-shadow: 0 4px 18px rgba(15,40,80,0.18); margin: 1.2rem 0; display: block; object-fit: cover; }
+  .photo-caption { font-size: 0.82rem; color: var(--muted); font-style: italic; text-align: center; margin-top: -0.6rem; margin-bottom: 1rem; }
+  .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.2rem 0; }
+  .photo-grid img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; border: 3px solid var(--pale-blue); box-shadow: 0 3px 12px rgba(15,40,80,0.15); }
+  @media(max-width:600px){ .photo-grid { grid-template-columns: 1fr; } }
+
+  /* ── BREADCRUMB & SUBNAV ── */
+  .breadcrumb { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.4rem; padding: 0.35rem 0; border-bottom: 1px solid var(--border); }
+  .breadcrumb span { color: var(--gold); margin: 0 0.4rem; }
+  .subnav { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.8rem; padding-bottom: 1.2rem; border-bottom: 2px solid var(--pale-blue); }
+  .subnav a { display: inline-block; padding: 0.35rem 0.9rem; background: var(--pale-blue); color: var(--blue-deep); text-decoration: none; border-radius: 3px; font-size: 0.9rem; font-family: 'EB Garamond', serif; letter-spacing: 0.04em; border: 1px solid var(--border); transition: background 0.2s, color 0.2s; cursor: pointer; }
+  .subnav a:hover { background: var(--blue-mid); color: #fff; border-color: var(--blue-mid); }
+  .subnav a.subnav-active { background: var(--blue-deep); color: #fff; border-color: var(--blue-deep); font-weight: 600; }
+
+  /* ── NIEUWSITEMS ── */
+  .news-item { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--blue-mid); padding: 0.9rem 1.2rem; margin-bottom: 0.9rem; border-radius: 3px; transition: box-shadow 0.2s, border-left-color 0.2s; cursor: pointer; }
+  .news-item:hover { box-shadow: 0 3px 14px rgba(30,80,140,0.14); border-left-color: var(--gold); }
+  .news-item .tag { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--blue-mid); font-weight: 500; margin-bottom: 0.2rem; }
+  .news-item .ni-title { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--blue-navy); }
+  .news-item:hover .ni-title { color: var(--blue-mid); }
+
+  /* ── VIERING TABLE ── */
+  .viering-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.95rem; }
+  .viering-table th { background: var(--blue-deep); color: #fff; padding: 0.5rem 0.8rem; text-align: left; font-family: 'Playfair Display', serif; font-weight: 400; }
+  .viering-table td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); }
+  .viering-table tr:nth-child(even) td { background: var(--pale-blue); }
+
+  /* ── SIDEBAR ── */
+  aside { font-size: 0.95rem; }
+  .sidebar-box { background: var(--white); border: 1px solid var(--border); border-top: 3px solid var(--blue-mid); padding: 1.2rem 1.2rem 1rem; margin-bottom: 1.6rem; border-radius: 3px; box-shadow: 0 2px 8px rgba(30,80,140,0.07); }
+  .sidebar-box h3 { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-style: normal; font-weight: 600; color: var(--blue-deep); text-transform: uppercase; letter-spacing: 0.07em; margin: 0 0 0.65rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--pale-blue); }
+  .sidebar-box p { margin-bottom: 0.4rem; font-size: 0.93rem; }
+  .sidebar-box .time { font-weight: 600; color: var(--blue-navy); }
+  .sidebar-box .address { line-height: 1.5; color: var(--muted); font-style: italic; font-size: 0.88rem; }
+  .sidebar-photo { width: 100%; border-radius: 3px; margin-bottom: 1rem; border: 2px solid var(--pale-blue); display: block; object-fit: cover; height: 160px; }
+
+  /* ── CONTACT FORM ── */
+  .contact-form { display: grid; gap: 1rem; margin-top: 1rem; }
+  .contact-form label { font-size: 0.88rem; color: var(--muted); display: block; margin-bottom: 0.2rem; }
+  .contact-form input, .contact-form textarea { width: 100%; padding: 0.55rem 0.8rem; border: 1px solid var(--border); background: #fff; font-family: 'EB Garamond', serif; font-size: 1rem; color: var(--text); border-radius: 3px; outline: none; transition: border-color 0.2s; }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--blue-mid); }
+  .contact-form textarea { min-height: 120px; resize: vertical; }
+  .btn { display: inline-block; padding: 0.6rem 1.6rem; background: var(--blue-deep); color: #fff; border: none; font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.06em; cursor: pointer; transition: background 0.2s; border-radius: 3px; }
+  .btn:hover { background: var(--blue-navy); }
+
+  /* ── HOMILIE ── */
+  .homilie { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--blue-mid); padding: 1.5rem 1.8rem; margin-top: 1rem; border-radius: 3px; line-height: 1.9; }
+
+  /* ── KIDS ── */
+  .kids-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem; }
+  @media(max-width:600px){ .kids-grid { grid-template-columns: 1fr; } }
+  .kids-card { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; text-align: center; cursor: pointer; transition: box-shadow 0.2s, transform 0.2s; }
+  .kids-card:hover { box-shadow: 0 4px 16px rgba(30,80,140,0.15); transform: translateY(-2px); }
+  .kids-card .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .kids-card h3 { font-style: normal; color: var(--blue-deep); margin: 0 0 0.5rem; }
+
+  /* ── PARTNERS ── */
+  .partners { display: grid; gap: 1rem; margin-top: 1rem; }
+  .partner-item { background: var(--white); border: 1px solid var(--border); padding: 1rem 1.3rem; border-radius: 3px; border-left: 4px solid var(--blue-mid); }
+  .partner-item strong { color: var(--blue-deep); }
+
+  /* ── MAP ── */
+  .map-box { background: var(--pale-blue); border: 1px solid var(--border); padding: 1.5rem; text-align: center; color: var(--muted); font-style: italic; border-radius: 4px; margin-top: 1rem; }
+
+  /* ── AGENDA ── */
+  .agenda-wrapper { border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-top: 0.8rem; box-shadow: 0 2px 8px rgba(15,40,80,0.08); }
+  .agenda-maand-header { background: var(--blue-navy); color: var(--gold-lt); font-family: 'Playfair Display', serif; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.28rem 0.8rem; }
+  .agenda-dag { display: grid; grid-template-columns: 72px 1fr; border-bottom: 1px solid var(--border); }
+  .agenda-dag:last-child { border-bottom: none; }
+  .agenda-dag.weekend .datum-cel { background: #e4edf7; }
+  .agenda-dag.vandaag .datum-cel { background: rgba(196,147,58,0.18); }
+  .datum-cel { background: var(--pale-blue); padding: 0.35rem 0.6rem; font-family: 'Playfair Display', serif; border-right: 2px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+  .datum-cel .dag-naam { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue-mid); font-family: 'EB Garamond', serif; }
+  .datum-cel .dag-nr { font-size: 1.1rem; line-height: 1.1; color: var(--blue-navy); }
+  .datum-cel .maand-kort { font-size: 0.6rem; color: var(--muted); font-family: 'EB Garamond', serif; }
+  .agenda-dag.vandaag .datum-cel .dag-naam,
+  .agenda-dag.vandaag .datum-cel .dag-nr { color: var(--gold); }
+  .ev-cel { padding: 0.3rem 0.8rem; display: flex; flex-direction: column; justify-content: center; background: var(--white); }
+  .evenement { display: flex; align-items: baseline; gap: 0.45rem; padding: 0.08rem 0; font-size: 0.85rem; line-height: 1.35; }
+  .ev-tijd { font-family: 'Playfair Display', serif; font-size: 0.7rem; color: var(--gold); min-width: 38px; flex-shrink: 0; }
+  .ev-icoon { flex-shrink: 0; font-size: 0.7rem; }
+  .ev-taize { color: var(--blue-mid); font-style: italic; }
+  .ev-nacht { color: #2d6a9f; }
+  .agenda-legenda { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.55rem; font-size: 0.78rem; color: var(--muted); font-style: italic; }
+
+  /* ── ARCHIEF ── */
+  .archief-lijst { list-style: none; margin: 0; padding: 0; }
+  .archief-lijst li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.32rem 0; border-bottom: 1px solid var(--pale-blue); font-size: 0.93rem; }
+  .archief-lijst li:last-child { border-bottom: none; }
+  .archief-lijst a { text-decoration: none; color: var(--blue-mid); transition: color 0.2s; flex: 1; }
+  .archief-lijst a:hover { color: var(--gold); }
+  .al-datum { font-size: 0.78rem; color: var(--muted); white-space: nowrap; font-style: italic; flex-shrink: 0; }
+
+  /* ── PAULUS BOX ── */
+  .paulus-box { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 1.3rem 1.7rem; border-radius: 3px; margin-top: 0.9rem; box-shadow: 0 2px 8px rgba(15,40,80,0.07); }
+  .paulus-box h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--blue-deep); font-style: normal; margin: 0 0 0.6rem; }
+  .paulus-knop { display: inline-block; margin-top: 0.7rem; padding: 0.5rem 1.3rem; background: var(--blue-deep); color: #fff; font-family: 'EB Garamond', serif; font-size: 0.94rem; letter-spacing: 0.04em; text-decoration: none; border-radius: 3px; transition: background 0.2s; }
+  .paulus-knop:hover { background: var(--gold); color: var(--blue-navy); text-decoration: none; }
+
+  /* ── ACTIVITEITEN FOTOS ── */
+  .act-subnav { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.6rem; padding-bottom: 1rem; border-bottom: 2px solid var(--pale-blue); }
+  .act-subnav a { display: inline-block; padding: 0.35rem 0.9rem; background: var(--pale-blue); color: var(--blue-deep); text-decoration: none; border-radius: 3px; font-size: 0.88rem; font-family: 'EB Garamond', serif; border: 1px solid var(--border); transition: background 0.2s, color 0.2s; cursor: pointer; }
+  .act-subnav a:hover { background: var(--blue-mid); color: #fff; border-color: var(--blue-mid); }
+  .act-subnav a.act-actief { background: var(--blue-deep); color: #fff; border-color: var(--blue-deep); font-weight: 600; }
+  .foto-categorie { margin-bottom: 2.2rem; }
+  .foto-cat-titel { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--blue-mid); font-style: normal; border-bottom: 1px solid var(--border); padding-bottom: 0.35rem; margin-bottom: 0.8rem; }
+  .foto-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 0.8rem; }
+  .foto-item { position: relative; overflow: hidden; border-radius: 3px; border: 2px solid var(--pale-blue); background: var(--pale-blue); aspect-ratio: 4/3; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+  .foto-item:hover { transform: scale(1.03); box-shadow: 0 5px 16px rgba(15,40,80,0.2); border-color: var(--gold); }
+  .foto-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .foto-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #7a9ec0; font-size: 0.74rem; font-family: 'EB Garamond', serif; gap: 0.35rem; text-align: center; padding: 0.4rem; }
+
+  /* Voorbije activiteiten */
+  .act-voorbij { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--muted); padding: 1rem 1.3rem; margin-bottom: 0.85rem; border-radius: 3px; }
+  .act-voorbij .act-datum { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.2rem; }
+  .act-voorbij .act-titel { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--blue-deep); margin-bottom: 0.3rem; }
+  .act-voorbij p { font-size: 0.9rem; color: var(--muted); margin: 0; }
+
+  /* ── KERK / TOERISME ── */
+  .kerk-subnav { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.8rem; padding-bottom: 1.2rem; border-bottom: 2px solid var(--pale-blue); }
+  .kerk-subnav a { display: inline-block; padding: 0.35rem 0.9rem; background: var(--pale-blue); color: var(--blue-deep); text-decoration: none; border-radius: 3px; font-size: 0.9rem; font-family: 'EB Garamond', serif; border: 1px solid var(--border); transition: background 0.2s, color 0.2s; cursor: pointer; }
+  .kerk-subnav a:hover { background: var(--blue-mid); color: #fff; }
+  .kerk-subnav a.kerk-actief { background: var(--blue-deep); color: #fff; border-color: var(--blue-deep); font-weight: 600; }
+  .tijdlijn { position: relative; padding-left: 1.5rem; margin-top: 1rem; }
+  .tijdlijn::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background: var(--pale-blue); }
+  .tl-item { position: relative; margin-bottom: 1.4rem; }
+  .tl-item::before { content:''; position:absolute; left:-1.7rem; top:0.45rem; width:10px; height:10px; border-radius:50%; background: var(--gold); border: 2px solid var(--white); box-shadow: 0 0 0 2px var(--gold); }
+  .tl-jaar { font-family:'Playfair Display',serif; font-size:0.85rem; color:var(--gold); font-weight:600; }
+  .tl-tekst { font-size:0.95rem; }
+
+  /* ── LIGHTBOX ── */
+  #lightbox { display: none; position: fixed; inset: 0; background: rgba(8,18,36,0.95); z-index: 2000; align-items: center; justify-content: center; flex-direction: column; }
+  #lightbox.open { display: flex; }
+  #lightbox img { max-width: 88vw; max-height: 82vh; object-fit: contain; border: 2px solid var(--gold); border-radius: 3px; }
+  #lb-sluit { position: absolute; top: 1rem; right: 1.5rem; color: var(--gold-lt); font-size: 2rem; cursor: pointer; line-height: 1; }
+  #lb-cap { margin-top: 0.8rem; color: var(--gold-lt); font-size: 0.86rem; font-style: italic; }
+
+  /* ── BEHEERPANEEL ── */
+  #admin-overlay { display: none; position: fixed; inset: 0; background: rgba(8,18,36,0.7); z-index: 3000; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 2rem 1rem; }
+  #admin-overlay.open { display: flex; }
+  #admin-panel { background: var(--white); border-radius: 6px; border-top: 4px solid var(--gold); box-shadow: 0 8px 40px rgba(10,30,60,0.4); width: 100%; max-width: 700px; padding: 2rem; position: relative; }
+  #admin-panel h2 { font-family: 'Playfair Display', serif; color: var(--blue-deep); font-size: 1.4rem; margin-bottom: 0.3rem; display: block; border-bottom: 2px solid var(--gold); padding-bottom: 0.4rem; }
+  #admin-panel .admin-subtitle { font-size: 0.9rem; color: var(--muted); font-style: italic; margin-bottom: 1.5rem; }
+  #admin-close { position: absolute; top: 1rem; right: 1.2rem; font-size: 1.6rem; color: var(--muted); cursor: pointer; line-height: 1; background: none; border: none; }
+  #admin-close:hover { color: var(--blue-deep); }
+  .admin-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 2px solid var(--pale-blue); }
+  .admin-tab { padding: 0.5rem 1.2rem; font-family: 'EB Garamond', serif; font-size: 0.95rem; cursor: pointer; border: none; background: none; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.2s, border-color 0.2s; }
+  .admin-tab.actief { color: var(--blue-deep); border-bottom-color: var(--gold); font-weight: 600; }
+  .admin-form { display: grid; gap: 1rem; }
+  .admin-form label { font-size: 0.85rem; color: var(--muted); display: block; margin-bottom: 0.2rem; font-style: italic; }
+  .admin-form input, .admin-form select, .admin-form textarea { width: 100%; padding: 0.5rem 0.75rem; border: 1px solid var(--border); background: var(--admin-bg); font-family: 'EB Garamond', serif; font-size: 1rem; color: var(--text); border-radius: 3px; outline: none; transition: border-color 0.2s; }
+  .admin-form input:focus, .admin-form select:focus, .admin-form textarea:focus { border-color: var(--blue-mid); background: #fff; }
+  .admin-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:500px) { .admin-form .form-row { grid-template-columns: 1fr; } }
+  .admin-btn-row { display: flex; gap: 0.8rem; align-items: center; margin-top: 0.5rem; }
+  .btn-primary { padding: 0.55rem 1.5rem; background: var(--blue-deep); color: #fff; border: none; font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.04em; cursor: pointer; border-radius: 3px; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--gold); color: var(--blue-navy); }
+  .btn-danger { padding: 0.4rem 1rem; background: #c0392b; color: #fff; border: none; font-family: 'EB Garamond', serif; font-size: 0.88rem; cursor: pointer; border-radius: 3px; transition: background 0.2s; }
+  .btn-danger:hover { background: #96281b; }
+  .admin-success { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; padding: 0.5rem 1rem; border-radius: 3px; font-size: 0.9rem; display: none; margin-top: 0.5rem; }
+  .admin-success.show { display: block; }
+  .ev-rij { display: flex; align-items: center; gap: 0.6rem; padding: 0.45rem 0.7rem; border-bottom: 1px solid var(--pale-blue); font-size: 0.88rem; }
+  .ev-rij:last-child { border-bottom: none; }
+  .ev-rij .ev-info { flex: 1; }
+  .ev-rij .ev-datum-tag { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 0.8rem; margin-right: 0.5rem; }
+  .ev-rij .ev-naam { color: var(--blue-navy); }
+  .ev-rij .ev-type-badge { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.1rem 0.4rem; border-radius: 2px; background: var(--pale-blue); color: var(--blue-mid); flex-shrink: 0; }
+  .ev-leeg { font-style: italic; color: var(--muted); font-size: 0.9rem; padding: 0.5rem 0; }
+  .admin-trigger { background: var(--blue-deep); color: var(--gold-lt); border: 2px solid var(--gold); border-radius: 50px; padding: 0.45rem 1.1rem; font-family: 'EB Garamond', serif; font-size: 0.82rem; letter-spacing: 0.06em; cursor: pointer; box-shadow: 0 3px 10px rgba(10,30,60,0.2); transition: background 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; }
+  .admin-trigger:hover { background: var(--gold); color: var(--blue-navy); transform: translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer { background: linear-gradient(135deg, var(--blue-navy) 0%, var(--blue-deep) 100%); color: #cfe2f5; padding: 2.5rem 1.5rem 1.5rem; border-top: 4px solid var(--gold); margin-top: 1rem; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+  @media(max-width:700px){ .footer-inner { grid-template-columns: 1fr; } }
+  .footer-col h4 { font-family: 'Playfair Display', serif; color: var(--gold-lt); font-size: 0.9rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.8rem; padding-bottom: 0.35rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .footer-col p { font-size: 0.88rem; line-height: 1.6; color: #aac4de; margin-bottom: 0.3rem; }
+  .footer-col a { color: var(--gold-lt); text-decoration: none; font-size: 0.88rem; }
+  .footer-col a:hover { color: #fff; }
+  .footer-logo-area { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.6rem; }
+  .footer-logo-box { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; padding: 0.5rem 0.8rem; display: flex; align-items: center; justify-content: center; }
+  .footer-logo-box img { height: 48px; width: auto; opacity: 0.9; filter: brightness(1.2); }
+  .footer-bottom { max-width: 1100px; margin: 1.5rem auto 0; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 0.82rem; color: #7a9ec0; }
+  .footer-cross { font-size: 1.8rem; color: var(--gold); display: block; text-align: center; margin-bottom: 1.5rem; }
+
+  @media(max-width:600px) {
+    .agenda-dag { grid-template-columns: 78px 1fr; }
+    .foto-grid { grid-template-columns: 1fr 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -178,30 +297,59 @@
   <div class="hero-overlay">
     <div class="hero-cross">&#x2748; &#x2748; &#x2748;</div>
     <h1>Onze-Lieve-Vrouw van Goede Bijstand</h1>
-    <p class="subtitle">Parochie &#8212; Brussel Centrum</p>
+    <p class="subtitle">Parochie &amp; Kerk &mdash; Brussel Centrum</p>
   </div>
 </header>
+
 <nav id="main-nav">
-  <a onclick="navigate('home')" data-page="home">Home</a>
-  <a onclick="navigate('bijstand')" data-page="bijstand">De Goede Bijstand</a>
-  <a onclick="navigate('vieringen')" data-page="vieringen">Vieringen</a>
-  <a onclick="navigate('activiteiten')" data-page="activiteiten">Activiteiten</a>
-  <a onclick="navigate('kinderen')" data-page="kinderen">Kinderen &amp; Jongeren</a>
-  <a onclick="navigate('schelp')" data-page="schelp">De Schelp</a>
-  <a onclick="navigate('samenwerking')" data-page="samenwerking">Samenwerking</a>
-  <a onclick="navigate('overlijden')" data-page="overlijden">Overlijden</a>
-  <a onclick="navigate('contact')" data-page="contact">Contact</a>
+  <div class="nav-item">
+    <a onclick="navigate('kerk')" data-page="kerk">Kerk <span class="nav-arrow">▾</span></a>
+    <div class="dropdown">
+      <a onclick="navigate('kerk-geschiedenis')">Geschiedenis</a>
+      <a onclick="navigate('kerk-info')">Bezoekersinformatie</a>
+      <a onclick="navigate('kerk-kunst')">Kunst &amp; Architectuur</a>
+    </div>
+  </div>
+  <div class="nav-item">
+    <a onclick="navigate('parochie')" data-page="parochie">Parochie <span class="nav-arrow">▾</span></a>
+    <div class="dropdown">
+      <a onclick="navigate('vieringen')">Vieringen</a>
+      <a onclick="navigate('jongeren')">Kinderen &amp; Jongeren</a>
+      <a onclick="navigate('sacramenten')">Sacramenten</a>
+      <a onclick="navigate('overlijden')">Overlijden</a>
+      <a onclick="navigate('schelp')">De Schelp</a>
+      <a onclick="navigate('samenwerking')">Samenwerking</a>
+    </div>
+  </div>
+  <div class="nav-item">
+    <a onclick="navigate('grondbib')" data-page="grondbib">Grondbibliotheek</a>
+  </div>
+  <div class="nav-item">
+    <a onclick="navigate('activiteiten')" data-page="activiteiten">Activiteiten <span class="nav-arrow">▾</span></a>
+    <div class="dropdown">
+      <a onclick="navigate('activiteiten')">Komende activiteiten</a>
+      <a onclick="navigate('act-voorbij')">Voorbije activiteiten</a>
+      <a onclick="navigate('act-fotos')">Foto's</a>
+    </div>
+  </div>
+  <div class="nav-item">
+    <a onclick="navigate('contact')" data-page="contact">Contact</a>
+  </div>
 </nav>
+
 <div class="container">
   <main id="main-content"></main>
   <aside id="sidebar"></aside>
 </div>
-<button class="admin-trigger" onclick="openAdmin()">&#9998; Beheer agenda</button>
+
+<!-- ADMIN OVERLAY -->
 <div id="admin-overlay">
-  <div id="admin-login" style="background:#fff;border-radius:6px;border-top:4px solid var(--gold);box-shadow:0 8px 40px rgba(10,30,60,.4);width:100%;max-width:340px;padding:2rem;text-align:center;">
+  <div id="admin-login" style="background:#fff;border-radius:6px;border-top:4px solid var(--gold);box-shadow:0 8px 40px rgba(10,30,60,0.4);width:100%;max-width:340px;padding:2rem;text-align:center;">
     <p style="font-family:'Playfair Display',serif;color:var(--blue-deep);font-size:1.1rem;margin-bottom:1rem;">Agendabeheer</p>
-    <input type="password" id="adm-pw-input" placeholder="Wachtwoord" onkeydown="if(event.key==='Enter')checkPw()" style="width:100%;padding:.5rem .75rem;border:1px solid var(--border);border-radius:3px;font-family:'EB Garamond',serif;font-size:1rem;outline:none;margin-bottom:.7rem;">
-    <p id="adm-pw-fout" style="display:none;color:#c0392b;font-size:.85rem;margin-bottom:.6rem;">Onjuist wachtwoord.</p>
+    <input type="password" id="adm-pw-input" placeholder="Wachtwoord"
+      onkeydown="if(event.key==='Enter')checkPw()"
+      style="width:100%;padding:0.5rem 0.75rem;border:1px solid var(--border);border-radius:3px;font-family:'EB Garamond',serif;font-size:1rem;outline:none;margin-bottom:0.7rem;">
+    <p id="adm-pw-fout" style="display:none;color:#c0392b;font-size:0.85rem;margin-bottom:0.6rem;">Onjuist wachtwoord.</p>
     <button class="btn-primary" onclick="checkPw()" style="width:100%;">Aanmelden</button>
   </div>
   <div id="admin-panel">
@@ -222,681 +370,811 @@
         <div>
           <label>Type</label>
           <select id="adm-type">
-            <option value="viering">&#x271D; Viering / Mis</option>
-            <option value="taize">&#x2736; Taizé-gebed</option>
-            <option value="activiteit">&#x25C6; Activiteit / Ontmoeting</option>
-            <option value="muziek">&#x266B; Muziek / Concert</option>
+            <option value="viering">✝ Viering / Mis</option>
+            <option value="taize">✦ Taizé-gebed</option>
+            <option value="activiteit">◆ Activiteit / Ontmoeting</option>
+            <option value="muziek">♫ Muziek / Concert</option>
           </select>
         </div>
-        <div class="admin-btn-row"><button class="btn-primary" onclick="voegToe()">Toevoegen aan agenda</button></div>
-        <div class="admin-success" id="adm-success">&#x2713; Evenement toegevoegd aan de agenda.</div>
+        <div class="admin-btn-row">
+          <button class="btn-primary" onclick="voegToe()">Toevoegen aan agenda</button>
+        </div>
+        <div class="admin-success" id="adm-success">✓ Evenement toegevoegd aan de agenda.</div>
       </div>
     </div>
-    <div id="atab-lijst" style="display:none;"><div id="adm-ev-lijst"></div></div>
+    <div id="atab-lijst" style="display:none;">
+      <div id="adm-ev-lijst"></div>
+    </div>
   </div>
 </div>
+
+<!-- LIGHTBOX -->
 <div id="lightbox">
   <span id="lb-sluit" onclick="sluitLb()">&#x2715;</span>
   <img id="lb-img" src="" alt="">
   <div id="lb-cap"></div>
 </div>
-<div id="gb-tooltip"></div>
 
-<div id="gb-locatie-modal" style="display:none;position:fixed;inset:0;background:rgba(8,18,36,0.85);z-index:4000;align-items:flex-start;justify-content:center;overflow-y:auto;padding:2rem 1rem;">
-  <div style="background:#fff;border-radius:6px;border-top:4px solid var(--gold);box-shadow:0 8px 40px rgba(10,30,60,0.4);width:100%;max-width:800px;padding:2rem;position:relative;">
-    <button onclick="document.getElementById('gb-locatie-modal').style.display='none'"
-      style="position:absolute;top:1rem;right:1.2rem;font-size:1.6rem;color:var(--muted);cursor:pointer;background:none;border:none;line-height:1;">&#x2715;</button>
-    <h2 style="font-family:'Playfair Display',serif;color:var(--blue-deep);font-size:1.4rem;margin-bottom:0.3rem;border-bottom:2px solid var(--gold);padding-bottom:0.4rem;display:block;">Grondbibliotheek &mdash; Alle locaties</h2>
-    <p style="font-size:0.88rem;color:var(--muted);font-style:italic;margin-bottom:1.5rem;">Van elke plek op aarde een stukje grond &mdash; <strong id="gb-modal-count">0</strong> locaties over 6 continenten.</p>
-    <div id="gb-locatie-inhoud" style="columns:2;column-gap:2rem;font-size:0.9rem;line-height:1.7;">
-      <!-- filled by JS -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Kerk van Goede Bijstand</h4>
+      <p>Kolenmarkt 91 (kant Fontainasplein)<br>1000 Brussel</p>
+      <p style="margin-top:0.5rem;">Open: elke dag 9–17 u<br>Zondag vanaf 10 u</p>
+      <p style="margin-top:0.6rem;"><a href="https://maps.google.com/?q=Kolenmarkt+91,+1000+Brussel" target="_blank">Google Maps &#8594;</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Secretariaat Bijstandsnetwerk<br>Bijstandsstraat 5, 1000 Brussel</p>
+      <p style="margin-top:0.5rem;"><a href="mailto:2096@diomb.be">2096@diomb.be</a></p>
+      <p style="margin-top:0.3rem;"><a href="https://www.facebook.com/Goede-Bijstand-Brussel-168666597140654/" target="_blank">Facebook &#8594;</a></p>
+      <p style="margin-top:0.3rem;"><strong style="color:#aac4de;">Pastoor:</strong> Johnny De Mot<br><a href="mailto:johnny.demot@viaporta.be">johnny.demot@viaporta.be</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Kerkfabriek</h4>
+      <div class="footer-logo-area">
+        <div class="footer-logo-box">
+          <img src="data:image/png;base64,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" alt="Logo Kerkfabriek Goede Bijstand" onerror="this.parentElement.innerHTML='<span style=\'font-size:0.8rem;color:var(--gold-lt);\'>&#x271D; Kerkfabriek</span>'">
+        </div>
+      </div>
+      <p>VPW Gewest Brussel-Centrum<br>
+        <strong style="color:#aac4de;font-size:0.9rem;">BE35 4331 0715 7137</strong>
+      </p>
+      <p style="margin-top:0.4rem;font-size:0.82rem;">
+        Bijstandsstraat 5, 1000 Brussel<br>
+        0211.215.223 &mdash; RPR Brussel
+      </p>
+      <p style="margin-top:0.4rem;"><a href="mailto:2096@diomb.be">2096@diomb.be</a></p>
     </div>
   </div>
-</div>
-<footer>
-  <span class="footer-cross">&#x271D;</span>
-  <p>Parochie Goede Bijstand &#8212; Kolenmarkt 91, 1000 Brussel</p>
-  <p style="margin-top:.4rem;"><a href="mailto:2096@diomb.be">2096@diomb.be</a> &nbsp;|&nbsp; <a href="https://www.facebook.com/Goede-Bijstand-Brussel-168666597140654/" target="_blank">Facebook</a></p>
+  <div class="footer-bottom">
+    <span class="footer-cross">&#x271D;</span>
+    Parochie Goede Bijstand &mdash; Kolenmarkt 91, 1000 Brussel &mdash; <a href="https://www.paulusgemeenschappen.be/nl" target="_blank">Paulusgemeenschappen</a>
+  </div>
 </footer>
 
 <script>
-const EXT='https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsitu/files/public/media/images/2023-06/Aangepast%20Exterieur_Knop%204%201%20Icoon%20Kerkgebouw%20Goede%20Bijstand.jpg';
-const INT='https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsitu/files/public/media/images/2023-06/Aangepast%20Interieur_Onze-Lieve-Vrouw%20van%20Goede%20Bijstandkerk_JPR4243_%C2%A9%20visit.brussels%20-%20Jean-Paul%20Remy.jpg';
-const ALT='https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsitu/files/public/media/images/2023-06/Aangepast%20Extra%20%28kunstwerk%20detail%29_Altaar%20Goede%20Bijstandskerk_0.jpg';
-const DNKORT=["Zo","Ma","Di","Wo","Do","Vr","Za"];
-const MNKORT=["jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"];
-const MNLANG=["Januari","Februari","Maart","April","Mei","Juni","Juli","Augustus","September","Oktober","November","December"];
-const EVICON={viering:"✝",activiteit:"◆",muziek:"♫",taize:"✶",nacht:"🌙"};
-const VASTE_DATUMS=[{datum:"2026-04-04",tijd:"21:00",type:"viering",tekst:"Paaswake — Goede Bijstand"}];
+// ═══════════════════════════════════════════════════════
+// CONSTANTEN
+// ═══════════════════════════════════════════════════════
+const EXT = 'https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsitu/files/public/media/images/2023-06/Aangepast%20Exterieur_Knop%204%201%20Icoon%20Kerkgebouw%20Goede%20Bijstand.jpg';
+const INT = 'https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsitu/files/public/media/images/2023-06/Aangepast%20Interieur_Onze-Lieve-Vrouw%20van%20Goede%20Bijstandkerk_JPR4243_%C2%A9%20visit.brussels%20-%20Jean-Paul%20Remy.jpg';
+const ALT = 'https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsitu/files/public/media/images/2023-06/Aangepast%20Extra%20%28kunstwerk%20detail%29_Altaar%20Goede%20Bijstandskerk_0.jpg';
 
-function genereerTaize(){const res=[];const nu=new Date();nu.setHours(0,0,0,0);const einde=new Date(nu);einde.setDate(nu.getDate()+35);for(let m=0;m<3;m++){const jr=nu.getFullYear()+Math.floor((nu.getMonth()+m)/12);const mn=(nu.getMonth()+m)%12;let tel=0;for(let dag=1;dag<=31;dag++){const d=new Date(jr,mn,dag);if(d.getMonth()!==mn)break;if(d.getDay()===6){tel++;if(tel===3){if(d>=nu&&d<=einde){const key=`${jr}-${String(mn+1).padStart(2,'0')}-${String(dag).padStart(2,'0')}`;res.push({datum:key,tijd:"20:00",type:"taize",tekst:"Gebed in de geest van Taizé"});}break;}}}}return res;}
-function genereerBijstandByNight(){const res=[];const nu=new Date();nu.setHours(0,0,0,0);const einde=new Date(nu);einde.setDate(nu.getDate()+35);for(let d=new Date(nu);d<=einde;d.setDate(d.getDate()+1)){const mn=d.getMonth();if(d.getDay()===5&&mn>=4&&mn<=7){const key=`${d.getFullYear()}-${String(mn+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;res.push({datum:key,tijd:"18:00",type:"nacht",tekst:"Bijstand by Night (18–22 u)"}); }}return res;}
-const STORAGE_KEY='gb_agenda_extra';
-function laadExtra(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');}catch(e){return[];}}
-function slaOpExtra(arr){localStorage.setItem(STORAGE_KEY,JSON.stringify(arr));}
-function getAlleEvents(){const alle=[...VASTE_DATUMS,...genereerTaize(),...genereerBijstandByNight(),...laadExtra()];const kaart={};alle.forEach(ev=>{if(!kaart[ev.datum])kaart[ev.datum]=[];kaart[ev.datum].push(ev);});Object.keys(kaart).forEach(d=>kaart[d].sort((a,b)=>(a.tijd||'00:00').localeCompare(b.tijd||'00:00')));return kaart;}
-function datumSleutel(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
-function agendaHTML(){const alleEvents=getAlleEvents();const nu=new Date();nu.setHours(0,0,0,0);let h='<div class="agenda-wrapper">';let huidigeMaand=-1;let aantalDagen=0;for(let i=0;i<35;i++){const d=new Date(nu);d.setDate(nu.getDate()+i);const dw=d.getDay(),mn=d.getMonth(),jr=d.getFullYear(),nr=d.getDate();const s=datumSleutel(d);const vast=[];if(dw===0)vast.push({tijd:"11:00",type:"viering",tekst:"Zondagsviering — Goede Bijstand"});if(dw===6)vast.push({tijd:"16:30",type:"viering",tekst:"Mis — Finis Terrae"});const extra=alleEvents[s]||[];const gezien=new Set();const evs=[...vast,...extra].filter(ev=>{const k=(ev.tijd||'')+'|'+ev.tekst;if(gezien.has(k))return false;gezien.add(k);return true;});if(!evs.length)continue;aantalDagen++;if(mn!==huidigeMaand){huidigeMaand=mn;h+=`<div class="agenda-maand-header">${MNLANG[mn]} ${jr}</div>`;}const kl=['agenda-dag',(dw===0||dw===6)?'weekend':'',i===0?'vandaag':''].filter(Boolean).join(' ');h+=`<div class="${kl}"><div class="datum-cel"><span class="dag-naam">${i===0?'Vandaag':DNKORT[dw]}</span><span class="dag-nr">${nr}</span><span class="maand-kort">${MNKORT[mn]}</span></div><div class="ev-cel">`;evs.forEach(ev=>{const kc=ev.type==='taize'?' ev-taize':ev.type==='nacht'?' ev-nacht':'';h+=`<div class="evenement"><span class="ev-tijd">${ev.tijd||''}</span><span class="ev-icoon${kc}">${EVICON[ev.type]||'✝'}</span><span class="${kc.trim()}">${ev.tekst}</span></div>`;});h+=`</div></div>`;}if(!aantalDagen)h+=`<div style="padding:.7rem 1rem;font-style:italic;color:var(--muted);font-size:.88rem;">Geen activiteiten gepland in de komende 5 weken.</div>`;h+=`</div><div class="agenda-legenda"><span>✝ Viering</span><span style="color:var(--blue-mid);font-style:italic;">✶ Taizé</span><span>🌙 Bijstand by Night</span><span>◆ Activiteit</span><span>♫ Muziek/Concert</span></div>`;return h;}
+const DNKORT = ["Zo","Ma","Di","Wo","Do","Vr","Za"];
+const MNKORT = ["jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"];
+const MNLANG = ["Januari","Februari","Maart","April","Mei","Juni","Juli","Augustus","September","Oktober","November","December"];
+const EVICON = { viering:"✝", activiteit:"◆", muziek:"♫", taize:"✦", nacht:"🌙" };
 
-function openAdmin(){document.getElementById('admin-overlay').classList.add('open');document.getElementById('admin-panel').style.display='none';document.getElementById('admin-login').style.display='block';document.getElementById('adm-pw-input').value='';setTimeout(()=>document.getElementById('adm-pw-input').focus(),100);}
-function checkPw(){if(document.getElementById('adm-pw-input').value==='goedebijstand'){document.getElementById('admin-login').style.display='none';document.getElementById('admin-panel').style.display='block';adminTab('toevoegen');}else{document.getElementById('adm-pw-fout').style.display='block';document.getElementById('adm-pw-input').value='';document.getElementById('adm-pw-input').focus();}}
-function closeAdmin(){document.getElementById('admin-overlay').classList.remove('open');}
-document.getElementById('admin-overlay').addEventListener('click',function(e){if(e.target===this)closeAdmin();});
-function adminTab(k){document.getElementById('atab-toevoegen').style.display=k==='toevoegen'?'block':'none';document.getElementById('atab-lijst').style.display=k==='lijst'?'block':'none';document.querySelectorAll('.admin-tab').forEach((t,idx)=>t.classList.toggle('actief',(k==='toevoegen'&&idx===0)||(k==='lijst'&&idx===1)));if(k==='lijst')renderEvLijst();}
-function voegToe(){const datum=document.getElementById('adm-datum').value;const tijd=document.getElementById('adm-tijd').value||'';const tekst=document.getElementById('adm-tekst').value.trim();const type=document.getElementById('adm-type').value;if(!datum||!tekst){alert('Vul minstens een datum en een omschrijving in.');return;}const extra=laadExtra();extra.push({datum,tijd,type,tekst});slaOpExtra(extra);document.getElementById('adm-datum').value='';document.getElementById('adm-tijd').value='';document.getElementById('adm-tekst').value='';document.getElementById('adm-type').value='viering';const succ=document.getElementById('adm-success');succ.classList.add('show');setTimeout(()=>succ.classList.remove('show'),3000);herlaadAgendaDOM();}
-function herlaadAgendaDOM(){const wrappers=document.querySelectorAll('.agenda-wrapper');wrappers.forEach(el=>{const tmp=document.createElement('div');tmp.innerHTML=agendaHTML();el.parentNode.replaceChild(tmp.firstElementChild,el);});}
-function renderEvLijst(){const extra=laadExtra();const container=document.getElementById('adm-ev-lijst');const MNKRT=["jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"];function fmtD(s){if(!s)return'';const[jr,mn,dg]=s.split('-');return `${dg} ${MNKRT[parseInt(mn,10)-1]} ${jr}`;}let h='<p style="font-size:.82rem;color:var(--muted);font-style:italic;margin-bottom:.8rem;">Vaste eenmalige vieringen:</p>';VASTE_DATUMS.forEach(ev=>{h+=`<div class="ev-rij"><div class="ev-info"><span class="ev-datum-tag">${fmtD(ev.datum)} ${ev.tijd||''}</span><span class="ev-naam">${ev.tekst}</span></div><span class="ev-type-badge">${ev.type}</span></div>`;});h+='<p style="font-size:.82rem;color:var(--muted);font-style:italic;margin:1rem 0 .5rem;">Uw toegevoegde evenementen:</p>';if(!extra.length){h+='<div class="ev-leeg">Nog geen evenementen toegevoegd.</div>';}else{[...extra].sort((a,b)=>a.datum.localeCompare(b.datum)).forEach(ev=>{const oi=extra.findIndex(e=>e.datum===ev.datum&&e.tekst===ev.tekst&&e.tijd===ev.tijd);h+=`<div class="ev-rij"><div class="ev-info"><span class="ev-datum-tag">${fmtD(ev.datum)} ${ev.tijd||''}</span><span class="ev-naam">${ev.tekst}</span></div><span class="ev-type-badge">${ev.type}</span>&nbsp;<button class="btn-danger" onclick="verwijderEv(${oi})">x</button></div>`;});}container.innerHTML=h;}
-function verwijderEv(idx){const extra=laadExtra();extra.splice(idx,1);slaOpExtra(extra);renderEvLijst();herlaadAgendaDOM();}
-function sluitLb(){document.getElementById('lightbox').classList.remove('open');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){sluitLb();closeAdmin();if(document.getElementById('gb-locatie-modal'))document.getElementById('gb-locatie-modal').style.display='none';}});
-document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)sluitLb();});
-function fotoBlok(titel,omschr,icoon){const ph=`<div class="foto-item"><div class="foto-ph"><span class="fi">${icoon}</span>Foto toevoegen</div></div>`;return `<div class="foto-categorie"><h3 class="foto-cat-titel">${titel}</h3><p class="foto-omschr">${omschr}</p><div class="foto-grid">${ph}${ph}${ph}</div></div>`;}
-function getSidebar(){return `<img src="${EXT}" alt="Onze-Lieve-Vrouw van Goede Bijstand" class="sidebar-photo"><div class="sidebar-box"><h3>Vieringen</h3><p><strong>Finis Terrae kerk</strong><br><span class="time">Elke zaterdag om 16.30&nbsp;u</span></p><br><p><strong>Goede Bijstand</strong><br><span class="time">Elke zondag om 11.00&nbsp;u</span><br>Met elke 3e zondag kindernevendienst:<br><a onclick="navigate('bijtjes')">Goede Bijtjes</a> en <a onclick="navigate('mosterdzaadjes')">Mosterdzaadjes</a></p></div><div class="sidebar-box"><h3>Adres Goede Bijstand</h3><p class="address">Kolenmarkt 91<br>(kant Fontainasplein)<br>1000 Brussel</p><p style="font-size:.85rem;margin-top:.6rem;color:var(--muted);">Open: elke dag 9–17 u, zondag vanaf 10 u</p></div><div class="sidebar-box"><h3>Adres Finis Terrae</h3><p class="address">Nieuwstraat 76<br>1000 Brussel</p></div><div class="sidebar-box"><h3>Contact</h3><p class="address">Secretariaat Bijstandsnetwerk<br>Bijstandsstraat 5<br>1000 Brussel</p><p style="margin-top:.6rem;"><a href="https://www.facebook.com/Goede-Bijstand-Brussel-168666597140654/" target="_blank">Volg ons op Facebook &#8594;</a></p><p style="margin-top:.4rem;"><a onclick="navigate('contact')">Stuur een bericht &#8594;</a></p></div><div class="sidebar-box"><h3>Pastores</h3><p><strong>Johnny De Mot</strong><br><span style="font-size:.88rem;color:var(--muted);">Pastoor Goede Bijstand,<br>Verantwoordelijke Nederlandstalige pastoraal Brussel centrum</span><br><a href="mailto:johnny.demot@viaporta.be">johnny.demot@viaporta.be</a></p></div><div class="sidebar-box"><h3>Steunen</h3><p>Wilt u de parochie steunen?<br><a onclick="navigate('bijstand')">Meer info &#8594;</a></p></div>`;}
-function showSub(k){document.querySelectorAll('.subpage').forEach(el=>el.style.display='none');const t=document.getElementById('sub-'+k);if(t)t.style.display='block';document.querySelectorAll('[data-sub]').forEach(a=>a.classList.toggle('subnav-active',a.dataset.sub===k));}
-function showVierSub(k){document.querySelectorAll('.vsub').forEach(el=>el.style.display='none');const t=document.getElementById('vsub-'+k);if(t)t.style.display='block';document.querySelectorAll('[data-vsub]').forEach(a=>a.classList.toggle('subnav-active',a.dataset.vsub===k));}
-function showActSub(k){['overzicht','fotos'].forEach(id=>{const el=document.getElementById('asub-'+id);if(el)el.style.display=(id===k)?'block':'none';});document.querySelectorAll('[data-asub]').forEach(a=>a.classList.toggle('act-actief',a.dataset.asub===k));}
+// ═══════════════════════════════════════════════════════
+// AGENDA DATA
+// ═══════════════════════════════════════════════════════
+const VASTE_DATUMS = [
+  { datum:"2026-04-04", tijd:"21:00", type:"viering", tekst:"Paaswake — Goede Bijstand" },
+];
 
+function genereerTaize() {
+  const resultaat = [];
+  const nu = new Date(); nu.setHours(0,0,0,0);
+  const einde = new Date(nu); einde.setDate(nu.getDate() + 35);
+  for (let m = 0; m < 3; m++) {
+    const jr = nu.getFullYear() + Math.floor((nu.getMonth() + m) / 12);
+    const mn = (nu.getMonth() + m) % 12;
+    let teller = 0;
+    for (let dag = 1; dag <= 31; dag++) {
+      const d = new Date(jr, mn, dag);
+      if (d.getMonth() !== mn) break;
+      if (d.getDay() === 6) {
+        teller++;
+        if (teller === 3) {
+          if (d >= nu && d <= einde) {
+            const key = `${jr}-${String(mn+1).padStart(2,'0')}-${String(dag).padStart(2,'0')}`;
+            resultaat.push({ datum: key, tijd: "20:00", type: "taize", tekst: "Gebed in de geest van Taizé" });
+          }
+          break;
+        }
+      }
+    }
+  }
+  return resultaat;
+}
+
+function genereerBijstandByNight() {
+  const resultaat = [];
+  const nu = new Date(); nu.setHours(0,0,0,0);
+  const einde = new Date(nu); einde.setDate(nu.getDate() + 35);
+  for (let d = new Date(nu); d <= einde; d.setDate(d.getDate() + 1)) {
+    const mn = d.getMonth();
+    if (d.getDay() === 5 && mn >= 4 && mn <= 7) {
+      const key = `${d.getFullYear()}-${String(mn+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      resultaat.push({ datum: key, tijd: "18:00", type: "nacht", tekst: "Bijstand by Night (18–22 u)" });
+    }
+  }
+  return resultaat;
+}
+
+const STORAGE_KEY = 'gb_agenda_extra';
+function laadExtra() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch(e) { return []; } }
+function slaOpExtra(arr) { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+
+function getAlleEvents() {
+  const alle = [...VASTE_DATUMS, ...genereerTaize(), ...genereerBijstandByNight(), ...laadExtra()];
+  const kaart = {};
+  alle.forEach(ev => {
+    if (!kaart[ev.datum]) kaart[ev.datum] = [];
+    kaart[ev.datum].push(ev);
+  });
+  Object.keys(kaart).forEach(d => kaart[d].sort((a,b) => (a.tijd||'00:00').localeCompare(b.tijd||'00:00')));
+  return kaart;
+}
+
+function datumSleutel(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+// ═══════════════════════════════════════════════════════
+// AGENDA HTML
+// ═══════════════════════════════════════════════════════
+function agendaHTML() {
+  const alleEvents = getAlleEvents();
+  const nu = new Date(); nu.setHours(0,0,0,0);
+  let h = '<div class="agenda-wrapper">';
+  let huidigeMaand = -1;
+  let aantalDagen = 0;
+
+  for (let i = 0; i < 35; i++) {
+    const d = new Date(nu); d.setDate(nu.getDate() + i);
+    const dw = d.getDay(), mn = d.getMonth(), jr = d.getFullYear(), nr = d.getDate();
+    const s = datumSleutel(d);
+
+    const vast = [];
+    if (dw === 0) vast.push({ tijd:"11:00", type:"viering", tekst:"Zondagsviering — Goede Bijstand" });
+    if (dw === 6) vast.push({ tijd:"16:30", type:"viering", tekst:"Mis — Finis Terrae" });
+
+    const extra = alleEvents[s] || [];
+    const gezien = new Set();
+    const evs = [...vast, ...extra].filter(ev => {
+      const sleutel = (ev.tijd||'') + '|' + ev.tekst;
+      if (gezien.has(sleutel)) return false;
+      gezien.add(sleutel);
+      return true;
+    });
+
+    if (!evs.length) continue;
+    aantalDagen++;
+
+    if (mn !== huidigeMaand) {
+      huidigeMaand = mn;
+      h += `<div class="agenda-maand-header">${MNLANG[mn]} ${jr}</div>`;
+    }
+
+    const klassen = ['agenda-dag', (dw===0||dw===6)?'weekend':'', i===0?'vandaag':''].filter(Boolean).join(' ');
+    h += `<div class="${klassen}"><div class="datum-cel">
+      <span class="dag-naam">${i===0?'Vandaag':DNKORT[dw]}</span>
+      <span class="dag-nr">${nr}</span>
+      <span class="maand-kort">${MNKORT[mn]}</span>
+    </div><div class="ev-cel">`;
+    evs.forEach(ev => {
+      const kl = ev.type==='taize' ? ' ev-taize' : ev.type==='nacht' ? ' ev-nacht' : '';
+      h += `<div class="evenement">
+        <span class="ev-tijd">${ev.tijd||''}</span>
+        <span class="ev-icoon${kl}">${EVICON[ev.type]||'✝'}</span>
+        <span class="${kl.trim()}">${ev.tekst}</span>
+      </div>`;
+    });
+    h += `</div></div>`;
+  }
+
+  if (!aantalDagen) h += `<div style="padding:0.7rem 1rem;font-style:italic;color:var(--muted);font-size:0.88rem;">Geen activiteiten gepland in de komende 5 weken.</div>`;
+  h += `</div>
+  <div class="agenda-legenda">
+    <span>✝ Viering</span>
+    <span style="color:var(--blue-mid);font-style:italic;">✦ Taizé</span>
+    <span>🌙 Bijstand by Night</span>
+    <span>◆ Activiteit</span>
+    <span>♫ Muziek/Concert</span>
+  </div>
+  <div style="margin-top:0.8rem;text-align:right;">
+    <button class="admin-trigger" onclick="openAdmin()">
+      &#9998; Beheer agenda &nbsp;<span style="font-size:0.72rem;opacity:0.75;font-style:italic;">— Voorbehouden aan beheerders</span>
+    </button>
+  </div>`;
+  return h;
+}
+
+// ═══════════════════════════════════════════════════════
+// BEHEERPANEEL
+// ═══════════════════════════════════════════════════════
+function openAdmin() {
+  document.getElementById('admin-overlay').classList.add('open');
+  document.getElementById('admin-panel').style.display = 'none';
+  document.getElementById('admin-login').style.display = 'block';
+  document.getElementById('adm-pw-input').value = '';
+  setTimeout(() => document.getElementById('adm-pw-input').focus(), 100);
+}
+function checkPw() {
+  if (document.getElementById('adm-pw-input').value === 'goedebijstand') {
+    document.getElementById('admin-login').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
+    adminTab('toevoegen');
+  } else {
+    document.getElementById('adm-pw-fout').style.display = 'block';
+    document.getElementById('adm-pw-input').value = '';
+    document.getElementById('adm-pw-input').focus();
+  }
+}
+function closeAdmin() { document.getElementById('admin-overlay').classList.remove('open'); }
+document.getElementById('admin-overlay').addEventListener('click', function(e) { if (e.target===this) closeAdmin(); });
+
+function adminTab(k) {
+  document.getElementById('atab-toevoegen').style.display = k==='toevoegen' ? 'block' : 'none';
+  document.getElementById('atab-lijst').style.display = k==='lijst' ? 'block' : 'none';
+  document.querySelectorAll('.admin-tab').forEach((t,idx) => t.classList.toggle('actief', (k==='toevoegen'&&idx===0)||(k==='lijst'&&idx===1)));
+  if (k==='lijst') renderEvLijst();
+}
+
+function voegToe() {
+  const datum = document.getElementById('adm-datum').value;
+  const tijd  = document.getElementById('adm-tijd').value || '';
+  const tekst = document.getElementById('adm-tekst').value.trim();
+  const type  = document.getElementById('adm-type').value;
+  if (!datum || !tekst) { alert('Vul minstens een datum en een omschrijving in.'); return; }
+  const extra = laadExtra();
+  extra.push({ datum, tijd, type, tekst });
+  slaOpExtra(extra);
+  document.getElementById('adm-datum').value = '';
+  document.getElementById('adm-tijd').value = '';
+  document.getElementById('adm-tekst').value = '';
+  document.getElementById('adm-type').value = 'viering';
+  const succ = document.getElementById('adm-success');
+  succ.classList.add('show');
+  setTimeout(() => succ.classList.remove('show'), 3000);
+}
+
+function renderEvLijst() {
+  const extra = laadExtra();
+  const container = document.getElementById('adm-ev-lijst');
+  let h = '<p style="font-size:0.82rem;color:var(--muted);font-style:italic;margin-bottom:0.8rem;">Vaste eenmalige vieringen:</p>';
+  VASTE_DATUMS.forEach(ev => {
+    h += `<div class="ev-rij"><div class="ev-info"><span class="ev-datum-tag">${formatDatumNl(ev.datum)} ${ev.tijd||''}</span><span class="ev-naam">${ev.tekst}</span></div><span class="ev-type-badge">${ev.type}</span></div>`;
+  });
+  h += '<p style="font-size:0.82rem;color:var(--muted);font-style:italic;margin:1rem 0 0.5rem;">Uw toegevoegde evenementen:</p>';
+  if (!extra.length) {
+    h += '<div class="ev-leeg">Nog geen evenementen toegevoegd.</div>';
+  } else {
+    [...extra].sort((a,b) => a.datum.localeCompare(b.datum)).forEach(ev => {
+      const origIdx = extra.findIndex(e => e.datum===ev.datum && e.tekst===ev.tekst && e.tijd===ev.tijd);
+      h += `<div class="ev-rij"><div class="ev-info"><span class="ev-datum-tag">${formatDatumNl(ev.datum)} ${ev.tijd||''}</span><span class="ev-naam">${ev.tekst}</span></div><span class="ev-type-badge">${ev.type}</span>&nbsp;<button class="btn-danger" onclick="verwijderEv(${origIdx})">×</button></div>`;
+    });
+  }
+  container.innerHTML = h;
+}
+
+function verwijderEv(idx) {
+  const extra = laadExtra(); extra.splice(idx,1); slaOpExtra(extra); renderEvLijst();
+}
+
+function formatDatumNl(s) {
+  if (!s) return '';
+  const [jr,mn,dg] = s.split('-');
+  return `${dg} ${MNKORT[parseInt(mn,10)-1]} ${jr}`;
+}
+
+// ═══════════════════════════════════════════════════════
+// LIGHTBOX
+// ═══════════════════════════════════════════════════════
+function sluitLb() { document.getElementById('lightbox').classList.remove('open'); }
+document.addEventListener('keydown', e => { if (e.key==='Escape') { sluitLb(); closeAdmin(); } });
+document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target===this) sluitLb(); });
+
+function openLb(src, cap) {
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lb-cap').textContent = cap;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+// ═══════════════════════════════════════════════════════
+// GITHUB FOTO's
+// ═══════════════════════════════════════════════════════
+const GITHUB_API = 'https://api.github.com/repos/evelienleys/goedebijstand/git/trees/main?recursive=1';
+let fotoCache = null;
+
+async function laadFotos() {
+  if (fotoCache) return fotoCache;
+  try {
+    const res = await fetch(GITHUB_API);
+    const data = await res.json();
+    fotoCache = data.tree
+      .filter(f => /\.(png|jpg|jpeg|gif|webp)$/i.test(f.path))
+      .map(f => ({
+        pad: f.path,
+        url: `https://raw.githubusercontent.com/evelienleys/goedebijstand/main/${f.path}`,
+        map: f.path.split('/').slice(0, -1).join('/') || 'Overig'
+      }));
+    return fotoCache;
+  } catch(e) { return []; }
+}
+
+async function renderFotoGalerij(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = `<p style="color:var(--muted);font-style:italic;font-size:0.9rem;">Foto's worden geladen…</p>`;
+  const fotos = await laadFotos();
+  if (!fotos.length) {
+    container.innerHTML = `<p style="color:var(--muted);font-style:italic;">Geen foto's gevonden.</p>`;
+    return;
+  }
+  const mappen = {};
+  fotos.forEach(f => {
+    if (!mappen[f.map]) mappen[f.map] = [];
+    mappen[f.map].push(f);
+  });
+  let h = '';
+  Object.entries(mappen).sort(([a],[b]) => a.localeCompare(b)).forEach(([map, items]) => {
+    const mapNaam = map.split('/').pop();
+    h += `<div class="foto-categorie"><h3 class="foto-cat-titel">${mapNaam}</h3><div class="foto-grid">`;
+    items.forEach(f => {
+      const naam = f.pad.split('/').pop().replace(/\.[^.]+$/, '').replace(/[_-]/g, ' ');
+      h += `<div class="foto-item" onclick="openLb('${f.url}','${naam}')">
+        <img src="${f.url}" alt="${naam}" loading="lazy"
+             onerror="this.parentElement.innerHTML='<div class=\\'foto-ph\\'><span style=\\'font-size:1.7rem;opacity:0.45\\'>🖼</span><br>${naam}</div>'">
+      </div>`;
+    });
+    h += `</div></div>`;
+  });
+  container.innerHTML = h;
+}
+
+// ═══════════════════════════════════════════════════════
+// SIDEBAR
+// ═══════════════════════════════════════════════════════
+function getSidebar() {
+  return `
+  <img src="${EXT}" alt="Onze-Lieve-Vrouw van Goede Bijstand" class="sidebar-photo">
+  <div class="sidebar-box">
+    <h3>Vieringen</h3>
+    <p><strong>Finis Terrae kerk</strong><br><span class="time">Elke zaterdag om 16.30&nbsp;u</span></p>
+    <br>
+    <p><strong>Goede Bijstand</strong><br><span class="time">Elke zondag om 11.00&nbsp;u</span><br>
+    3e zondag: <a onclick="navigate('jongeren')">Goede Bijtjes</a> &amp; <a onclick="navigate('jongeren')">Mosterdzaadjes</a></p>
+  </div>
+  <div class="sidebar-box">
+    <h3>Adres Goede Bijstand</h3>
+    <p class="address">Kolenmarkt 91<br>(kant Fontainasplein)<br>1000 Brussel</p>
+    <p style="font-size:0.85rem;margin-top:0.6rem;color:var(--muted);">Open: elke dag 9–17 u, zondag vanaf 10 u</p>
+  </div>
+  <div class="sidebar-box">
+    <h3>Adres Finis Terrae</h3>
+    <p class="address">Nieuwstraat 76<br>1000 Brussel</p>
+  </div>
+  <div class="sidebar-box">
+    <h3>Contact</h3>
+    <p class="address">Secretariaat Bijstandsnetwerk<br>Bijstandsstraat 5<br>1000 Brussel</p>
+    <p style="margin-top:0.6rem;"><a href="https://www.facebook.com/Goede-Bijstand-Brussel-168666597140654/" target="_blank">Volg ons op Facebook &#8594;</a></p>
+    <p style="margin-top:0.4rem;"><a onclick="navigate('contact')">Stuur een bericht &#8594;</a></p>
+  </div>
+  <div class="sidebar-box">
+    <h3>Pastores</h3>
+    <p><strong>Johnny De Mot</strong><br>
+    <span style="font-size:0.88rem;color:var(--muted);">Pastoor Goede Bijstand</span><br>
+    <a href="mailto:johnny.demot@viaporta.be">johnny.demot@viaporta.be</a></p>
+  </div>
+  <div class="sidebar-box">
+    <h3>Steunen</h3>
+    <p>VPW Gewest Brussel-Centrum<br>
+    <strong style="font-size:0.9rem;letter-spacing:0.03em;">BE35 4331 0715 7137</strong></p>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════
+function showSub(k, prefix, total) {
+  document.querySelectorAll('[data-sub]').forEach(a => {
+    const el = document.getElementById('sub-' + a.dataset.sub);
+    if (el) el.style.display = 'none';
+    a.classList.toggle('subnav-active', a.dataset.sub === k);
+  });
+  const t = document.getElementById('sub-' + k); if (t) t.style.display = 'block';
+}
+function showKerkSub(k) {
+  ['geschiedenis','info','kunst'].forEach(id => {
+    const el = document.getElementById('kerk-' + id); if (el) el.style.display = (id===k) ? 'block' : 'none';
+  });
+  document.querySelectorAll('[data-kerk]').forEach(a => a.classList.toggle('kerk-actief', a.dataset.kerk === k));
+}
+function showVierSub(k) {
+  ['overzicht','homilies','bezinning','fotos'].forEach(id => {
+    const el = document.getElementById('vsub-' + id); if (el) el.style.display = (id===k) ? 'block' : 'none';
+  });
+  document.querySelectorAll('[data-vsub]').forEach(a => a.classList.toggle('subnav-active', a.dataset.vsub === k));
+  if (k === 'fotos') renderFotoGalerij('vsub-fotos-container');
+}
+
+// ═══════════════════════════════════════════════════════
+// PAGINA'S
+// ═══════════════════════════════════════════════════════
 const pages = {
+
+  // ── HOME ──
   home: { title:'Home', content:() => `
     <section>
-      <img src="${EXT}" alt="Kerk van Goede Bijstand" class="church-photo" style="height:260px;">
+      <img src="${EXT}" alt="Kerk van Goede Bijstand" class="church-photo" style="height:240px;">
       <p class="photo-caption">De barokke gevel van de Kerk van Goede Bijstand aan de Kolenmarkt &#169; Johan Bakker / CC Wikimedia</p>
       <h2>Agenda &mdash; Vieringen &amp; Activiteiten</h2>
-      <p style="font-style:italic;color:var(--muted);margin-bottom:.6rem;">Overzicht van de komende 5 weken. Enkel dagen met een viering of activiteit worden getoond.</p>
+      <p style="font-style:italic;color:var(--muted);margin-bottom:0.6rem;">Overzicht van de komende 5 weken.</p>
       ${agendaHTML()}
     </section>
     <section>
       <h2>Paulusgemeenschappen</h2>
-      <p>Onze parochie maakt deel uit van de <strong>Paulusgemeenschappen</strong>, een samenwerkingsverband van Nederlandstalige geloofsgemeenschappen in Brussel.</p>
-      <div class="paulus-box"><h3>Waarom &lsquo;Paulusgemeenschappen&rsquo;?</h3><p>De naam verwijst naar de apostel Paulus, die van gemeenschap naar gemeenschap trok om te bemoedigen en te ondersteunen. Het pastoresteam werkt nauw samen over de gemeenschappen heen.</p><a class="paulus-knop" href="https://www.paulusgemeenschappen.be/nl" target="_blank" rel="noopener">Bezoek paulusgemeenschappen.be &#8594;</a></div>
-    </section>
-    <section>
-      <h2>Gebed in de geest van Taiz&#233;</h2>
-      <p><em>Elke derde zaterdag van de maand &mdash; 20.00&nbsp;u &mdash; Kerk van Goede Bijstand</em></p>
-      <p>Op vraag van priester Johnny De Mot organiseren we maandelijks een gebed met liederen van Taizé. Iedereen is welkom.</p>
-      <p>Voor meer informatie: <a href="mailto:bep.saintandre@gmail.com">bep.saintandre@gmail.com</a></p>
-    </section>
-    <section>
-      <h2>Bijstand by Night</h2>
-      <p><em>Elke vrijdagavond van mei t.e.m. augustus &mdash; 18 tot 22 uur</em></p>
-      <p>Contact: <a href="mailto:eheesen@hotmail.com">Nieneke</a> of <a href="mailto:danny.decock59@yahoo.com">Danny</a></p>
+      <p>Onze parochie Goede Bijstand maakt deel uit van de <strong>Paulusgemeenschappen</strong>, een samenwerkingsverband van Nederlandstalige geloofsgemeenschappen in Brussel.</p>
+      <div class="paulus-box">
+        <h3>Waarom 'Paulusgemeenschappen'?</h3>
+        <p>De naam verwijst naar de apostel Paulus, die van gemeenschap naar gemeenschap trok om te bemoedigen en te ondersteunen. Zo kiezen ook onze pastores voor een dienend leiderschap.</p>
+        <a class="paulus-knop" href="https://www.paulusgemeenschappen.be/nl" target="_blank" rel="noopener">Bezoek paulusgemeenschappen.be &#8594;</a>
+      </div>
     </section>
     <section>
       <h2>Nieuws</h2>
       <div class="news-item" onclick="navigate('vieringen')"><div class="tag">Vieringen</div><div class="ni-title">Overzicht Vieringen</div></div>
-      <div class="news-item" onclick="navigate('overlijden')"><div class="tag">Overlijden</div><div class="ni-title">Paul Huyskens</div></div>
+      <div class="news-item" onclick="navigate('overlijden')"><div class="tag">Overlijden</div><div class="ni-title">Paul Huyskens &#8224; 24 oktober 2025</div></div>
       <div class="news-item" onclick="navigate('samenwerking')"><div class="tag">Samenwerking</div><div class="ni-title">Kamino &ndash; Jongerennetwerk</div></div>
+      <div class="news-item" onclick="navigate('activiteiten')"><div class="tag">Activiteiten</div><div class="ni-title">Gebed in de geest van Taizé &mdash; elke 3e zaterdag</div></div>
     </section>` },
 
-  activiteiten: { title:'Activiteiten', content:() => `    <section>
-      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> Activiteiten</div>
-      <h2>Activiteiten &amp; Evenementen</h2>
-      <div class="act-subnav">
-        <a onclick="showActSub('overzicht')" data-asub="overzicht" class="act-actief">Overzicht</a>
-        <a onclick="showActSub('fotos')"     data-asub="fotos">&#128247; Foto's</a>
-      </div>
-      <div id="asub-overzicht">
-        <h3>Gebed in de geest van Taiz&#233;</h3>
-        <p><em>Elke derde zaterdag van de maand, 20.00&nbsp;u &mdash; Kerk van Goede Bijstand</em></p>
-        <p>Een moment van gebed, stilte en gezang. Iedereen is welkom. Zie de <a onclick="navigate('home')">agenda op de homepage</a> voor alle datums.</p>
-        <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
-        <h3>Bijstand by Night</h3>
-        <p><em>Elke vrijdagavond van mei t.e.m. augustus, 18&ndash;22&nbsp;uur</em></p>
-        <p>De kerk staat open voor iedereen. Contact: <a href="mailto:eheesen@hotmail.com">Nieneke</a> of <a href="mailto:danny.decock59@yahoo.com">Danny</a>.</p>
-        <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
-        <h3>Vlaamse Meesters in Situ</h3>
-        <a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">
-          <img src="\${ALT}" alt="Hoofdaltaar" style="width:100%;max-height:260px;object-fit:cover;border-radius:4px;border:3px solid var(--pale-blue);box-shadow:0 4px 18px rgba(15,40,80,.18);margin:.8rem 0;display:block;">
-        </a>
-        <p style="font-size:.82rem;color:var(--muted);font-style:italic;margin-top:-.5rem;margin-bottom:.75rem;">Hoofdaltaar &mdash; Jan Pieter van Baurscheit de Oude &copy; Dominique Provost / Art in Flanders</p>
-        <p>Voor wervelende barok in marmer en bladgoud moet u in onze kerk zijn. <a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">Ontdek de Vlaamse Meesters in Situ &#8594;</a></p>
-        <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
-        <h3>Grondbibliotheek</h3>
-        <p><em>Van elke plek op aarde een stukje grond.</em></p>
-        <p>Hieronder vindt u een interactieve kaart met alle locaties. Beweeg met de muis over een punt (of tik op mobiel) om de plaatsnaam te zien.</p>
-        <div style="margin:1rem 0 0.4rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
-          <span style="font-size:0.88rem;color:var(--muted);"><strong id="gb-total-count" style="color:var(--blue-deep);">0</strong> locaties &mdash; 6 continenten</span>
-          <button onclick="document.getElementById('gb-locatie-modal').style.display='flex'"
-            style="padding:0.35rem 1rem;background:var(--blue-deep);color:#fff;border:none;border-radius:3px;font-family:'EB Garamond',serif;font-size:0.9rem;cursor:pointer;letter-spacing:0.04em;">
-            &#9776; Bekijk alle locaties
-          </button>
-        </div>
-        <div style="position:relative;width:100%;margin:0.5rem 0;">
-          <svg id="gb-map-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
-    <!-- Ocean background -->
-    <rect width="1000" height="500" fill="#c8dff0"/>
-    
-    <!-- Simplified world map paths -->
-    <!-- Europe -->
-    <path class="land" d="M480,100 L490,95 L505,98 L515,92 L520,97 L530,93 L540,98 L545,105 L555,108 L558,115 L550,118 L545,125 L535,128 L525,132 L520,140 L510,138 L505,145 L495,142 L488,148 L480,145 L475,138 L470,132 L465,125 L468,118 L475,112 Z"/>
-    <!-- Scandinavia -->
-    <path class="land" d="M490,65 L498,60 L505,63 L510,72 L515,78 L512,85 L505,88 L498,85 L492,78 L488,72 Z"/>
-    <path class="land" d="M505,63 L515,55 L522,58 L528,65 L525,75 L518,80 L512,78 L508,70 Z"/>
-    <path class="land" d="M475,75 L483,70 L490,72 L492,80 L488,88 L480,90 L473,85 Z"/>
-    <!-- UK & Ireland -->
-    <path class="land" d="M455,95 L462,90 L468,93 L470,100 L465,108 L458,110 L453,105 Z"/>
-    <path class="land" d="M448,95 L453,92 L456,98 L452,105 L447,103 Z"/>
-    <!-- France/Iberia/Italy -->
-    <path class="land" d="M460,118 L475,112 L480,118 L478,128 L470,135 L460,132 L452,128 L450,120 Z"/>
-    <path class="land" d="M440,125 L452,120 L455,130 L450,140 L440,145 L430,140 L428,132 L435,128 Z"/>
-    <path class="land" d="M430,130 L440,128 L442,138 L438,148 L430,150 L425,145 L425,138 Z"/>
-    <!-- Corsica/Sardinia -->
-    <path class="land" d="M477,138 L481,135 L483,140 L480,145 L476,143 Z"/>
-    <path class="land" d="M479,148 L483,145 L485,150 L482,155 L478,153 Z"/>
-    <!-- Sicily -->
-    <path class="land" d="M487,155 L493,152 L496,156 L493,161 L487,160 Z"/>
-    <!-- Italy -->
-    <path class="land" d="M485,128 L492,125 L497,130 L498,140 L495,150 L490,155 L485,150 L482,140 L483,133 Z"/>
-    <!-- Balkans/Greece -->
-    <path class="land" d="M510,128 L520,125 L528,128 L530,138 L525,145 L515,148 L508,143 L507,135 Z"/>
-    <path class="land" d="M515,148 L520,145 L523,150 L520,158 L515,156 Z"/>
-    <!-- Eastern Europe -->
-    <path class="land" d="M525,105 L540,100 L555,103 L565,108 L562,118 L550,122 L538,120 L528,115 Z"/>
-    <path class="land" d="M540,118 L555,115 L565,120 L568,130 L558,135 L545,130 Z"/>
-
-    <!-- Africa -->
-    <path class="land" d="M480,180 L495,175 L520,172 L540,175 L555,183 L568,195 L572,215 L568,240 L555,268 L540,290 L525,308 L510,318 L495,315 L480,305 L468,288 L460,268 L458,245 L462,222 L468,205 L475,192 Z"/>
-    <!-- Madagascar -->
-    <path class="land" d="M567,260 L573,255 L578,265 L575,278 L568,280 L563,272 Z"/>
-    <!-- North Africa detail -->
-    <path class="land" d="M480,178 L495,173 L515,170 L530,172 L545,175 L555,180 L558,190 L545,195 L525,192 L505,190 L488,188 Z"/>
-
-    <!-- Middle East -->
-    <path class="land" d="M565,155 L580,150 L595,152 L605,160 L608,172 L600,180 L585,183 L570,178 L563,168 Z"/>
-    <path class="land" d="M580,170 L595,168 L600,175 L598,185 L590,188 L580,185 Z"/>
-    <!-- Arabian Peninsula -->
-    <path class="land" d="M585,180 L610,175 L625,180 L630,195 L628,215 L620,228 L605,232 L592,225 L585,212 L583,198 Z"/>
-
-    <!-- India -->
-    <path class="land" d="M630,165 L650,158 L668,162 L678,175 L680,192 L675,210 L665,225 L650,235 L635,232 L625,218 L622,200 L625,183 Z"/>
-    <!-- Sri Lanka -->
-    <path class="land" d="M660,240 L665,237 L668,242 L665,248 L660,247 Z"/>
-
-    <!-- Southeast Asia -->
-    <path class="land" d="M710,185 L730,178 L748,180 L758,190 L755,205 L742,213 L725,210 L712,200 Z"/>
-    <!-- Vietnam/Thailand -->
-    <path class="land" d="M720,195 L730,192 L738,198 L740,212 L735,225 L725,230 L718,222 L715,210 Z"/>
-    <!-- Indochina -->
-    <path class="land" d="M700,180 L720,175 L730,180 L732,192 L725,200 L712,198 L702,190 Z"/>
-
-    <!-- China -->
-    <path class="land" d="M660,130 L700,120 L740,122 L768,130 L778,145 L775,165 L760,178 L738,182 L715,178 L692,170 L670,160 L655,148 Z"/>
-
-    <!-- Japan -->
-    <path class="land" d="M778,148 L785,143 L790,148 L788,158 L782,162 L777,158 Z"/>
-    <path class="land" d="M783,140 L790,135 L796,140 L793,150 L787,152 L782,148 Z"/>
-
-    <!-- Russia -->
-    <path class="land" d="M540,60 L600,45 L680,40 L760,45 L820,55 L860,65 L870,80 L855,92 L820,95 L780,90 L740,85 L700,82 L660,78 L620,75 L580,72 L550,70 Z"/>
-    <path class="land" d="M820,55 L870,50 L910,55 L940,65 L938,80 L920,88 L895,85 L870,82 L848,75 L832,65 Z"/>
-
-    <!-- Central Asia -->
-    <path class="land" d="M580,105 L625,98 L665,100 L685,110 L682,125 L665,130 L640,128 L615,120 L590,115 Z"/>
-
-    <!-- North America -->
-    <path class="land" d="M120,80 L170,72 L215,75 L248,85 L265,100 L270,120 L265,140 L255,158 L240,170 L220,178 L195,180 L170,178 L148,170 L130,158 L118,140 L112,120 L113,100 Z"/>
-    <!-- Florida -->
-    <path class="land" d="M215,170 L222,168 L228,175 L225,188 L218,190 L212,183 Z"/>
-    <!-- Alaska -->
-    <path class="land" d="M68,75 L90,68 L110,72 L118,82 L112,92 L95,95 L75,90 Z"/>
-    <!-- Greenland -->
-    <path class="land" d="M340,45 L370,38 L395,42 L405,55 L400,70 L385,78 L362,75 L342,65 Z"/>
-    <!-- Canada extension -->
-    <path class="land" d="M120,78 L155,70 L190,68 L225,72 L255,80 L270,90 L265,100 L248,85 L215,75 L170,72 Z"/>
-
-    <!-- Mexico/Central America -->
-    <path class="land" d="M160,178 L185,175 L205,180 L215,190 L210,205 L198,215 L182,218 L168,210 L158,198 Z"/>
-    <!-- Caribbean -->
-    <path class="land" d="M230,195 L238,192 L243,197 L240,203 L233,204 Z"/>
-    <path class="land" d="M248,197 L255,194 L258,199 L255,205 L249,204 Z"/>
-    <path class="land" d="M262,192 L272,188 L278,193 L275,200 L265,202 Z"/>
-    <!-- Curaçao -->
-    <path class="land" d="M242,210 L248,208 L250,212 L247,216 L242,215 Z"/>
-    <!-- Panama -->
-    <path class="land" d="M196,218 L208,216 L215,222 L213,230 L203,232 L195,226 Z"/>
-
-    <!-- South America -->
-    <path class="land" d="M230,228 L260,220 L285,222 L305,230 L318,248 L322,270 L318,298 L308,325 L292,348 L272,362 L252,368 L235,362 L220,345 L210,322 L208,295 L212,268 L220,248 Z"/>
-    <!-- Brazil bulge -->
-    <path class="land" d="M285,235 L318,238 L342,248 L352,265 L345,282 L325,288 L305,282 L288,265 L280,248 Z"/>
-
-    <!-- Australia -->
-    <path class="land" d="M745,315 L785,305 L820,308 L848,320 L862,340 L860,365 L845,385 L820,395 L790,398 L762,390 L742,372 L732,350 L733,330 Z"/>
-    <!-- New Zealand -->
-    <path class="land" d="M878,375 L885,368 L892,372 L895,385 L888,392 L880,388 Z"/>
-    <path class="land" d="M872,390 L880,385 L885,392 L882,402 L874,402 Z"/>
-
-    <!-- Cyprus -->
-    <path class="land" d="M553,152 L560,149 L567,152 L566,158 L558,160 L552,157 Z"/>
-    <!-- Malta -->
-    <path class="land" d="M490,163 L494,161 L497,164 L495,167 L490,166 Z"/>
-
-    <!-- Canary Islands -->
-    <path class="land" d="M435,185 L440,183 L443,186 L441,190 L436,189 Z"/>
-    <!-- Cape Verde -->
-    <path class="land" d="M418,195 L423,193 L425,197 L422,201 L418,200 Z"/>
-
-    <!-- Seychelles -->
-    <path class="land" d="M598,245 L602,243 L604,247 L602,250 L598,249 Z"/>
-
-    <!-- Iceland -->
-    <path class="land" d="M408,68 L422,63 L435,65 L440,73 L435,80 L420,82 L408,77 Z"/>
-
-    <!-- Pins will be inserted here by JS -->
-    <g id="gb-pins-layer"></g>
-  </svg>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;gap:0.7rem;margin-top:0.3rem;font-size:0.8rem;color:var(--muted);">
-          <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#8b3a1a;border:1.5px solid #c8943a;margin-right:3px;vertical-align:middle;"></span>Afrika</span>
-          <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#3d5c2a;border:1.5px solid #c8943a;margin-right:3px;vertical-align:middle;"></span>Azië &amp; M-O</span>
-          <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#2a4a6b;border:1.5px solid #c8943a;margin-right:3px;vertical-align:middle;"></span>Europa</span>
-          <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#6b2a7a;border:1.5px solid #c8943a;margin-right:3px;vertical-align:middle;"></span>Amerika &amp; Caraïben</span>
-        </div>
-        <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
-        <h3><a href="Vieringen en liturgie/Kerst/20251222_Kerstbrief.pdf" target="_blank" style="text-decoration:none;color:inherit;">Kerstbrief 2025 &mdash; De Kleine Zusters van Jezus &#8594;</a></h3>
-        <p><a href="Vieringen en liturgie/Kerst/20251222_Kerstbrief.pdf" target="_blank">Lees de Kerstbrief (PDF) &#8594;</a></p>
-      </div>
-      <div id="asub-fotos" style="display:none;">
-        \${fotoBlok('Vieringen &amp; Liturgie','Momenten van gebed, eredienst en sacramenten doorheen het kerkelijk jaar.','&#127775;')}
-        \${fotoBlok('Sociale Activiteiten','Ontmoetingen, maaltijden en samenzijn die de gemeenschap verbinden.','&#129309;')}
-        \${fotoBlok('Kinderen &amp; Jongeren','Catechese, spelactiviteiten en jeugdvieringen voor de jongste parochianen.','&#11088;')}
-        \${fotoBlok('Culturele Evenementen','Concerten, tentoonstellingen en culturele initiatieven in en rond de kerk.','&#127925;')}
-      </div>
-    </section>` },
-
-  bijstand: { title:'De Goede Bijstand', content:() => `
+  // ── KERK (hoofd) ──
+  kerk: { title:'De Kerk', content:() => `
     <section>
-      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> De Goede Bijstand</div>
-      <div class="subnav">
-        <a onclick="showSub('welkom')" data-sub="welkom" class="subnav-active">Welkom</a>
-        <a onclick="showSub('krachtlijnen')" data-sub="krachtlijnen">Krachtlijnen</a>
-        <a onclick="showSub('gemeenschap')" data-sub="gemeenschap">Gemeenschap</a>
-        <a onclick="showSub('team')" data-sub="team">Team</a>
-        <a onclick="showSub('kerkfabriek')" data-sub="kerkfabriek">Kerkfabriek</a>
-        <a onclick="showSub('steunen')" data-sub="steunen">Steunen</a>
+      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> Kerk</div>
+      <div class="kerk-subnav">
+        <a onclick="showKerkSub('geschiedenis')" data-kerk="geschiedenis" class="kerk-actief">Geschiedenis</a>
+        <a onclick="showKerkSub('info')"         data-kerk="info">Bezoekersinformatie</a>
+        <a onclick="showKerkSub('kunst')"        data-kerk="kunst">Kunst &amp; Architectuur</a>
       </div>
-      <div id="sub-welkom" class="subpage"><h2>Welkom</h2><p>Welkom op de website van de gemeenschap De Goede Bijstand, een Nederlandstalige parochie in het hartje van Brussel.</p></div>
-      <div id="sub-krachtlijnen" class="subpage" style="display:none;"><h2>Krachtlijnen</h2><p>Als parochiegemeenschap leven en werken we vanuit de overtuiging dat een mens niet gemaakt is om alleen op weg te gaan, maar om er te zijn voor elkaar.</p></div>
-      <div id="sub-gemeenschap" class="subpage" style="display:none;"><h2>Onze gemeenschap</h2><p>Iedereen is welkom. Onze deuren staan open.</p></div>
-      <div id="sub-team" class="subpage" style="display:none;"><h2>Team</h2><div class="partner-item" style="margin-top:1.2rem;"><strong>Johnny De Mot</strong><p>Pastoor Goede Bijstand<br><a href="mailto:johnny.demot@viaporta.be">johnny.demot@viaporta.be</a></p></div></div>
-      <div id="sub-kerkfabriek" class="subpage" style="display:none;"><h2>Kerkfabriek</h2><p>Contact: <a href="mailto:2096@diomb.be">2096@diomb.be</a></p></div>
-      <div id="sub-steunen" class="subpage" style="display:none;"><h2>Steunen</h2><div class="partner-item" style="margin-top:1rem;font-size:1.1rem;"><span style="font-size:.95rem;color:var(--muted);">VPW Gewest Brussel-Centrum</span><br><strong>BE35 4331 0715 7137</strong></div></div>
+      <div id="kerk-geschiedenis">
+        <h2>Geschiedenis</h2>
+        <div class="photo-grid">
+          <div><img src="${EXT}" alt="Gevel" style="width:100%;height:200px;object-fit:cover;border-radius:4px;border:3px solid var(--pale-blue);"><p class="photo-caption">Gevel Kolenmarkt &#169; Johan Bakker / CC Wikimedia</p></div>
+          <div><img src="${INT}" alt="Interieur" style="width:100%;height:200px;object-fit:cover;border-radius:4px;border:3px solid var(--pale-blue);"><p class="photo-caption">&#169; Jean-Paul Remy / visit.brussels</p></div>
+        </div>
+        <div class="tijdlijn">
+          <div class="tl-item"><div class="tl-jaar">1657</div><p class="tl-tekst">Oprichting van de parochie Onze-Lieve-Vrouw van Goede Bijstand door de Augustijnen in het hartje van Brussel.</p></div>
+          <div class="tl-item"><div class="tl-jaar">1674 – 1694</div><p class="tl-tekst">Bouw van de huidige barokke kerk onder leiding van architect Guilielmus Ignatius Kerricx.</p></div>
+          <div class="tl-item"><div class="tl-jaar">18e eeuw</div><p class="tl-tekst">Uitbreiding en verfraaiing van het interieur. Jan Pieter van Baurscheit de Oude maakt het indrukwekkende hoofdaltaar.</p></div>
+          <div class="tl-item"><div class="tl-jaar">1797</div><p class="tl-tekst">Sluiting tijdens de Franse Revolutie. De kerk wordt tijdelijk aan een andere bestemming gegeven.</p></div>
+          <div class="tl-item"><div class="tl-jaar">19e – 20e eeuw</div><p class="tl-tekst">Restauraties en herbestemming als actieve parochiekerk. Integratie in de Nederlandstalige pastoraal van Brussel.</p></div>
+          <div class="tl-item"><div class="tl-jaar">Heden</div><p class="tl-tekst">Levendige gemeenschap met wekelijkse vieringen, Taizé-gebeden, Bijstand by Night en nauwe samenwerking met de Paulusgemeenschappen.</p></div>
+        </div>
+      </div>
+      <div id="kerk-info" style="display:none;">
+        <h2>Bezoekersinformatie</h2>
+        <img src="${EXT}" alt="Kerk" class="church-photo" style="height:200px;">
+        <h3>Openingsuren</h3>
+        <p>De kerk is <strong>dagelijks open van 9 tot 17 uur</strong>, op zondag vanaf 10 uur.</p>
+        <h3>Adres</h3>
+        <p>Kolenmarkt 91 (ingang kant Fontainasplein), 1000 Brussel</p>
+        <div class="map-box">&#128205; Kolenmarkt 91, 1000 Brussel<br><br><a href="https://maps.google.com/?q=Kolenmarkt+91,+1000+Brussel" target="_blank">Bekijk op Google Maps &#8594;</a></div>
+        <h3>Bereikbaarheid</h3>
+        <p>De kerk ligt op wandelafstand van het Centraal Station en het Fontainasplein. Metro: halte Anneessens of Beurs.</p>
+        <h3>Toegankelijkheid</h3>
+        <p>De kerk is rolstoeltoegankelijk via de ingang aan de kant van het Fontainasplein.</p>
+      </div>
+      <div id="kerk-kunst" style="display:none;">
+        <h2>Kunst &amp; Architectuur</h2>
+        <a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">
+          <img src="${ALT}" alt="Hoofdaltaar" class="church-photo" style="height:240px;">
+        </a>
+        <p class="photo-caption">Hoofdaltaar — Jan Pieter van Baurscheit de Oude &copy; Dominique Provost / Art in Flanders</p>
+        <p>De kerk is een prachtig voorbeeld van de <strong>contrareformatorische barok</strong> in de Zuidelijke Nederlanden. De rijke ornamenten, het marmeren altaar en de vergulde details creëren een ruimte die zowel indrukwekkend als uitnodigend is.</p>
+        <h3>Hoofdaltaar</h3>
+        <p>Het hoofdaltaar, vervaardigd door <strong>Jan Pieter van Baurscheit de Oude</strong>, geldt als een meesterwerk van de Vlaamse barokbeeldhouwkunst. Wit en zwart marmer wisselen af met bladgoud.</p>
+        <h3>Vlaamse Meesters in Situ</h3>
+        <p>De kerk maakt deel uit van het project <em>Vlaamse Meesters in Situ</em>, dat kunstwerken toont in hun originele context.</p>
+        <p><a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">Ontdek de Vlaamse Meesters in Situ &#8594;</a></p>
+      </div>
     </section>` },
 
+  'kerk-geschiedenis': { title:'Geschiedenis', content:() => { navigate('kerk'); setTimeout(()=>showKerkSub('geschiedenis'),50); return ''; } },
+  'kerk-info':         { title:'Bezoekersinformatie', content:() => { navigate('kerk'); setTimeout(()=>showKerkSub('info'),50); return ''; } },
+  'kerk-kunst':        { title:'Kunst & Architectuur', content:() => { navigate('kerk'); setTimeout(()=>showKerkSub('kunst'),50); return ''; } },
+
+  // ── PAROCHIE (hoofd) ──
+  parochie: { title:'Parochie', content:() => `
+    <section>
+      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> Parochie</div>
+      <h2>Parochie Goede Bijstand</h2>
+      <div class="subnav">
+        <a onclick="showSub('welkom')"        data-sub="welkom"        class="subnav-active">Welkom</a>
+        <a onclick="showSub('krachtlijnen')"  data-sub="krachtlijnen">Krachtlijnen</a>
+        <a onclick="showSub('team')"          data-sub="team">Team</a>
+        <a onclick="showSub('parochieploeg')" data-sub="parochieploeg">Parochieploeg</a>
+        <a onclick="showSub('kerkfabriek')"   data-sub="kerkfabriek">Kerkfabriek</a>
+        <a onclick="showSub('steunen')"       data-sub="steunen">Steunen</a>
+      </div>
+      <div id="sub-welkom" class="subpage">
+        <h2>Welkom</h2>
+        <p>Welkom op de website van de gemeenschap De Goede Bijstand, een Nederlandstalige parochie in het hartje van Brussel.</p>
+        <p>Misschien bent u benieuwd naar wie we zijn en wat we doen. Misschien wilt u ons een vraag stellen. Hoe dan ook: welkom.</p>
+        <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
+        <p>Ontdek onze activiteiten via de <a onclick="navigate('activiteiten')">activiteitenpagina</a>, of neem <a onclick="navigate('contact')">contact op</a>.</p>
+      </div>
+      <div id="sub-krachtlijnen" class="subpage" style="display:none;">
+        <h2>Krachtlijnen</h2>
+        <p><strong>Verbinden:</strong> niet in de zin dat wij altijd dezelfde taal spreken of hetzelfde denken. Onze gemeenschap is zeer divers en dus open, rijk aan dialoog en discussie.</p>
+        <p><strong>Verbonden zijn we</strong>, als we vieren in de kring, ongedwongen en geborgen. Als we, geïnspireerd door Jezus, brood en wijn delen omdat we ook brood en wijn voor elkaar willen zijn.</p>
+        <p>Als parochiegemeenschap leven en werken we vanuit de overtuiging dat een mens niet gemaakt is om alleen op weg te gaan, maar om er te zijn voor elkaar.</p>
+      </div>
+      <div id="sub-team" class="subpage" style="display:none;">
+        <h2>Team</h2>
+        <div class="partner-item" style="margin-top:0.5rem;"><strong>Johnny De Mot</strong><p>Pastoor Goede Bijstand, Verantwoordelijke Nederlandstalige pastoraal Brussel centrum<br><a href="mailto:johnny.demot@viaporta.be">johnny.demot@viaporta.be</a></p></div>
+        <p style="margin-top:1rem;">Het pastoresteam van de Paulusgemeenschappen omvat ook Guido Vandeperre, Peter Baekelmans, Chris Ruelens, Ria Dereymaeker, Ellen Keersmaekers en Mariette Dhondt.</p>
+      </div>
+      <div id="sub-parochieploeg" class="subpage" style="display:none;">
+        <h2>Parochieploeg</h2>
+        <p>De parochieploeg vergadert elke eerste woensdagvoormiddag van de maand.</p>
+        <div class="partner-item" style="margin-top:1rem;"><strong>Samenstelling</strong><p>Johnny De Mot, Magda De Cock, Goedele Miseur, Lieven Baert, Ellen Keersmaekers</p></div>
+      </div>
+      <div id="sub-kerkfabriek" class="subpage" style="display:none;">
+        <h2>Kerkfabriek</h2>
+        <p>Erediensten zijn een gewestbevoegdheid. Meer info: <a href="https://plaatselijke-besturen.brussels/levensbeschouwelijke-instellingen" target="_blank">Brussel Plaatselijke Besturen &#8594;</a></p>
+        <div class="partner-item" style="margin-top:1rem;"><strong>Raad van bestuur</strong><p>Evelien Leys &mdash; voorzitter<br>Lieven Baert &mdash; secretaris<br>Lode Vanderbeken &mdash; penningmeester<br>Laura Lievevrouw, Freddy Gerard</p></div>
+        <p style="margin-top:1rem;">Contact: <a href="mailto:2096@diomb.be">2096@diomb.be</a> &nbsp;|&nbsp; 0211.215.223 &mdash; RPR Brussel</p>
+      </div>
+      <div id="sub-steunen" class="subpage" style="display:none;">
+        <h2>Steunen</h2>
+        <p>Steun de parochie met een gift op volgend rekeningnummer:</p>
+        <div class="partner-item" style="margin-top:1rem;font-size:1.05rem;letter-spacing:0.04em;"><span style="font-size:0.9rem;color:var(--muted);">VPW Gewest Brussel-Centrum</span><br><strong>BE35 4331 0715 7137</strong></div>
+        <p style="margin-top:1rem;">Voor vragen: <a href="mailto:2096@diomb.be">2096@diomb.be</a></p>
+      </div>
+    </section>` },
+
+  // ── VIERINGEN ──
   vieringen: { title:'Vieringen', content:() => `
     <section>
-      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> Vieringen</div>
+      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> <a onclick="navigate('parochie')">Parochie</a> <span>&#8250;</span> Vieringen</div>
       <h2>Vieringen</h2>
       <div class="subnav">
         <a onclick="showVierSub('overzicht')" data-vsub="overzicht" class="subnav-active">Overzicht</a>
-        <a onclick="showVierSub('homilies')" data-vsub="homilies">Homilies</a>
+        <a onclick="showVierSub('homilies')"  data-vsub="homilies">Homilies</a>
         <a onclick="showVierSub('bezinning')" data-vsub="bezinning">Bezinningsteksten</a>
+        <a onclick="showVierSub('fotos')"     data-vsub="fotos">&#128247; Foto's</a>
       </div>
       <div id="vsub-overzicht" class="vsub">
+        <img src="${INT}" alt="Interieur" class="church-photo" style="height:200px;">
+        <p class="photo-caption">&#169; Jean-Paul Remy / visit.brussels</p>
         <h3>Vaste vieringen</h3>
-        <table class="viering-table"><thead><tr><th>Kerk</th><th>Dag</th><th>Uur</th></tr></thead><tbody><tr><td>Finis Terrae</td><td>Elke zaterdag</td><td>16.30&nbsp;u</td></tr><tr><td>Goede Bijstand</td><td>Elke zondag</td><td>11.00&nbsp;u</td></tr></tbody></table>
+        <table class="viering-table">
+          <thead><tr><th>Kerk</th><th>Dag</th><th>Uur</th><th>Bijzonderheden</th></tr></thead>
+          <tbody>
+            <tr><td>Finis Terrae</td><td>Elke zaterdag</td><td>16.30&nbsp;u</td><td>&mdash;</td></tr>
+            <tr><td>Goede Bijstand</td><td>Elke zondag</td><td>11.00&nbsp;u</td><td>3e zondag: kindernevendienst</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:1rem;font-size:0.88rem;color:var(--muted);font-style:italic;">Alle vieringen zijn zichtbaar in de <a onclick="navigate('home')">agenda op de homepage</a>.</p>
       </div>
-      <div id="vsub-homilies" class="vsub" style="display:none;"><ul class="archief-lijst"><li><a href="Homilies/Homilies_2010-2025/Homilie Kerstmis_moet ik zwijgen.pdf" target="_blank">Kerstmis: moet ik zwijgen?</a><span class="al-datum">25 december 2025</span></li></ul></div>
-      <div id="vsub-bezinning" class="vsub" style="display:none;"><ul class="archief-lijst"><li><a href="Bezinningsteksten_2023-2025/Koud Gepakt Warm Gedragen.pdf" target="_blank">Koud Gepakt, Warm Gedragen</a><span class="al-datum">21 september 2025</span></li></ul></div>
+      <div id="vsub-homilies" class="vsub" style="display:none;">
+        <ul class="archief-lijst">
+          <li><a href="Homilies/Homilies_2010-2025/Homilie Kerstmis_ moet ik zwijgen.pdf" target="_blank">Kerstmis: moet ik zwijgen?</a><span class="al-datum">25 dec 2025</span></li>
+          <li><a href="Homilies/Homilies_2010-2025/Homilie tv-mis 22 april 2022.pdf" target="_blank">Homilie tv-mis</a><span class="al-datum">24 apr 2022</span></li>
+          <li><a href="Homilies/Homilies_2010-2025/Paaswake 13 april 2020.pdf" target="_blank">Paaswake</a><span class="al-datum">13 apr 2020</span></li>
+          <li><a href="Homilies/Homilies_KerkelijkJaar/Zie het Lam Gods_2e zondag A.png" target="_blank">Zie het Lam Gods</a><span class="al-datum">2e zondag A</span></li>
+          <li><a href="Homilies/Homilies_KerkelijkJaar/De goede herder_4e Paaszondag A.png" target="_blank">De goede herder</a><span class="al-datum">4e Paaszondag A</span></li>
+        </ul>
+      </div>
+      <div id="vsub-bezinning" class="vsub" style="display:none;">
+        <ul class="archief-lijst">
+          <li><a href="Bezinningsteksten_2023-2025/Koud Gepakt Warm Gedragen.pdf" target="_blank">Koud Gepakt, Warm Gedragen</a><span class="al-datum">21 sep 2025</span></li>
+          <li><a href="Bezinningsteksten_2023-2025/DagRita.png" target="_blank">Dag Rita</a><span class="al-datum">31 aug 2025</span></li>
+          <li><a href="Bezinningsteksten_2023-2025/Mindfulness.png" target="_blank">Mindfulness in een christelijke sfeer</a><span class="al-datum">21 mei 2024</span></li>
+          <li><a href="Bezinningsteksten_2023-2025/BiddenIsMijNietGegeven.png" target="_blank">Bidden is mij niet gegeven</a><span class="al-datum">7 okt 2023</span></li>
+          <li><a href="Bezinningsteksten_2022/HoopOmhelzen.png" target="_blank">Hoop Omhelzen</a><span class="al-datum">30 apr 2022</span></li>
+        </ul>
+      </div>
+      <div id="vsub-fotos" class="vsub" style="display:none;">
+        <div id="vsub-fotos-container"></div>
+      </div>
     </section>` },
 
-  kinderen: { title:'Kinderen & Jongeren', content:() => `
+  // ── JONGEREN ──
+  jongeren: { title:'Kinderen & Jongeren', content:() => `
     <section>
-      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> Kinderen &amp; Jongeren</div>
+      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> <a onclick="navigate('parochie')">Parochie</a> <span>&#8250;</span> Kinderen &amp; Jongeren</div>
       <h2>Kinderen &amp; Jongeren</h2>
+      <p>Elke derde zondag van de maand is er kindernevendienst tijdens de viering van 11 uur.</p>
       <div class="kids-grid">
-        <div class="kids-card" onclick="navigate('bijtjes')"><div class="icon">&#x1F41D;</div><h3>Goede Bijtjes</h3><p>Voor kinderen van de lagere school.</p></div>
-        <div class="kids-card" onclick="navigate('mosterdzaadjes')"><div class="icon">&#x1F331;</div><h3>Mosterdzaadjes</h3><p>Elke derde zondag van de maand.</p></div>
-        <div class="kids-card" onclick="navigate('vormsel')" style="grid-column:1/-1"><div class="icon">&#x271D;</div><h3>Vormsel &amp; Eerste Communie</h3><p>Begeleiding op weg naar dit dubbele feest.</p></div>
+        <div class="kids-card"><div class="icon">&#x1F41D;</div><h3>Goede Bijtjes</h3><p>Voor kinderen van het eerste leerjaar en jonger. Een knutselplek en praatplek rond de thema's van de zondag.</p></div>
+        <div class="kids-card"><div class="icon">&#x1F331;</div><h3>Mosterdzaadjes</h3><p>Voor het 1e t.e.m. 3e leerjaar. Elke derde zondag, met catechisten Magda, Petra en Johnny.</p></div>
+        <div class="kids-card" onclick="navigate('vormsel')" style="grid-column:1/-1"><div class="icon">&#x271D;</div><h3>Vormsel &amp; Eerste Communie</h3><p>Wil je je kind laten vormen? We begeleiden je op weg naar dit dubbele feest. <a>Meer info &#8594;</a></p></div>
+      </div>
+      <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
+      <h3>Jongeren</h3>
+      <p>Via samenwerking met <strong>Kamino</strong> zijn er regelmatig activiteiten. <a onclick="navigate('samenwerking')">Meer over Kamino &#8594;</a></p>
+    </section>` },
+
+  vormsel: { title:'Vormsel & Eerste Communie', content:`
+    <section>
+      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> <a onclick="navigate('jongeren')">Kinderen &amp; Jongeren</a> <span>&#8250;</span> Vormsel</div>
+      <h2>&#x271D; Vormsel &amp; Eerste Communie</h2>
+      <p>In Brussel vieren we het <strong>vormsel en de eerste communie samen</strong> — een oude christelijke traditie. Kinderen <strong>vanaf 8 jaar</strong> kunnen starten; het feest vindt plaats ten vroegste op <strong>10-jarige leeftijd</strong>.</p>
+      <div class="partner-item" style="margin-top:1rem;"><strong>2-jarig traject &mdash; start in het vierde leerjaar</strong></div>
+      <h3>Contact</h3>
+      <p><a href="mailto:mariette.dhondt@gmail.com">mariette.dhondt@gmail.com</a></p>
+    </section>` },
+
+  // ── SACRAMENTEN ──
+  sacramenten: { title:'Sacramenten', content:() => `
+    <section>
+      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> <a onclick="navigate('parochie')">Parochie</a> <span>&#8250;</span> Sacramenten</div>
+      <h2>Sacramenten</h2>
+      <p>Voor alle sacramenten: <a href="mailto:johnny.demot@viaporta.be">johnny.demot@viaporta.be</a></p>
+      <h3>Doopsel</h3><p>Het eerste sacrament. Vragen over doopsel of volwassenendoop? Neem contact op met pastoor Johnny De Mot.</p>
+      <h3>Biechtgesprek</h3><p>Een persoonlijk gesprek over verzoening. Afspraak via <a href="mailto:johnny.demot@viaporta.be">johnny.demot@viaporta.be</a>.</p>
+      <h3>Ziekenzalving</h3><p>Voor wie ernstig ziek is of op hoge leeftijd. Bezoek aan huis of ziekenhuis mogelijk.</p>
+      <h3>Huwelijk</h3><p>Trouwen in de Kerk van Goede Bijstand? Neem tijdig contact op.</p>
+      <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
+      <p><a onclick="navigate('vormsel')">Vormsel &amp; Eerste Communie &#8594;</a></p>
+    </section>` },
+
+  // ── OVERLIJDEN ──
+  overlijden: { title:'Overlijden', content:() => `
+    <section>
+      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> <a onclick="navigate('parochie')">Parochie</a> <span>&#8250;</span> Overlijden</div>
+      <h2>Overlijden</h2>
+      <h3>Begrafenissen &amp; contact</h3>
+      <p>Overlijden melden: <a href="mailto:johnny.demot@viaporta.be">johnny.demot@viaporta.be</a> &nbsp;|&nbsp; <a onclick="navigate('contact')">Contactformulier &#8594;</a></p>
+      <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
+      <div class="news-item" style="cursor:default;"><div class="tag">Overlijden &mdash; 24 oktober 2025</div><div class="ni-title" style="font-size:1.1rem;margin-bottom:0.4rem;">Paul Huyskens</div><p style="font-size:0.92rem;color:var(--muted);">Echtgenoot van Frank Benault, overleed op 24 oktober 2025. Begrafenis crematorium Evere, 30 oktober 2025.</p><p style="font-size:0.87rem;"><a href="Overlijden  2025/Overlijdensbericht_PaulHuyskens.pdf" target="_blank">Rouwbrief &#8594;</a></p></div>
+      <div class="news-item" style="cursor:default;"><div class="tag">Overlijden &mdash; 12 september 2025</div><div class="ni-title" style="font-size:1.1rem;margin-bottom:0.4rem;">Pastor Gino Mattheeuws</div><p style="font-size:0.92rem;color:var(--muted);">Lid van ons team, voorganger van Goede Bijstand en Finis Terrae. Begrafenis Sint-Jozefskerk Evere, 20 september 2025.</p><p style="font-size:0.87rem;"><a href="Overlijden  2025/Overlijdensbericht_GinoMattheeuws.pdf" target="_blank">Rouwbrief &#8594;</a></p></div>
+      <div class="news-item" style="cursor:default;"><div class="tag">Overlijden &mdash; 18 augustus 2025</div><div class="ni-title" style="font-size:1.1rem;margin-bottom:0.4rem;">Rita Lecomte</div><p style="font-size:0.92rem;color:var(--muted);">Begrafenis O.L.V. Boodschap Ter Muilen te Liedekerke, 25 augustus 2025.</p><p style="font-size:0.87rem;"><a href="Overlijden  2025/Overlijdensbericht_RitaLecomte.pdf" target="_blank">Rouwbrief &#8594;</a></p></div>
+    </section>` },
+
+  // ── DE SCHELP ──
+  schelp: { title:'De Schelp', content:() => `
+    <section>
+      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> <a onclick="navigate('parochie')">Parochie</a> <span>&#8250;</span> De Schelp</div>
+      <h2>De Schelp</h2>
+      <p>De parochiezaal De Schelp is een rolstoeltoegankelijke ontmoetings- en vergaderruimte. Vanuit een christelijke levenshouding biedt zij ruimte aan organisaties die streven naar gelijkheid van kansen.</p>
+      <h3>Aanvragen</h3>
+      <p>Het is momenteel niet mogelijk om De Schelp te huren. Deze pagina wordt bijgewerkt zodra dit weer mogelijk is.</p>
+      <h3>Adres</h3>
+      <p>Oliventenhof 8, Brussel Centrum</p>
+      <p><a onclick="navigate('contact')">Stuur een bericht &#8594;</a></p>
+    </section>` },
+
+  // ── SAMENWERKING ──
+  samenwerking: { title:'Samenwerking', content:() => `
+    <section>
+      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> <a onclick="navigate('parochie')">Parochie</a> <span>&#8250;</span> Samenwerking</div>
+      <h2>Samenwerking</h2>
+      <div class="partners">
+        <div class="partner-item"><strong>Kamino &ndash; Jongerennetwerk</strong><p>Jongerennetwerk van de katholieke kerk in Brussel. <a href="https://www.kamino.be" target="_blank">www.kamino.be &#8594;</a></p></div>
+        <div class="partner-item"><strong>Bijstandsnetwerk Brussel</strong><p>Coördinatie Nederlandstalige pastoraal Brussel centrum.</p></div>
+        <div class="partner-item"><strong>Finis Terrae</strong><p>Zustergemeenschap, Nieuwstraat 76. Elke zaterdag 16.30&nbsp;u.</p></div>
+        <div class="partner-item"><strong>Taizé</strong><p>Maandelijks gebedsavond in de kerk van Goede Bijstand.</p></div>
+        <div class="partner-item"><strong>Paulusgemeenschappen</strong><p><a href="https://www.paulusgemeenschappen.be/nl" target="_blank">www.paulusgemeenschappen.be &#8594;</a></p></div>
+        <div class="partner-item"><strong>House of Compassion</strong><p><a href="https://www.houseofcompassion.be/" target="_blank">www.houseofcompassion.be &#8594;</a></p></div>
       </div>
     </section>` },
 
-  bijtjes: { title:'Goede Bijtjes', content:`<section><div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> <a onclick="navigate('kinderen')">Kinderen</a> <span>&#8250;</span> Goede Bijtjes</div><h2>&#x1F41D; Goede Bijtjes</h2><p>Voor de kinderen van het eerste leerjaar en jonger. Elke <strong>derde zondag van de maand</strong> tijdens de viering van 11&nbsp;uur.</p></section>` },
-  mosterdzaadjes: { title:'Mosterdzaadjes', content:`<section><div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> <a onclick="navigate('kinderen')">Kinderen</a> <span>&#8250;</span> Mosterdzaadjes</div><h2>&#x1F331; Mosterdzaadjes</h2><p>Voor kinderen van het 1e t.e.m. 4e leerjaar. Elke <strong>derde zondag van de maand</strong> tijdens de viering van 11&nbsp;uur.</p></section>` },
-  vormsel: { title:'Vormsel & Eerste Communie', content:`<section><div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> <a onclick="navigate('kinderen')">Kinderen</a> <span>&#8250;</span> Vormsel</div><h2>&#x271D; Vormsel &amp; Eerste Communie</h2><p>In Brussel vieren we het <strong>vormsel en de eerste communie samen</strong>. Kinderen <strong>vanaf 8 jaar</strong> kunnen zich voorbereiden. Contact: <a href="mailto:mariette.dhondt@gmail.com">mariette.dhondt@gmail.com</a></p></section>` },
+  // ── GRONDBIBLIOTHEEK ──
+  grondbib: { title:'Grondbibliotheek', content:() => `
+    <section>
+      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> Grondbibliotheek</div>
+      <h2>Grondbibliotheek</h2>
+      <p>Van elke plek op aarde een stukje grond. Een uniek project dat mensen verbindt via de aarde waarop ze staan.</p>
+      <img src="${ALT}" alt="Grondbibliotheek" class="church-photo" style="height:220px;">
+      <p>De interactieve kaart toont waar grond vandaan komt en wie de bijdrage leverde. Elk potje grond vertelt een verhaal.</p>
+      <p style="margin-top:1rem;"><a href="https://evelienleys.github.io/grondbibliotheek/" target="_blank" rel="noopener" class="paulus-knop" style="display:inline-block;text-decoration:none;">Bekijk de interactieve kaart &#8594;</a></p>
+    </section>` },
 
-  schelp: { title:'De Schelp', content:() => `<section><div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> De Schelp</div><h2>De Schelp</h2><p>De parochiezaal De Schelp is een rolstoeltoegankelijke ontmoetings- en vergaderruimte.</p><h3>Contact</h3><p>Adres: Oliventenhof 8, Brussel Centrum</p></section>` },
+  // ── ACTIVITEITEN ──
+  activiteiten: { title:'Activiteiten', content:() => `
+    <section>
+      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> Activiteiten</div>
+      <h2>Komende activiteiten</h2>
+      <div class="act-subnav">
+        <a onclick="showActPageSub('komend')"  data-asub2="komend"  class="act-actief">Komende activiteiten</a>
+        <a onclick="showActPageSub('voorbij')" data-asub2="voorbij">Voorbije activiteiten</a>
+        <a onclick="showActPageSub('fotos')"   data-asub2="fotos">&#128247; Foto's</a>
+      </div>
+      <div id="asub2-komend">
+        <h3>Gebed in de geest van Taizé</h3>
+        <p><em>Elke derde zaterdag van de maand, 20.00&nbsp;u — Kerk van Goede Bijstand</em></p>
+        <p>Een moment van gebed, stilte en gezang. Iedereen is welkom. Contact: <a href="mailto:bep.saintandre@gmail.com">bep.saintandre@gmail.com</a></p>
+        <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
+        <h3>Bijstand by Night</h3>
+        <p><em>Elke vrijdagavond van mei t.e.m. augustus, 18–22&nbsp;uur</em></p>
+        <p>De kerk staat open voor iedereen. Stilte of serene muziek, onverwachte ontmoetingen. Contact: <a href="mailto:eheesen@hotmail.com">Nieneke</a> of <a href="mailto:danny.decock59@yahoo.com">Danny</a>.</p>
+        <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
+        <h3>Vlaamse Meesters in Situ</h3>
+        <a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">
+          <img src="${ALT}" alt="Hoofdaltaar" style="width:100%;max-height:220px;object-fit:cover;border-radius:4px;border:3px solid var(--pale-blue);margin:0.8rem 0;display:block;">
+        </a>
+        <p><a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">Ontdek de Vlaamse Meesters in Situ &#8594;</a></p>
+        <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
+        <h3>Kerstbrief 2025</h3>
+        <p><a href="Vieringen en liturgie/Kerst/20251222_Kerstbrief.pdf" target="_blank">De Kleine Zusters van Jezus in België — Lees de Kerstbrief (PDF) &#8594;</a></p>
+      </div>
+      <div id="asub2-voorbij" style="display:none;">
+        <h3>Voorbije activiteiten</h3>
+        <div class="act-voorbij"><div class="act-datum">November 2024</div><div class="act-titel">Viering Allerzielen</div><p>Gedachtenisviering voor alle overledenen van de gemeenschap.</p></div>
+        <div class="act-voorbij"><div class="act-datum">Oktober 2023</div><div class="act-titel">Gedachtenisviering</div><p>Jaarlijkse gedachtenisviering met het gehele geloofsgemeenschap.</p></div>
+        <div class="act-voorbij"><div class="act-datum">November 2022</div><div class="act-titel">Doop Line en Olivia</div><p>Doopsel van twee nieuwe leden van de gemeenschap op 20 november.</p></div>
+        <div class="act-voorbij"><div class="act-datum">Zomer 2022</div><div class="act-titel">Bijstand by Night — zomerserie</div><p>Een warme zomer vol ontmoetingen, muziek en stilte in de opengestelde kerk.</p></div>
+        <div class="act-voorbij"><div class="act-datum">April 2022</div><div class="act-titel">Paaswake</div><p>De jaarlijkse paaswake in de kerk van Goede Bijstand.</p></div>
+        <div class="act-voorbij"><div class="act-datum">Januari 2020</div><div class="act-titel">Doop Béatrice</div><p>Doopsel op 18 januari 2020.</p></div>
+      </div>
+      <div id="asub2-fotos" style="display:none;">
+        <div id="asub2-fotos-container"><p style="color:var(--muted);font-style:italic;">Klik op 'Foto's' om de galerij te laden.</p></div>
+      </div>
+    </section>` },
 
-  samenwerking: { title:'Samenwerking', content:() => `<section><div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> Samenwerking</div><h2>Samenwerking</h2><div class="partners"><div class="partner-item"><strong>Kamino &ndash; Jongerennetwerk</strong><p><a href="https://www.kamino.be" target="_blank">www.kamino.be &#8594;</a></p></div><div class="partner-item"><strong>Paulusgemeenschappen</strong><p><a href="https://www.paulusgemeenschappen.be/nl" target="_blank">www.paulusgemeenschappen.be &#8594;</a></p></div><div class="partner-item"><strong>House of Compassion</strong><p><a href="https://www.houseofcompassion.be/" target="_blank">www.houseofcompassion.be &#8594;</a></p></div></div></section>` },
+  'act-voorbij': { title:'Voorbije activiteiten', content:() => { navigate('activiteiten'); setTimeout(()=>showActPageSub('voorbij'),50); return ''; } },
+  'act-fotos':   { title:"Foto's", content:() => { navigate('activiteiten'); setTimeout(()=>showActPageSub('fotos'),50); return ''; } },
 
-  overlijden: { title:'Overlijden', content:() => `<section><div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> Overlijden</div><h2>Overlijden</h2><h3>Begrafenissen &amp; contact</h3><p>Voor het melden van een overlijden: <a href="mailto:johnny.demot@viaporta.be">johnny.demot@viaporta.be</a></p><div class="ornament">&#x2748; &#x2748; &#x2748;</div><div class="news-item" style="cursor:default;"><div class="tag">Overlijden &mdash; 24 oktober 2025</div><div class="ni-title" style="font-size:1.1rem;margin-bottom:.4rem;">Paul Huyskens</div><p style="font-size:.92rem;color:var(--muted);">Paul Huyskens overleed op 24 oktober 2025 op 71-jarige leeftijd. De begrafenis vond plaats in het crematorium van Evere op 30 oktober 2025.</p></div></section>` },
-
-  contact: { title:'Contact', content:() => `<section><div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> Contact</div><h2>Contact</h2><h3>Pastoor</h3><p><strong>Johnny De Mot</strong><br><a href="mailto:johnny.demot@viaporta.be">johnny.demot@viaporta.be</a></p><div class="contact-form"><div><label>Uw naam</label><input type="text" placeholder="Voor- en achternaam"></div><div><label>E-mailadres</label><input type="email" placeholder="uw@email.be"></div><div><label>Bericht</label><textarea placeholder="Schrijf hier uw bericht..."></textarea></div><div><button class="btn" onclick="alert('Uw bericht is verstuurd. Dank u!')">Verstuur bericht</button></div></div><div class="map-box">&#128205; Kolenmarkt 91, 1000 Brussel<br><br><a href="https://maps.google.com/?q=Kolenmarkt+91,+1000+Brussel" target="_blank">Bekijk op Google Maps &#8594;</a></div></section>` }
+  // ── CONTACT ──
+  contact: { title:'Contact', content:() => `
+    <section>
+      <div class="breadcrumb"><a onclick="navigate('home')">Home</a> <span>&#8250;</span> Contact</div>
+      <h2>Contact</h2>
+      <h3>Secretariaat</h3><p>Bijstandsstraat 5, 1000 Brussel</p>
+      <h3>Pastoor</h3><p><strong>Johnny De Mot</strong><br><a href="mailto:johnny.demot@viaporta.be">johnny.demot@viaporta.be</a></p>
+      <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
+      <h3>Stuur ons een bericht</h3>
+      <div class="contact-form">
+        <div><label>Uw naam</label><input type="text" placeholder="Voor- en achternaam"></div>
+        <div><label>E-mailadres</label><input type="email" placeholder="uw@email.be"></div>
+        <div><label>Onderwerp</label><input type="text" placeholder="Waar gaat uw vraag over?"></div>
+        <div><label>Bericht</label><textarea placeholder="Schrijf hier uw bericht..."></textarea></div>
+        <div><button class="btn" onclick="alert('Uw bericht is verstuurd. Dank u!')">Verstuur bericht</button></div>
+      </div>
+      <div class="ornament">&#x2748; &#x2748; &#x2748;</div>
+      <div class="map-box">&#128205; Kerk van Goede Bijstand &mdash; Kolenmarkt 91, 1000 Brussel<br><br><a href="https://maps.google.com/?q=Kolenmarkt+91,+1000+Brussel" target="_blank">Bekijk op Google Maps &#8594;</a></div>
+    </section>` }
 };
 
+// ═══════════════════════════════════════════════════════
+// ACTIVITEITEN SUBNAV HELPER
+// ═══════════════════════════════════════════════════════
+function showActPageSub(k) {
+  ['komend','voorbij','fotos'].forEach(id => {
+    const el = document.getElementById('asub2-' + id);
+    if (el) el.style.display = (id===k) ? 'block' : 'none';
+  });
+  document.querySelectorAll('[data-asub2]').forEach(a => a.classList.toggle('act-actief', a.dataset.asub2 === k));
+  if (k === 'fotos') renderFotoGalerij('asub2-fotos-container');
+}
+
+// ═══════════════════════════════════════════════════════
+// NAVIGATIE
+// ═══════════════════════════════════════════════════════
 function navigate(pageKey) {
   const page = pages[pageKey];
   if (!page) return;
-  const c = typeof page.content === 'function' ? page.content() : page.content;
-  document.getElementById('main-content').innerHTML = c;
+  const content = typeof page.content === 'function' ? page.content() : page.content;
+  if (!content) return; // redirect pages return ''
+  document.getElementById('main-content').innerHTML = content;
   document.getElementById('sidebar').innerHTML = getSidebar();
-  document.title = page.title + ' — Onze-Lieve-Vrouw van Goede Bijstand';
-  document.querySelectorAll('nav a').forEach(a => a.classList.toggle('active', a.dataset.page === pageKey));
+  document.title = page.title + ' \u2014 Onze-Lieve-Vrouw van Goede Bijstand';
+
+  // Highlight juiste hoofdtab
+  const parentMap = {
+    'kerk':'kerk', 'kerk-geschiedenis':'kerk', 'kerk-info':'kerk', 'kerk-kunst':'kerk',
+    'parochie':'parochie', 'vieringen':'parochie', 'jongeren':'parochie', 'vormsel':'parochie',
+    'sacramenten':'parochie', 'overlijden':'parochie', 'schelp':'parochie', 'samenwerking':'parochie',
+    'grondbib':'grondbib',
+    'activiteiten':'activiteiten', 'act-voorbij':'activiteiten', 'act-fotos':'activiteiten',
+    'contact':'contact', 'home':'home'
+  };
+  const activeParent = parentMap[pageKey] || pageKey;
+  document.querySelectorAll('#main-nav > .nav-item > a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === activeParent);
+  });
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  if (pageKey === 'activiteiten') setTimeout(initGrondbibliotheek, 60);
 }
 
 navigate('home');
-
-
-function initGrondbibliotheek() {
-  var gbMapSvg = document.getElementById('gb-map-svg');
-  var gbPinsLayerEl = document.getElementById('gb-pins-layer');
-  var gbTooltipEl = document.getElementById('gb-tooltip');
-  if (!gbMapSvg || !gbPinsLayerEl) return;
-
-  const locations = [
-  // AFRICA
-  ["1","Benin","Benin","2017","","africa",9.3,2.3],
-  ["2","Burkina Faso","Ouagadougou","","","africa",12.37,-1.53],
-  ["3","Canarische Eilanden","Gran Canaria - La Culata","","Roque Nuglo 1813m","africa",27.97,-15.60],
-  ["4","Canarische Eilanden","Gran Canaria - Al Hambra","","","africa",27.95,-15.55],
-  ["5","Canarische Eilanden","Canarische Eilanden","","","africa",28.1,-15.4],
-  ["6","Congo","Katako-Kindu","08/2019","","africa",-2.43,26.18],
-  ["7","Congo","Wamba Prison","","","africa",2.15,27.99],
-  ["8","Congo","Zuid-Kivu","08/2018","","africa",-2.5,28.85],
-  ["9","Congo","Congo","","","africa",-4.32,15.32],
-  ["10","Egypte","Egypte","2017","","africa",26.82,30.80],
-  ["11","Kaapverdië","Praia","","","africa",14.93,-23.52],
-  ["11b","Kaapverdië","Cruz de Papa","12/2023","","africa",14.90,-23.50],
-  ["12a","Marokko","Nador","20/08/2024","","africa",35.17,-2.93],
-  ["12b","Marokko","Marrakesh","","","africa",31.63,-8.00],
-  ["12c","Marokko","Qarzazate","","","africa",30.92,-6.90],
-  ["12d","Marokko","Driuch","","","africa",35.13,-3.38],
-  ["13","Oeganda","Oeganda","2017","","africa",1.37,32.29],
-  ["15","Rwanda","Kigali - Masaka","2021","","africa",-1.94,30.06],
-  ["16","Rwanda","Rwanda","2024","","africa",-2.0,29.87],
-  ["17","Rwanda","Kigali - Masaka","2023","","africa",-1.97,30.08],
-  ["18","Rwanda","Kigali - Masaka","10/2017","","africa",-1.95,30.07],
-  ["19","Rwanda","Kigali - Massaka","03/2023","","africa",-1.96,30.09],
-  ["20","Seychelles","Seychelles","","","africa",-4.68,55.49],
-  ["21","Togo","Togo","2017","","africa",8.62,0.82],
-  ["23","Zuid-Afrika","Witsand","2019","","africa",-34.40,20.85],
-  ["24","Zuid-Afrika","Willowmore","","","africa",-33.28,23.49],
-  // ASIA / MIDDLE EAST
-  ["25","Birma","Myanmar","2018","","asia",16.87,96.19],
-  ["26","China","Nanning","","","asia",22.82,108.37],
-  ["27a","Cyprus","Troodos","","","asia",34.92,32.87],
-  ["27b","Cyprus","Kolossi","","","asia",34.67,32.93],
-  ["27c","Cyprus","Avgorou","","","asia",35.03,33.77],
-  ["28","India","Delhi - Mahatma Gandhi Park","","Mahatma Gandhi Park","asia",28.69,77.22],
-  ["29","India","Madhya Pradesh","","","asia",23.47,77.95],
-  ["30","India","Prayagraj","23/2024","Oever van de Ganges","asia",25.43,81.84],
-  ["31","Iran","Teheran","","","asia",35.69,51.39],
-  ["32","Israël","Jeruzalem","","","asia",31.78,35.22],
-  ["33","Jordanië","Dode Zee","","+ zout","asia",31.55,35.47],
-  ["34","Libanon","Libanon","","","asia",33.85,35.86],
-  ["35","Jordanië/Syrië","Jordanië - Syrië","","","asia",32.5,36.3],
-  ["36","Nepal","Nepal","","","asia",28.39,84.12],
-  ["37","Palestina","Palestina","2015","","asia",31.95,35.29],
-  ["38","Sri Lanka","Sri Lanka","","","asia",7.87,80.77],
-  ["39","Sri Lanka","Colombo","","","asia",6.93,79.85],
-  ["40","Thailand","Thailand","","","asia",15.87,100.99],
-  ["41","Vietnam","Vietnam","","","asia",14.06,108.28],
-  ["42","Turkije","Turkije","","","asia",38.96,35.24],
-  ["42a","Turkije","Istanbul","","","asia",41.01,28.97],
-  ["42b","Turkije","Istanbul - Taksimplein","","Taksimplein","asia",41.04,28.99],
-  ["43","Georgië","Bozjom National Park","05/08/2024","National Park","asia",41.85,43.00],
-  // EUROPE
-  ["44a","België","Oostende","13/07/2022","","europe",51.23,2.92],
-  ["44b","België","Abdij van Postel","01/05/2025","Kempen Antwerpen","europe",51.35,5.03],
-  ["45","Denemarken","Kopenhagen","","","europe",55.68,12.57],
-  ["46","Denemarken","Kopenhagen","","","europe",55.69,12.58],
-  ["47","Denemarken","Ribe","03/2023","","europe",55.33,8.76],
-  ["48","Denemarken","Lindet Skov Hönning","","","europe",55.23,9.20],
-  ["49","Duitsland","Duitsland","","","europe",51.16,10.45],
-  ["49a","Duitsland","Keulen","","","europe",50.94,6.96],
-  ["49b","Duitsland","Freiburg","","","europe",47.99,7.85],
-  ["50","Engeland","Essex - Colchester","05/2022","","europe",51.89,0.90],
-  ["51","Engeland","Londen","","","europe",51.51,-0.13],
-  ["52","Engeland","Engeland","","","europe",52.36,-1.17],
-  ["52b","Engeland","Derwent Water","4/9/2024","","europe",54.57,-3.14],
-  ["53","Finland","Kallislaki","","","europe",62.24,28.18],
-  ["54","Frankrijk","Aude - Roquetaillade","15/09/2017","Tussen de druivengaard (+schelp)","europe",43.07,2.35],
-  ["55","Frankrijk","Corsica","","","europe",42.03,9.01],
-  ["56","Frankrijk","Corsica - Priana","","","europe",42.37,8.73],
-  ["57a","Frankrijk","Colmar","","","europe",48.08,7.36],
-  ["57b","Frankrijk","Dijon","","","europe",47.32,5.04],
-  ["57c","Frankrijk","Fontenay","05/05/2019","+ schelp","europe",47.62,4.28],
-  ["58","Frankrijk","Grenoble","","","europe",45.19,5.72],
-  ["59","Frankrijk","Lyon","","","europe",45.75,4.83],
-  ["60","Frankrijk","Nice","","","europe",43.71,7.26],
-  ["61","Frankrijk","Puy de Dôme - Puy Pariou","05/09/2022","","europe",45.78,2.96],
-  ["61b","Frankrijk","Mulhouse","16/12/2024","","europe",47.75,7.34],
-  ["62","Griekenland","Thessaloniki","","","europe",40.64,22.94],
-  ["63","Griekenland","Vergina","","","europe",40.49,22.32],
-  ["64","Hongarije","Ketszthely","","","europe",46.77,17.24],
-  ["65","Ierland","Dublin - Phoenix Park","","Phoenix Park","europe",53.35,-6.33],
-  ["65a","Ierland","Rosslare","16/06/2024","","europe",52.25,-6.34],
-  ["66","IJsland","Diamond Beach","09/2023","","europe",63.84,-17.68],
-  ["67","IJsland","IJsland","","","europe",65.0,-18.0],
-  ["68","Italië","Dolomieten - Drie Zinnen","","","europe",46.62,12.30],
-  ["69","Italië","Drie Zinnen 2450m","09/09/2021","","europe",46.64,12.33],
-  ["70","Italië","Etna - Strada Mareneve","09/2011","Piano Provenzana","europe",37.75,15.00],
-  ["71","Italië","Granada","05/09/2022","","europe",37.18,-3.60],
-  ["72","Italië","Il Poggio di San Remo","","","europe",43.82,7.77],
-  ["73","Italië","Rome","","","europe",41.90,12.50],
-  ["74","Italië","Stelvio","","","europe",46.53,10.45],
-  ["75","Italië","Trapani - Parrinello","","Baglio Donna Franca","europe",37.98,12.55],
-  ["76","Italië","Venetië","","","europe",45.44,12.33],
-  ["77","Italië","Vesuvius-vulkaan","09/2018","","europe",40.82,14.43],
-  ["78","Italië","Zuid-Tirol - Toblach","08/09/2021","","europe",46.73,12.22],
-  ["78b","Italië","Gardameer","","","europe",45.65,10.65],
-  ["78c","Italië","Assisi - Domus Pacis","01/09/2025","","europe",43.07,12.62],
-  ["79","Kroatië","Kroatië","","","europe",45.10,16.44],
-  ["79a","Kroatië","Dubrovnik","","","europe",42.65,18.09],
-  ["79b","Kroatië","Varaždin","","","europe",46.31,16.34],
-  ["79c","Kroatië","Dalmatia","","","europe",43.51,16.45],
-  ["79d","Kroatië","Poréc","05/08/2024","","europe",45.23,13.60],
-  ["80a","Malta","Marfa","","","europe",35.99,14.35],
-  ["80b","Malta","Gózo - Xaghra Tempels","","","europe",36.05,14.27],
-  ["80c","Malta","Mosta Basiliek","","","europe",35.91,14.43],
-  ["80d","Malta","Marsaxlokk","","","europe",35.84,14.54],
-  ["80e","Malta","Comino Island","","","europe",36.01,14.34],
-  ["81","Monaco","Monaco","","","europe",43.74,7.43],
-  ["82","Nederland","Rotterdam","2019","","europe",51.92,4.48],
-  ["83","Noorwegen","Gardnos","","","europe",60.60,9.12],
-  ["84","Noorwegen","Ifnefoss","","","europe",60.12,9.05],
-  ["85","Noorwegen","Lillehammer","","","europe",61.12,10.47],
-  ["86","Noorwegen","Norefjell","","","europe",60.40,9.48],
-  ["87","Noorwegen","Oslo","","","europe",59.91,10.75],
-  ["88","Noorwegen","Steindalfoss","23/07/2019","","europe",69.19,19.97],
-  ["89","Oostenrijk","Wenen","","","europe",48.21,16.37],
-  ["90","Oostenrijk","Oostenrijk","","","europe",47.52,14.55],
-  ["91","Polen","Krakau","","","europe",50.06,19.94],
-  ["92","Polen","Yerzmanki","","","europe",50.75,20.00],
-  ["93","Polen","Zgorzelec","","","europe",51.15,15.01],
-  ["94","Portugal","Madeira","","","europe",32.76,-16.96],
-  ["95","Portugal","Santiago do Cacèm","09/09/2016","","europe",38.02,-8.69],
-  ["96","Portugal","Portugal","","","europe",39.56,-8.00],
-  ["97","Portugal","Solajo Espigueiros","","","europe",41.72,-8.48],
-  ["97b","Portugal","Braga","","","europe",41.55,-8.43],
-  ["97c","Portugal","Ponte de Lima","","","europe",41.77,-8.58],
-  ["98","Roemenië","Boekarest","","","europe",44.43,26.10],
-  ["99","Rusland","Sint-Petersburg","","","europe",59.95,30.32],
-  ["100","Schotland","Ben Nevis","","","europe",56.79,-5.00],
-  ["101","Schotland","Isle of Skye - Old Man of Storr","01/09/2022","","europe",57.50,-6.18],
-  ["102","Schotland","Loch Ness","","","europe",57.32,-4.43],
-  ["103","Schotland","Lockerbie","","","europe",55.12,-3.36],
-  ["104","Schotland","Port Achan","","","europe",56.30,-5.23],
-  ["105","Schotland","Tighnabruaich","","","europe",55.93,-5.23],
-  ["106","Spanje","Barcelona","","","europe",41.39,2.15],
-  ["107","Spanje","Gerona","09/09/2022","","europe",41.98,2.82],
-  ["108","Spanje","Granada","05/09/2022","","europe",37.18,-3.60],
-  ["109","Spanje","Granada","","","europe",37.17,-3.59],
-  ["110","Spanje","Valga - Eucalyptus Bos","","Eucalyptus Bos","europe",42.63,-8.41],
-  ["111","Spanje","Zaragoza","03/2019","","europe",41.65,-0.88],
-  ["112","Spanje","Zaragoza - Hijar","03/2019","","europe",41.18,-0.44],
-  ["113","Spanje","Zaragoza - Hijar","06/2022","","europe",41.17,-0.43],
-  ["114","Spanje","Spanje","","zand","europe",40.0,-3.0],
-  ["114b","Spanje","La Rioja - Santo Domingo de la Calzada","","","europe",42.44,-2.95],
-  ["115","Tsjechië","Praag","","","europe",50.08,14.44],
-  ["116","Tsjechië","Karlsbad","","","europe",50.23,12.87],
-  ["117","Wales","Brechfa Forest","","","europe",51.90,-4.13],
-  ["118","Wales","Brecon Beacons","","","europe",51.87,-3.44],
-  ["119","Zweden","Veberod","","","europe",55.63,13.47],
-  // AMERICAS
-  ["120","Alabama","Bayou la Batre","","","americas",30.40,-88.25],
-  ["121","Alabama","Robertsdale","","","americas",30.55,-87.71],
-  ["122","Arkansas","Lockesburg","","","americas",33.97,-94.17],
-  ["123","Arkansas","Texarkana","","","americas",33.43,-94.04],
-  ["124a","Canada","Montréal - Parc des Rapides","","","americas",45.42,-73.61],
-  ["124b","Canada","Montréal - Jardin des Premières","","","americas",45.44,-73.59],
-  ["125","Canada","Niagara Falls","","","americas",43.09,-79.08],
-  ["126","Caraïben","Cayman Eilanden","","","americas",19.31,-81.25],
-  ["127","Cuba","Isla Maparta","","","americas",22.95,-81.80],
-  ["128","Cuba","El Castillito - Suikerveld","","Suikerveld","americas",22.43,-80.00],
-  ["128b","Cuba","Varadero","","","americas",23.15,-81.25],
-  ["129","Curaçao","Kòrsou - Westpunt","","","americas",12.38,-69.15],
-  ["130a","Dominicaanse Republiek","Bávaro","","","americas",18.73,-68.49],
-  ["130b","Dominicaanse Republiek","Anamuya Mountain","","","americas",18.83,-68.55],
-  ["130c","Dominicaanse Republiek","Rio Anamuya","","","americas",18.80,-68.53],
-  ["132","Florida","Lee","","","americas",26.77,-81.68],
-  ["133","Georgia","Alto","","","americas",34.45,-83.57],
-  ["134","Jamaica","Montego Bay","","","americas",18.47,-77.92],
-  ["135","Klein Curaçao","Klein Curaçao","","","americas",11.98,-68.65],
-  ["136","Louisiana","Alto","","","americas",32.36,-92.11],
-  ["137","Louisiana","Ferryday","","","americas",31.63,-91.55],
-  ["138","Louisiana","Gilliam","","","americas",32.81,-93.85],
-  ["139","Mississippi","Biloxi","","","americas",30.40,-88.89],
-  ["140","Mississippi","Kokomo","","","americas",31.04,-89.93],
-  ["140a","Mississippi","Natchez Soil","","","americas",31.56,-91.40],
-  ["141","Mexico","Yucatán Akumal","10/2024","","americas",20.39,-87.32],
-  ["142","New Mexico","Albuquerque","","","americas",35.08,-106.65],
-  ["143","New Mexico","Bloomfield","","","americas",36.71,-107.99],
-  ["144","New Mexico","Santa Fe","","","americas",35.69,-105.94],
-  ["145","New York","New York City - Central Park","","Central Park","americas",40.79,-73.96],
-  ["146","North Carolina","Smoky Mountains","","","americas",35.68,-83.53],
-  ["147","North Carolina","Waynesville","","","americas",35.49,-82.99],
-  ["148","North Carolina","North Carolina","","","americas",35.52,-79.83],
-  ["149","Oklahoma","Elk City","","","americas",35.41,-99.40],
-  ["150","Oklahoma","Hodgen","","","americas",34.93,-94.73],
-  ["151","Oklahoma","Oklahoma City","","","americas",35.47,-97.52],
-  ["152a","Panama","Panama City","","","americas",8.99,-79.52],
-  ["152b","Panama","San José","","","americas",9.93,-84.08],
-  ["153","South Carolina","Charleston","","","americas",32.78,-79.94],
-  ["154","South Carolina","Prosperity","","","americas",34.21,-81.53],
-  ["155","South Carolina","Holly Hill","","","americas",33.33,-80.42],
-  ["156","Tennessee","Gatlinburg","","","americas",35.71,-83.51],
-  ["157","Texas","Kellerville","","","americas",35.52,-100.47],
-  ["158","Texas","Wildorado","","","americas",35.18,-102.17],
-  ["159","Brazilië","Brazilië","","","americas",-14.24,-51.93],
-  ["160a","Peru","Cusco - Ollantaytambo","","","americas",-13.26,-72.27],
-  ["160b","Peru","Arequipa - Chivay","","","americas",-15.64,-71.61],
-];
-
-  function project(lat, lon) {
-    var x = (lon + 180) / 360 * 1000;
-    var latRad = lat * Math.PI / 180;
-    var mercN = Math.log(Math.tan((Math.PI / 4) + (latRad / 2)));
-    var y = (500 / 2) - (500 * mercN / (2 * Math.PI * 1.3));
-    return [x, y];
-  }
-
-  var totalCount = 0;
-
-  locations.forEach(function(loc) {
-    var id = loc[0], country = loc[1], place = loc[2], date = loc[3], note = loc[4], continent = loc[5], lat = loc[6], lon = loc[7];
-    var pos = project(lat, lon);
-    var x = pos[0], y = pos[1];
-    totalCount++;
-
-    var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    g.setAttribute('class', 'gb-pin ' + continent);
-    g.setAttribute('transform', 'translate(' + x + ',' + y + ')');
-    g.style.cursor = 'pointer';
-
-    var hitArea = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    hitArea.setAttribute('r', '10');
-    hitArea.setAttribute('cx', '0');
-    hitArea.setAttribute('cy', '0');
-    hitArea.setAttribute('class', 'gb-hit-area');
-    g.appendChild(hitArea);
-
-    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    circle.setAttribute('r', '3.5');
-    circle.setAttribute('cx', '0');
-    circle.setAttribute('cy', '0');
-    circle.setAttribute('class', 'gb-dot');
-    g.appendChild(circle);
-
-    function showGbTooltip(cx, cy) {
-      var html = '<div class="gb-tt-place">' + place + '</div>';
-      html += '<div class="gb-tt-country">' + country + '</div>';
-      if (date) html += '<div class="gb-tt-date">&#128197; ' + date + '</div>';
-      if (note) html += '<div class="gb-tt-note">&#x2736; ' + note + '</div>';
-      gbTooltipEl.innerHTML = html;
-      gbTooltipEl.classList.add('visible');
-      posGbTooltip(cx, cy);
-    }
-
-    function posGbTooltip(cx, cy) {
-      var margin = 16, ttW = 270, ttH = 110;
-      var tx = cx + margin, ty = cy + margin;
-      if (tx + ttW > window.innerWidth) tx = cx - ttW - margin;
-      if (ty + ttH > window.innerHeight) ty = cy - ttH - margin;
-      if (tx < 8) tx = 8;
-      if (ty < 8) ty = 8;
-      gbTooltipEl.style.left = tx + 'px';
-      gbTooltipEl.style.top = ty + 'px';
-    }
-
-    g.addEventListener('mouseenter', function(e) { showGbTooltip(e.clientX, e.clientY); });
-    g.addEventListener('mousemove', function(e) { posGbTooltip(e.clientX, e.clientY); });
-    g.addEventListener('mouseleave', function() { gbTooltipEl.classList.remove('visible'); });
-    g.addEventListener('touchstart', function(e) {
-      e.preventDefault(); e.stopPropagation();
-      var t = e.touches[0];
-      showGbTooltip(t.clientX, t.clientY);
-    }, { passive: false });
-
-    gbPinsLayerEl.appendChild(g);
-  });
-
-  // Update counts
-  var tcEl = document.getElementById('gb-total-count');
-  var mcEl = document.getElementById('gb-modal-count');
-  if (tcEl) tcEl.textContent = totalCount;
-  if (mcEl) mcEl.textContent = totalCount;
-
-  // Build location list grouped by continent
-  var grouped = {'africa':[],'asia':[],'europe':[],'americas':[]};
-  var contLabels = {'africa':'Afrika','asia':'Azië & Midden-Oosten','europe':'Europa','americas':'Amerika & Caraïben'};
-  locations.forEach(function(loc) {
-    var g2 = loc[5];
-    if (!grouped[g2]) grouped[g2] = [];
-    grouped[g2].push(loc);
-  });
-  var inh = document.getElementById('gb-locatie-inhoud');
-  if (inh) {
-    var html2 = '';
-    ['europe','africa','americas','asia'].forEach(function(cont) {
-      if (!grouped[cont] || !grouped[cont].length) return;
-      html2 += '<div style="break-inside:avoid;margin-bottom:1.2rem;">';
-      html2 += '<strong style="font-family:\'Playfair Display\',serif;color:var(--blue-deep);font-size:0.95rem;display:block;border-bottom:1px solid var(--border);padding-bottom:0.2rem;margin-bottom:0.4rem;">' + contLabels[cont] + '</strong>';
-      grouped[cont].forEach(function(loc) {
-        var extra = '';
-        if (loc[3]) extra += ' <span style="color:var(--muted);font-size:0.78rem;">(' + loc[3] + ')</span>';
-        if (loc[4]) extra += ' <em style="color:var(--muted);font-size:0.78rem;">&mdash; ' + loc[4] + '</em>';
-        html2 += '<div style="padding:0.1rem 0;border-bottom:1px solid #f0f0f0;">';
-        html2 += '<span style="font-size:0.78rem;color:var(--muted);min-width:1.5rem;display:inline-block;">' + loc[0] + '</span> ';
-        html2 += '<span style="color:var(--text);">' + loc[2] + '</span>';
-        if (loc[1] !== loc[2]) html2 += ' <span style="color:var(--muted);font-size:0.8rem;">— ' + loc[1] + '</span>';
-        html2 += extra + '</div>';
-      });
-      html2 += '</div>';
-    });
-    inh.innerHTML = html2;
-  }
-
-  // Touch dismiss
-  document.addEventListener('touchstart', function(e) {
-    if (!e.target.closest('#gb-pins-layer')) {
-      gbTooltipEl.classList.remove('visible');
-    }
-  });
-}
-
 </script>
 </body>
 </html>
+
