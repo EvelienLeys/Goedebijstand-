@@ -1854,10 +1854,33 @@ function pageContent(pageKey) {
             <p style="font-size:0.9rem;color:var(--muted);font-style:italic;margin-top:1rem;">Ignace Menschaert, Kerksken</p>
           </div>
         </div>
-        <div id="sub-steunen" class="subpage" style="display:none;">
+       <div id="sub-steunen" class="subpage" style="display:none;">
           <h2>${t('steunen_title')}</h2>
           <p>${t('steunen_body')}</p>
-          <div class="partner-item" style="margin-top:1rem;font-size:1.1rem;"><span style="font-size:0.95rem;color:var(--muted);">VPW Gewest Brussel-Centrum</span><br><strong>BE35 4331 0715 7137</strong></div>
+          <div class="partner-item" style="margin-top:1rem;font-size:1.1rem;">
+            <span style="font-size:0.95rem;color:var(--muted);">VPW Gewest Brussel-Centrum</span><br>
+            <strong>BE35 4331 0715 7137</strong><br>
+            <span style="font-size:0.95rem;color:var(--muted);">BIC: GKCCBEBBXXX</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem;max-width:420px;">
+            <div style="text-align:center;">
+              <img src="Donate_02_qr_sumup.png" alt="QR SumUp"
+                   style="width:100%;max-width:160px;border:3px solid var(--pale-blue);border-radius:6px;box-shadow:0 3px 10px rgba(15,40,80,0.15);">
+              <p style="font-size:0.82rem;color:var(--muted);margin-top:0.4rem;font-style:italic;">Scan QR — SumUp</p>
+            </div>
+            <div style="text-align:center;">
+              <img src="Donate_02_qr_wero.png" alt="QR Wero"
+                   style="width:100%;max-width:160px;border:3px solid var(--pale-blue);border-radius:6px;box-shadow:0 3px 10px rgba(15,40,80,0.15);">
+              <p style="font-size:0.82rem;color:var(--muted);margin-top:0.4rem;font-style:italic;">Scan QR — Wero</p>
+            </div>
+          </div>
+          <p style="margin-top:0.6rem;font-size:0.88rem;color:var(--muted);font-style:italic;">
+            ${LANG==='nl'?'Of tik uw bankkaart op het betaalterminal in de kerk.':
+              LANG==='fr'?'Ou appuyez votre carte sur le terminal de paiement dans l\'église.':
+              LANG==='de'?'Oder tippen Sie Ihre Karte auf das Zahlungsterminal in der Kirche.':
+              LANG==='en'?'Or tap your card on the payment terminal in the church.':
+              'O toque su tarjeta en el terminal de pago de la iglesia.'}
+          </p>
           <p style="margin-top:1rem;">${t('steunen_questions')} <a href="mailto:2096@diomb.be">2096@diomb.be</a></p>
         </div>
       </section>`;
